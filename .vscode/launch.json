@@ -1,0 +1,14 @@
+{
+  "configurations": [
+    {
+      "type": "java",
+      "name": "Spring Boot-RatemeApplication<rateme>",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "mainClass": "com.app.rateme.RatemeApplication",
+      "projectName": "rateme",
+      "args": "",
+      "envFile": "${workspaceFolder}/.env"
+    }
+  ]
+}
