@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Rateme</title>
+    <link rel="stylesheet" href="css/site.css" />
+    <link rel="stylesheet" href="css/grading.css" />
+    <link rel="stylesheet" href="css/layout.css" />
+    <link rel="stylesheet" href="css/snackbar.css" />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
+      integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="
+      crossorigin=""
+    />
+
+    <!-- Make sure you put this AFTER Leaflet's CSS -->
+    <script
+      src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
+      integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
+      crossorigin=""
+    ></script>
+
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
+      integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU"
+      crossorigin="anonymous"
+    />
+
+    <script src="js/map.js"></script>
+    <script src="js/rating.js"></script>
+    <script src="js/user.js"></script>
+  </head>
+  <body>
+    <div class="mainContainer">
+      <header>
+        <div id="registration" style="display: none">
+          <form id="registrationForm">
+            <h2>Registration</h2>
+            <table>
+              <tr>
+                <td><label for="inputVorname">First name</label></td>
+                <td>
+                  <input
+                    id="inputVorname"
+                    name="firstName"
+                    type="text"
+                    size="40"
+                  />
+                </td>
+                <td>
+                  <div class="error" id="vornameError"></div>
+                </td>
+              </tr>
+              <tr>
+                <td><label for="inputNachname">Last name</label></td>
+                <td>
+                  <input
+                    id="inputNachname"
+                    type="text"
+                    name="lastName"
+                    size="40"
+                  />
+                </td>
+                <td class="error" id="nachnameError"></td>
+              </tr>
+              <tr>
+                <td><label for="inputStrasse">Street</label></td>
+                <td>
+                  <input
+                    id="inputStrasse"
+                    type="text"
+                    name="street"
+                    size="25"
+                  />
+                  <span style="float: right">
+                    <label for="inputNr">Nr </label>
+                    <input id="inputNr" name="streetNr" size="4"
+                  /></span>
+                </td>
+                <td class="error" id="adresseError"></td>
+              </tr>
+              <tr>
+                <td><label for="inputPlz">PLZ</label></td>
+                <td>
+                  <input type="text" id="inputPlz" name="zip" size="4" />
+                  <span style="float: right">
+                    <label for="inputOrt">City</label
+                    ><input type="text" name="city" id="inputOrt" size="25"
+                  /></span>
+                </td>
+                <td class="error" id="plzOrtError"></td>
+              </tr>
+              <tr></tr>
+              <tr>
+                <td><label for="inputEmail">E-Mail</label></td>
+                <td>
+                  <input id="inputEmail" type="text" name="email" size="40" />
+                </td>
+                <td class="error" id="emailError"></td>
+              </tr>
+              <tr>
+                <td><label for="inputBenutzerId"> User-Id </label></td>
+                <td>
+                  <input
+                    id="inputBenutzerId"
+                    type="text"
+                    name="userName"
+                    size="40"
+                  />
+                </td>
+                <td class="error" id="benutzerIdError"></td>
+              </tr>
+              <tr>
+                <td><label for="inputPasswort">Password</label></td>
+                <td>
+                  <input
+                    id="inputPasswort"
+                    type="password"
+                    name="password"
+                    size="40"
+                  /><i class="far fa-eye fa-eye-slash" id="togglePassword"></i>
+                </td>
+                <td class="error" id="passwortError"></td>
+              </tr>
+              <tr>
+                <td>Password strength</td>
+                <td>
+                  <canvas id="pwdCanvas"></canvas>
+                </td>
+              </tr>
+              <tr>
+                <td>&nbsp;</td>
+                <td>
+                  <button id="registrationOpen" type="submit">Register</button>
+                  <button id="registrationClose" type="reset">Cancel</button>
+                </td>
+              </tr>
+            </table>
+          </form>
+        </div>
+        <div id="loginHeader">
+          <div id="leftHeader">
+            <div id="loginInfo">
+              <span style="white-space: nowrap">
+                User: <input id="userNameLogin" type="text" name="userName" />
+              </span>
+              <span style="white-space: nowrap">
+                Password:
+                <input id="passwordLogin" type="password" name="password" />
+              </span>
+              <button id="loginBtn" type="button" style="width: 100px">
+                Login
+              </button>
+            </div>
+          </div>
+          <div id="rightHeader">
+            <a href="javascript:handleRegistrationOpen()"
+              >Register with new user
+            </a>
+          </div>
+        </div>
+        <div id="logoutHeader">
+          <span id="welcome"></span>
+          <button id="logoutBtn" type="button">Logout</button>
+        </div>
+      </header>
+      <article>
+        <div id="mapid"></div>
+      </article>
+      <aside>
+        <div id="ratingContainer">
+          <div id="ratingHeader">
+            <h1 id="poiName">Welcome</h1>
+            <button style="height: 20px">Infos</button>
+          </div>
+          <h3>Add rating:</h3>
+
+          <form id="ratingForm">
+            <fieldset class="rating">
+              <legend>Rating:</legend>
+
+              <input type="radio" id="star1" name="rating" value="5" /><label
+                for="star1"
+                title="Sucks big time"
+              >
+                1Star
+              </label>
+              <input type="radio" id="star2" name="rating" value="4" /><label
+                for="star2"
+                title="Kinda bad"
+                >2 stars</label
+              >
+              <input type="radio" id="star3" name="rating" value="3" /><label
+                for="star3"
+                title="Meh"
+                >3 stars</label
+              >
+              <input type="radio" id="star4" name="rating" value="2" /><label
+                for="star4"
+                title="Pretty good"
+                >4 stars</label
+              >
+              <input type="radio" id="star5" name="rating" value="1" />
+              <label for="star5" title="Rocks!">5 stars</label>
+            </fieldset>
+
+            <div id="textRating">
+              <label for="inputRating">Comment:</label>
+              <textarea id="ratingText"> </textarea>
+            </div>
+            <label for="imageinput">Upload image:</label>
+            <input
+              id="imageinput"
+              name="imageinput"
+              type="file"
+              accept="image/jpeg, image/png, image/jpg"
+            />
+            <output id="output"></output>
+            <button id="submitRating" type="submit" autofocus>Submit</button>
+          </form>
+          <h3 id="poiRatingsTitle">Ratings:</h3>
+          <div id="poiRatingsSection"></div>
+        </div>
+      </aside>
+      <footer>
+        <div id="userRatings">
+          <h3>My ratings:</h3>
+          <table id="myRatingsTable"></table>
+        </div>
+        <div id="snackbar">
+          <span id="snackbarMsg"></span>
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>

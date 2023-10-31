@@ -1,0 +1,200 @@
+@charset "UTF-8";
+
+@import
+	url('https://fonts.googleapis.com/css2?family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap')
+	;
+
+
+#ratingContainer {
+	margin: 1em;
+}
+
+#ratingContainer h3 {
+	margin-bottom: 1em;
+}
+
+#poiRatingsTitle {
+	display: none;
+}
+
+#poiRatingsSection {
+	display: none;
+	background-color: #fcf1d4;
+	overflow-y: auto;
+	max-height: 10em;
+	padding: 1em;
+}
+
+#ratingForm {
+	background-color: #fcf1d4;
+	border: 1px dotted grey;
+	display: flex;
+	flex-direction: column;
+	gap: 1em;
+	padding: 1em;
+	padding-right: 1em;
+	padding-bottom: 1em;
+	padding-top: 1em;
+}
+
+.checked {
+	color: orange;
+}
+
+#myRatingsTable {
+	width: 100%;
+	border: 2px solid #2c3d03;
+}
+
+#myRatingsTable td {
+	margin: 5px;
+	padding: 5px;
+}
+
+#myRatingsTable tr {
+	padding: 2px;
+}
+
+#myRatingsTable tr:nth-child(even) {
+	background: #fff
+}
+
+#myRatingsTable tr:nth-child(odd) {
+	background: #fcf1d4;
+}
+
+#submitRating {
+	width: 25%;
+}
+
+#ratingHeader {
+	display: flex;
+	align-content: space-between;
+	align-items: center;
+	gap: 0.5em;
+	height: 1em;
+}
+
+#starLabel {
+	margin-right: 1em;
+}
+
+textarea {
+	width: 100%;
+	min-height: 3em;
+}
+
+#myRatingImage {
+	width: 10%
+}
+
+#myRatingStar {
+	width: 10%
+}
+
+#myRatingDate {
+	width: 5%
+}
+
+#myRatingTitle {
+	width: 10%
+}
+
+#loginHeader {
+	display: flex;
+	align-items: baseline;
+	justify-content: space-between;
+	flex-direction: row;
+}
+
+#registrationForm td {
+	padding: 0em;
+}
+
+
+#mapid {
+	height: 100%;
+}
+
+#bewertungsDiv {
+	width: 300px;
+	background: #F9EECF;
+	border: 1px dotted black;
+	text-align: left
+}
+
+#registration {
+	display: none;
+	position: absolute;
+	top: 20px;
+	left: 20px;
+	padding: 15px;
+	border: 3px solid #2c3d03;
+	background: #ffe6b3;
+	z-index: 1000;
+}
+
+.errorInputVorname {
+	display: block;
+}
+
+.errorInputVorname:invalid {
+	display: block;
+	background-color: red;
+}
+
+.error {
+	display: none;
+}
+
+#pwdCanvas {
+	border: 1px solid #d3d3d3;
+	width: 100%;
+	height: 15px;
+}
+
+
+
+#userRatings {
+	padding: 2px;
+	display: none;
+}
+
+#userRatingsEntry {
+	display: flex;
+	flex-direction: column;
+}
+
+#poiRatingsSectionEntry {
+	display: flex;
+	flex-direction: column;
+	gap: 5px;
+}
+
+#togglePassword {
+	margin-left: -30px;
+	cursor: pointer;
+}
+
+
+
+input span {
+	float: right;
+}
+
+#logoutHeader {
+	display: none;
+}
+
+#logoutHeader button {
+	margin-left: 1em;
+}
+
+.fa-check {
+	color: #02b502;
+}
+
+hr {
+	width: 100%;
+	border-top: 2px solid #333;
+}
