@@ -1,5 +1,9 @@
 version: "3.8"
 
+networks:
+  monitoring:
+    driver: bridge
+
 services:
   nginx-app:
     container_name: nginx-app
@@ -10,7 +14,7 @@ services:
     ports:
       - 8081:80
     networks:
-      - app
+      - monitoring
 
   grafana:
     image: grafana/grafana:latest
@@ -26,7 +30,7 @@ services:
       - GF_AUTH_ANONYMOUS_ORG_ROLE=Admin
       - GF_AUTH_DISABLE_LOGIN_FORM=true
     networks:
-      - app
+      - monitoring
 
   loki:
     image: grafana/loki:latest
@@ -37,7 +41,7 @@ services:
       - 3100:3100
     command: -config.file=/etc/loki/local-config.yaml
     networks:
-      - app
+      - monitoring
 
   promtail:
     labels:
@@ -53,8 +57,4 @@ services:
     depends_on:
       - loki
     networks:
-      - app
-
-networks:
-  app:
-    name: app
+      - monitoring

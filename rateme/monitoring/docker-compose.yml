@@ -13,6 +13,9 @@ services:
     build:
       context: ../
       dockerfile: "Dockerfile"
+    labels:
+      logging: "promtail"
+      logging_jobname: "containerlogs"
     ports:
       - 8080:8080
 
@@ -60,34 +63,5 @@ services:
       - 9090
     ports:
       - 9090:9090
-    networks:
-      - monitoring
-
-  grafana:
-    image: grafana/grafana-enterprise
-    container_name: grafana
-    restart: unless-stopped
-    ports:
-      - "3000:3000"
-    volumes:
-      - "./data/grafana:/var/lib/grafana"
-    entrypoint:
-      - sh
-      - -euc
-      - |
-        mkdir -p /etc/grafana/provisioning/datasources
-        cat <<EOF > /etc/grafana/provisioning/datasources/ds.yaml
-        apiVersion: 1
-        datasources:
-          - name: Loki
-            type: loki
-            access: proxy
-            url: http://gateway:3100
-            jsonData:
-              httpHeaderName1: "X-Scope-OrgID"
-            secureJsonData:
-              httpHeaderValue1: "tenant1"
-        EOF
-        /run.sh
     networks:
       - monitoring
