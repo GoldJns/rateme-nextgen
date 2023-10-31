@@ -1,0 +1,17 @@
+version: "3.8"
+
+networks:
+  monitoring:
+    driver: bridge
+
+services:
+  app:
+    image: app
+    build:
+      context: ../
+      dockerfile: "Dockerfile"
+    labels:
+      logging: "promtail"
+      logging_jobname: "containerlogs"
+    ports:
+      - 8080:8080
