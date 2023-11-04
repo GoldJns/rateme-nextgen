@@ -1,0 +1,13 @@
+FROM nginx:latest
+
+# Set the working directory in the container
+WORKDIR /usr/share/nginx/html
+
+# Copy the local HTML, CSS, JS files to the container
+COPY src/main/webapp/ .
+
+# Expose port 80 to the outside world
+EXPOSE 80
+
+# Start Nginx when the container launches
+CMD ["nginx", "-g", "daemon off;"]

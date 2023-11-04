@@ -6,13 +6,26 @@
 
 Run `./mvnw clean package` to build the project.
 
+## Run
+
+Ensure you have rights to execute start script
+```sh
+  sudo chown +x start.sh   
+```
+
+This commmand will start the springboot application and setup additional services e.g. monitoring
+```sh
+  ./start.sh
+```
+
+
 ## Docker
 
 Build a new image:
 
 ```sh
   docker build -t <image-name>:<tag> .
-`````
+```
 
 Run image:
 ```sh
@@ -35,3 +48,4 @@ Following services will start:
 - grafana on port `3000`
 - node-exporter on port `9100`
 - springboot app on port `8080`
+- loki on port `3100`

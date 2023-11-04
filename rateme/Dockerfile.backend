@@ -1,4 +1,4 @@
-FROM eclipse-temurin
+FROM eclipse-temurin:17-jdk
 VOLUME /tmp
 COPY target/*.jar app.jar
 EXPOSE 8080
