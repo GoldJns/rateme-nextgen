@@ -24,3 +24,16 @@ services:
       logging_jobname: "containerlogs"
     ports:
       - 8082:80
+  database:
+    build:
+      context: ./database
+      dockerfile: Dockerfile.database
+    image: ratemedb:latest
+    volumes:
+      - ./database/DbVolume:/var/lib/mysql
+      - ./database/config:/etc/mysql/conf.d
+    environment:
+      - MYSQL_DATABASE=rateme_swtp
+      - MYSQL_ALLOW_EMPTY_PASSWORD=true
+    ports:
+      - "3306:3306"
