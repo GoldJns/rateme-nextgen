@@ -32,6 +32,7 @@ services:
     volumes:
       - ./database/DbVolume:/var/lib/mysql
       - ./database/config:/etc/mysql/conf.d
+      - ./database/InitScripts/:/docker-entrypoint-init.d/1.sql
     environment:
       - MYSQL_DATABASE=rateme_swtp
       - MYSQL_ALLOW_EMPTY_PASSWORD=true
