@@ -17,6 +17,7 @@ spec:
       containers:
         - name: backend-container
           image: ghcr.io/goldjns/rateme-nextgen-backend:backend-0.1.0-beta
+          imagePullPolicy: Always
           ports:
             - name: http
               containerPort: 8080
