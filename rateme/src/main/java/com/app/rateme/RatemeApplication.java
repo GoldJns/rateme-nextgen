@@ -15,7 +15,6 @@ public class RatemeApplication {
 	}
 
 	@RestController
-
 	class Hello {
 
 		private Logger logger = LoggerFactory.getLogger(RatemeApplication.class);

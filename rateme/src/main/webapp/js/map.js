@@ -64,7 +64,7 @@ async function getPoiById(poiId) {
 }
 
 async function getAllPois() {
-  const response = await fetch("app/pois", {
+  const response = await fetch("http://localhost:8080/pois", {
     method: "get",
     headers: {
       Accept: "application/json",
