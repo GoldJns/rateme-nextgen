@@ -11,6 +11,8 @@ name: Java CI with Maven
 on:
   push:
     branches: [ "main" ]
+    paths-ignore: 
+    - "*.md"
   pull_request:
     branches: [ "main" ]
 
