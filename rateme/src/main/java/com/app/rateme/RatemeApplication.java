@@ -15,7 +15,6 @@ public class RatemeApplication {
 	}
 
 	@RestController
-
 	class Hello {
 
 		private Logger logger = LoggerFactory.getLogger(RatemeApplication.class);
@@ -25,7 +24,7 @@ public class RatemeApplication {
 			logger.debug("this is a debug log");
 			logger.info("moinsen");
 			logger.error("this is exception");
-			return "Hello World!";
+			return "Hello test World!";
 		}
 
 	}
