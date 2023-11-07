@@ -49,3 +49,8 @@ Following services will start:
 - node-exporter on port `9100`
 - springboot app on port `8080`
 - loki on port `3100`
+
+## Credits
+This project includes code adapted from [rateme](https://github.com/alex9849/rateme) by [alex9849](https://github.com/alex9849) 
+
+
