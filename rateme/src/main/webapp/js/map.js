@@ -64,7 +64,7 @@ async function getPoiById(poiId) {
 }
 
 async function getAllPois() {
-  const response = await fetch("app/pois", {
+  const response = await fetch("http://localhost:8080/pois", {
     method: "get",
     headers: {
       Accept: "application/json",
@@ -98,10 +98,11 @@ async function onPoiSelected(poi, event) {
   // set selected
   prevSelectedMarker = event.target;
   prevSelectedMarker.setIcon(redIcon);
-  selectedPoiId = poi.id;
 
-  drawPoiInfo(poi.tags);
-  await drawPoiRating(selectedPoiId);
+  selectedPoiId = poi.osmId;
+   getPoitags(poi.osmId);
+ // drawPoiInfo(poi.tags);
+ // await drawPoiRating(selectedPoiId);
 }
 
 function drawPoiInfo(poi) {
@@ -112,4 +113,30 @@ function drawPoiInfo(poi) {
       break;
     }
   }
+}
+
+
+
+function getPoitags(id) {
+  console.log(id)
+  fetch("http://localhost:8080/pois/" + id, {
+    method: "get",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+  })
+    .then((response) => response.json())
+    .then((poitag) => { 
+      console.log(poitag)
+      for (const p of poitag) {
+        if (p.tag === "name") {
+          document.getElementById("poiinfo").innerHTML = p.value;
+          break;
+        }
+      }
+   
+      
+    })
+    .catch((error) => console.error("Error:", error));
 }
