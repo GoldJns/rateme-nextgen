@@ -10,6 +10,7 @@ let blueIcon;
 let prevSelectedMarker = null;
 let selectedPoiId = null;
 
+const serviceUrl = window.endpointConfig.local.SERVICES_BASE_URL;
 // Initialisierung der Karte
 function initMap() {
   myMap = L.map("mapid").setView([49.250723, 7.377122], 13);
@@ -64,7 +65,7 @@ async function getPoiById(poiId) {
 }
 
 async function getAllPois() {
-  const response = await fetch("app/pois", {
+  const response = await fetch(serviceUrl + "/pois", {
     method: "get",
     headers: {
       Accept: "application/json",
