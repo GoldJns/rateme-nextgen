@@ -51,7 +51,7 @@ jobs:
         run: |
           version=$(echo "v$(git tag -l --sort=-version:refname | head -n 1)")
           echo "Setting version to $version in pom.xml"
-          mvn versions:set -DnewVersion=$version
+          cd rateme && mvn versions:set -DnewVersion=$version
 
       - name: Commit version change
         run: |
