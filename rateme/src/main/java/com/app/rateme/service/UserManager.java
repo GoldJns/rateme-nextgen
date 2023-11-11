@@ -58,8 +58,8 @@ public class UserManager {
 			throw new RuntimeException("ERROR User creation failed: " + e.getMessage());
 		}
 
-		user.setPasswordsalt(salt);
-		user.setPasswordhash(passwordHash);
+		user.setPasswordSalt(salt);
+		user.setPasswordHash(passwordHash);
 
         final User createdUser = userRepository.save(user);
         return Optional.of(createdUser);

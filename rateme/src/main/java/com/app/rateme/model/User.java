@@ -2,8 +2,7 @@ package com.app.rateme.model;
 
 import java.util.Set;
 
-
-
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -16,26 +15,29 @@ import jakarta.persistence.Table;
 public class User {
 
     @Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int userId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int userId;
+    private String city;
 
-	
-	private String username;
-	private String mail;
-	private String firstname;
-	private String lastname;
-	private String street;
-	private String streetNr;
-	private String city;
-	private String zip;
-	private byte[] passwordhash;
-	private byte[] passwordsalt;
-	
-	@OneToMany(mappedBy = "user")
-	Set<Rating> ratings;
-    
-    public User(){
+    @Column(name = "e_mail", length = 50, nullable = false)
+    private String mail;
 
+    private String firstname;
+    private String lastname;
+    private byte[] passwordHash;
+    private byte[] passwordSalt;
+    private String street;
+
+    @Column(name = "street_nr",length = 20)
+    private String streetNr;
+
+    private String username;
+    private String zip;
+
+    @OneToMany(mappedBy = "user")
+    Set<Rating> ratings;
+
+    public User() {
 
     }
 
@@ -111,20 +113,20 @@ public class User {
         this.zip = zip;
     }
 
-    public byte[] getPasswordhash() {
-        return passwordhash;
+    public byte[] getPasswordHash() {
+        return passwordHash;
     }
 
-    public void setPasswordhash(byte[] passwordHash) {
-        this.passwordhash = passwordHash;
+    public void setPasswordHash(byte[] passwordHash) {
+        this.passwordHash = passwordHash;
     }
 
-    public byte[] getPasswordsalt() {
-        return passwordsalt;
+    public byte[] getPasswordSalt() {
+        return passwordSalt;
     }
 
-    public void setPasswordsalt(byte[] passwordSalt) {
-        this.passwordsalt = passwordSalt;
+    public void setPasswordSalt(byte[] passwordSalt) {
+        this.passwordSalt = passwordSalt;
     }
 
     public Set<Rating> getRatings() {
@@ -134,7 +136,5 @@ public class User {
     public void setRatings(Set<Rating> ratings) {
         this.ratings = ratings;
     }
-
-    
 
 }

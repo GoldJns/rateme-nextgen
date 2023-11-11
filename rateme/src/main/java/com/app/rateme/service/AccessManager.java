@@ -52,8 +52,8 @@ public class AccessManager {
                 // Check Password
 
                 byte[] loginPasswordHash = PasswordTools
-                        .generatePasswordHash(password, optUser.get().getPasswordsalt());
-                byte[] originalPasswordHash = optUser.get().getPasswordhash();
+                        .generatePasswordHash(password, optUser.get().getPasswordSalt());
+                byte[] originalPasswordHash = optUser.get().getPasswordHash();
 
                 if (Arrays.equals(loginPasswordHash, originalPasswordHash) == false) {
                     System.err.println("Wrong Password");
