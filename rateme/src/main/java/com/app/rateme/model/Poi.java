@@ -1,14 +1,24 @@
 package com.app.rateme.model;
 
+import java.util.List;
+import java.util.Set;
 
 import com.app.rateme.model.converter.PositionConverter;
-import jakarta.persistence.*;
 
-import java.util.List;
+import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "rateme_poi")
-public class Poi  {
+public class Poi {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,11 +32,12 @@ public class Poi  {
     @Convert(converter = PositionConverter.class)
     private Position position;
 
+    @OneToMany(fetch = FetchType.EAGER)
+    @JoinColumn(name = "osm_id", referencedColumnName = "osm_id")
+    private List<PoiTag> tags;
 
-
-
-
-
+    @OneToMany(mappedBy = "poi")
+    Set<Rating> ratings;
 
     public Poi() {
     }
@@ -54,6 +65,5 @@ public class Poi  {
     public void setPosition(Position position) {
         this.position = position;
     }
-
 
 }

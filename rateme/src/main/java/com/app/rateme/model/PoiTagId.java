@@ -1,8 +1,6 @@
 package com.app.rateme.model;
 
 
-import jakarta.persistence.Embeddable;
-
 import java.io.Serializable;
 
 

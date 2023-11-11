@@ -23,8 +23,10 @@ public class PoiController {
 
     @Autowired
     PoiTagRepository Poitagrepo;
+
+
     @GetMapping
-    public ResponseEntity getAllPois() {
+    public ResponseEntity<List<Poi>> getAllPois() {
         final List<Poi> allPois = PoiDaorepo.findAll();
         return ResponseEntity.ok(allPois);
     }

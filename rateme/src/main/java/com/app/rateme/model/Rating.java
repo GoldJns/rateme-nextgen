@@ -6,8 +6,12 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 
 @Entity
+@Table(name = "rateme_rating")
 public class Rating {
     
     @Id
@@ -18,10 +22,17 @@ public class Rating {
 	private int stars;
 	private LocalDateTime createdAt;
 
-	private Poi poi;
-	private User user;
+
 	
 	private byte[] image;
+
+    @ManyToOne
+	@JoinColumn(name = "osm_id")
+	private Poi poi;
+
+	@ManyToOne
+	@JoinColumn(name = "user_id")
+	private User user;
 
     public Rating(){
 

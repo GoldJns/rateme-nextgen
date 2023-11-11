@@ -1,0 +1,48 @@
+package com.app.rateme.api;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.app.rateme.api.dto.RegistrationDataDto;
+import com.app.rateme.security.LoginToken;
+import com.app.rateme.service.AccessManager;
+import com.app.rateme.service.UserManager;
+
+@RestController
+@RequestMapping("user")
+public class UserController {
+
+    @Autowired
+    private UserManager userManager;
+
+    @Autowired
+    private AccessManager accessManager;
+
+    @PostMapping("/register")
+    public ResponseEntity<LoginToken> registerUser(@RequestBody RegistrationDataDto registrationData) {
+        try {
+            ResponseEntity<LoginToken> response;
+
+            if (registrationData.getUserName().length() == 0) {
+                System.out.println("ERROR No username provided!");
+                response = new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
+
+            System.out.println();
+            System.out.println("Register " + registrationData.getUserName());
+
+            userManager.register(registrationData);
+
+            response = accessManager.login(registrationData.getUserName(), registrationData.getPassword());
+            return response;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+}

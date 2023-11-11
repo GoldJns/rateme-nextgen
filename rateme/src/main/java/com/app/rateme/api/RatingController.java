@@ -1,35 +1,45 @@
 package com.app.rateme.api;
 
-import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.app.rateme.dao.PoiDAO;
+import com.app.rateme.dao.RatingRepository;
+import com.app.rateme.model.Poi;
 import com.app.rateme.model.Rating;
-import com.app.rateme.model.RatingRepository;
+
+import jakarta.websocket.server.PathParam;
 
 @RestController
 @RequestMapping("ratings")
 public class RatingController {
 
-    private final RatingRepository ratingRepository;
+
+    @Autowired
+    private RatingRepository ratingRepository;
+
+	@Autowired
+    private PoiDAO poiRepository;
 
    
     
-    public RatingController(RatingRepository ratingRepository) {
-        this.ratingRepository = ratingRepository;
-    }
 
 
   
+//Test ???
+    @GetMapping("/poi/{osmId}")
+	public ResponseEntity<List<Rating>> getRatingsByPoi(@PathParam("osmId") long osmId) {
+		Optional<Poi> poi = poiRepository.findById(osmId);
+		final List<Rating> ratingsByPoi = ratingRepository.findAllByPoi(poi);
 
-//test
-    @GetMapping
-    public List<Rating> test(){
-        return List.of(
-            new Rating(1,"Schmeckt gut",4,LocalDateTime.of(2023,11,4, 0, 0))
-        );
-    }
+		return new ResponseEntity<>(ratingsByPoi,HttpStatus.OK);
+	}
+    
 }
