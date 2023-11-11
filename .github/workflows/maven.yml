@@ -52,5 +52,5 @@ jobs:
       - name: Upload artifacts
         uses: actions/upload-artifact@v2
         with:
-          name: my-artifact
-          path: target/my-app.jar
+          name: App jar
+          path: rateme/target/rateme-${{ steps.tag_version.outputs.new_tag }}-SNAPSHOT.jar
