@@ -50,6 +50,8 @@ Following services will start:
 - springboot app on port `8080`
 - loki on port `3100`
 
+
+
 ## Features Added
 -Display all pois in map
 -Display information of poi when it selectd
@@ -96,3 +98,9 @@ Note: in Docker sql_server name is (database) in Lockal Maschine sql_server name
 -Hide aside Content to display Poi Information when it selected 
 -Added div for Poi Information with css Styles
 -Added js Function to get Poi Info.
+
+
+## Credits
+This project includes code adapted from [rateme](https://github.com/alex9849/rateme) by [alex9849](https://github.com/alex9849) 
+
+
