@@ -21,6 +21,7 @@ import com.app.rateme.service.AccessManager;
 import com.app.rateme.service.UserManager;
 
 @RestController
+@CrossOrigin("*")
 @RequestMapping("user")
 public class UserController {
 
