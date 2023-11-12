@@ -39,3 +39,6 @@ build/
 
 ### Docker-volumes 
 database/DbVolume/
+
+### macOS ###
+*.DS_Store

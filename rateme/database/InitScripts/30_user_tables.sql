@@ -1,17 +1,15 @@
-
-
-CREATE TABLE rateme_user (
-user_id int auto_increment primary key
-, username varchar(20) not null UNIQUE 
-, E_Mail varchar(50) not null
-, firstname varchar(20) not null
-, lastname varchar(20) not null
-, street   varchar(30) not null
-, streetNr  varchar(20) not null
-, zip  varchar(20) not null
-, city  varchar(30) not null
-, password_hash VARBINARY (1000) not null
-, password_salt VARBINARY (1000) not null
-)CHARACTER SET utf8mb4;
-
-
+CREATE TABLE `rateme_user` (
+  `user_id` int NOT NULL AUTO_INCREMENT,
+  `username` varchar(20) NOT NULL,
+  `E_Mail` varchar(50) NOT NULL,
+  `firstname` varchar(20) NOT NULL,
+  `lastname` varchar(20) NOT NULL,
+  `street` varchar(30) NOT NULL,
+  `zip` varchar(20) NOT NULL,
+  `city` varchar(30) NOT NULL,
+  `password_hash` varbinary(1000) NOT NULL,
+  `password_salt` varbinary(1000) NOT NULL,
+  `street_nr` varchar(20) NOT NULL,
+  PRIMARY KEY (`user_id`),
+  UNIQUE KEY `username` (`username`)
+) ENGINE=InnoDB AUTO_INCREMENT=118 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci

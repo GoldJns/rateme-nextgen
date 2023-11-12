@@ -6,6 +6,7 @@ networks:
 
 volumes:
   prometheus_data:
+  grafana-data:
 
 services:
   nginx-app:
@@ -27,7 +28,10 @@ services:
     ports:
       - 3000:3000
     volumes:
-      - ./config/grafana-datasources.yml:/etc/grafana/provisioning/datasources/datasources.yaml
+      - ./grafana/provisioning:/etc/grafana/provisioning
+      - ./grafana/grafana.ini:/etc/grafana/grafana.ini
+      - ./grafana/provisioning/dashboards:/etc/grafana/dashboards
+      - grafana-data:/var/lib/grafana
     environment:
       - GF_AUTH_ANONYMOUS_ENABLED=true
       - GF_AUTH_ANONYMOUS_ORG_ROLE=Admin
@@ -53,7 +57,7 @@ services:
     image: grafana/promtail:latest
     container_name: promtail
     volumes:
-      - ./config/promtail.yaml:/etc/promtail/docker-config.yaml
+      - ./promtail/promtail.yaml:/etc/promtail/docker-config.yaml
       - /var/lib/docker/containers:/var/lib/docker/containers:ro
       - /var/run/docker.sock:/var/run/docker.sock
     command: -config.file=/etc/promtail/docker-config.yaml
