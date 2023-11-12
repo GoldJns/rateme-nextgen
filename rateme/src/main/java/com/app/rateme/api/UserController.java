@@ -30,7 +30,7 @@ public class UserController {
     @Autowired
     private AccessManager accessManager;
 
-    @PostMapping
+    @PostMapping("/register")
     public ResponseEntity<LoginToken> registerUser(@RequestBody UserDto registrationData) {
         try {
             ResponseEntity<LoginToken> response;
@@ -53,7 +53,7 @@ public class UserController {
         }
     }
 
-    @GetMapping
+    @GetMapping("/get")
     public ResponseEntity<UserDto> getUser(@RequestHeader("token") String loginToken) {
 
         // Access-control

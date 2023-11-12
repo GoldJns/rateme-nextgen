@@ -136,7 +136,7 @@ function drawCanvas(pwdStrength) {
 
 async function getUserById(userId) {
   try {
-    const response = await fetch(`app/user/${userId}`, {
+    const response = await fetch(serviceUrl + `/user/${userId}`, {
       method: "GET",
       headers: { "Content-type": "application/json" },
     });
@@ -172,7 +172,7 @@ function handlePasswordToggle() {
 
 async function fetchUser(token) {
   try {
-    const response = await fetch("app/user", {
+    const response = await fetch(serviceUrl + "/user/get", {
       method: "GET",
       headers: {
         "Content-type": "application/json",
@@ -190,7 +190,7 @@ async function fetchUser(token) {
 
 async function loginUser(credentials) {
   try {
-    const response = await fetch("app/access", {
+    const response = await fetch(serviceUrl + "/access/login", {
       method: "POST",
       headers: {
         "Content-type": "application/json",
@@ -244,7 +244,7 @@ async function handleRegistrationSubmit(event) {
   var json = JSON.stringify(registerData);
 
   try {
-    const response = await fetch("app/user", {
+    const response = await fetch(serviceUrl + "/user/register", {
       method: "POST",
       headers: {
         "Content-type": "application/json",
@@ -315,7 +315,7 @@ async function drawTable() {
 
 function handleLogout() {
   const id = sessionStorage.getItem("accessToken");
-  fetch("app/access", {
+  fetch(serviceUrl + "/access/logout", {
     method: "delete",
     headers: { token: id },
   })
