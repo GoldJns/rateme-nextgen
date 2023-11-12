@@ -35,7 +35,7 @@ build/
 
 ### Monitoring ###
 *.log
-
+*.gz
 
 ### Docker-volumes 
 database/DbVolume/
