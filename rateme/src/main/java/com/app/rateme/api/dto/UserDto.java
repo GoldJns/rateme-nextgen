@@ -1,6 +1,6 @@
 package com.app.rateme.api.dto;
 
-public class RegistrationDataDto {
+public class UserDto {
     
     private String userName;
 	private String password;

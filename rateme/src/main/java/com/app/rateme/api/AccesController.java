@@ -23,10 +23,10 @@ public class AccesController {
     @Autowired
     private AccessManager accessManager;
 
-    @PostMapping("/login")
+    @PostMapping
     public ResponseEntity<LoginToken> login(@RequestBody Map<String, Object> loginData) {
         try {
-            String username = (String) loginData.get("username");
+            String username = (String) loginData.get("userName");
             String password = (String) loginData.get("password");
 
             System.out.println("Try login User " + username);
@@ -41,7 +41,7 @@ public class AccesController {
         }
     }
 
-    @DeleteMapping("/logout")
+    @DeleteMapping
     public ResponseEntity<String> logout(@RequestHeader("token") String loginToken) {
         try {
             System.out.println("Logout: " + this.accessManager.getLoginName(UUID.fromString(loginToken)));

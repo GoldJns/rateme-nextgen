@@ -7,7 +7,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.app.rateme.api.dto.RegistrationDataDto;
+import com.app.rateme.api.dto.UserDto;
 import com.app.rateme.dao.UserRepository;
 import com.app.rateme.model.User;
 import com.app.rateme.util.PasswordTools;
@@ -27,7 +27,29 @@ public class UserManager {
         return Optional.of(user);
     }
 
-    public Optional<User> register(RegistrationDataDto data) throws Exception {
+	public UserDto getUserDtoData(String username){
+
+		UserDto userDto = new UserDto();
+		Optional<User> optUser = lookupUser( username);
+
+		if (optUser.isPresent()) {
+			User user = optUser.get();
+			userDto.setCity(user.getCity());
+			userDto.setEmail(user.getMail());
+			userDto.setFirstName(user.getFirstname());
+			userDto.setLastName(user.getLastname());
+			userDto.setStreet(user.getStreet());
+			userDto.setStreetNr(user.getStreetNr());
+			userDto.setZip(user.getZip());
+			userDto.setUserName(user.getUsername());
+			userDto.setPassword("");            // placeholder
+		}else{
+			userDto = null;
+		}
+		return userDto;
+	}
+
+    public Optional<User> register(UserDto data) throws Exception {
         User user = new User();
 		user.setCity(data.getCity());
 		user.setMail(data.getEmail());
