@@ -6,6 +6,7 @@ import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,13 +18,14 @@ import com.app.rateme.security.LoginToken;
 import com.app.rateme.service.AccessManager;
 
 @RestController
+@CrossOrigin("*")
 @RequestMapping("access")
 public class AccesController {
 
     @Autowired
     private AccessManager accessManager;
 
-    @PostMapping
+    @PostMapping("/login")
     public ResponseEntity<LoginToken> login(@RequestBody Map<String, Object> loginData) {
         try {
             String username = (String) loginData.get("userName");
@@ -41,7 +43,7 @@ public class AccesController {
         }
     }
 
-    @DeleteMapping
+    @DeleteMapping("/logout")
     public ResponseEntity<String> logout(@RequestHeader("token") String loginToken) {
         try {
             System.out.println("Logout: " + this.accessManager.getLoginName(UUID.fromString(loginToken)));

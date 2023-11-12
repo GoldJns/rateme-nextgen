@@ -2,6 +2,7 @@ window.addEventListener("load", initUser);
 window.addEventListener("beforeunload", checkLoginStatus);
 
 let user;
+const serviceUrl = window.endpointConfig.local.SERVICES_BASE_URL;
 
 async function checkLoginStatus() {
   const token = sessionStorage.getItem("accessToken");
@@ -190,7 +191,7 @@ async function fetchUser(token) {
 
 async function loginUser(credentials) {
   try {
-    const response = await fetch(serviceUrl + "/access/login", {
+    const response = await fetch("http://localhost:8080/access/login", {
       method: "POST",
       headers: {
         "Content-type": "application/json",
