@@ -62,6 +62,7 @@ public class UserManager {
 		user.setPasswordHash(passwordHash);
 
         final User createdUser = userRepository.save(user);
+		
         return Optional.of(createdUser);
     }
 }

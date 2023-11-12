@@ -2,6 +2,8 @@ package com.app.rateme.model;
 
 import java.util.Set;
 
+import org.hibernate.annotations.ColumnDefault;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -16,6 +18,7 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "user_id")
     private int userId;
     private String city;
 
@@ -28,7 +31,8 @@ public class User {
     private byte[] passwordSalt;
     private String street;
 
-    @Column(name = "street_nr",length = 20)
+   // @Column(name = "street_nr",length = 20)
+    @ColumnDefault("DEFAULT_VALUE")
     private String streetNr;
 
     private String username;
@@ -36,6 +40,7 @@ public class User {
 
     @OneToMany(mappedBy = "user")
     Set<Rating> ratings;
+    
 
     public User() {
 
