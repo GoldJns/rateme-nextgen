@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import java.util.List;
 
 @Service
-public class Poiservice {
+public class PoiService {
     @Autowired
     PoiDAO PoiDaoRepo;
     @Autowired
