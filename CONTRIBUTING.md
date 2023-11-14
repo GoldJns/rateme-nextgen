@@ -19,3 +19,9 @@ Refactor: refactor: improve existing code
 Bug Fix: fix: resolve issue with XYZ
 Chore: chore: update dependencies   
 
+## Code Conventions
+
+- Use `PascalCase` for Classes/ Filenames
+- other stuff(like java objects etc.) should be named with `camelCase`
+- Use short descriptive Names
+
