@@ -36,7 +36,13 @@ build/
 ### Monitoring ###
 *.log
 *.gz
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/main
 
 ### Docker-volumes 
 database/DbVolume/
+
+### macOS ###
+*.DS_Store

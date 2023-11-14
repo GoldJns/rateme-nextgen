@@ -24,9 +24,19 @@ public class PoiController {
     PoiService poiService ;
 
 
+<<<<<<< HEAD
     @GetMapping
     public ResponseEntity getAllPois() {
         final List<Poi> allPois = poiService.getAllPois();
+=======
+    @Autowired
+    PoiTagRepository Poitagrepo;
+
+
+    @GetMapping
+    public ResponseEntity<List<Poi>> getAllPois() {
+        final List<Poi> allPois = PoiDaorepo.findAll();
+>>>>>>> origin/main
         return ResponseEntity.ok(allPois);
     }
 
