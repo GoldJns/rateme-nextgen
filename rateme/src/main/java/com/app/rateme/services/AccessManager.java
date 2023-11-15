@@ -1,4 +1,4 @@
-package com.app.rateme.service;
+package com.app.rateme.services;
 
 import java.util.Arrays;
 import java.util.Map;
@@ -64,14 +64,12 @@ public class AccessManager {
                 UUID utoken = UUID.randomUUID();
                 this.logins.put(utoken, loginname);
                 LoginToken token = new LoginToken(utoken.toString());
-                
 
-                
-                response = new ResponseEntity<>(token,HttpStatus.OK);
-                
-            }else{
+                response = new ResponseEntity<>(token, HttpStatus.OK);
+
+            } else {
                 System.err.println("User " + loginname + " not known");
-				throw new RuntimeException("User not known");
+                throw new RuntimeException("User not known");
             }
 
         } catch (Exception exce) {
