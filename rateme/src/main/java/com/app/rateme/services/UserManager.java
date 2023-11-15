@@ -1,4 +1,4 @@
-package com.app.rateme.service;
+package com.app.rateme.services;
 
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
@@ -17,20 +17,19 @@ import jakarta.persistence.NoResultException;
 @Service
 public class UserManager {
 
-    @Autowired
-    private UserRepository userRepository;
-    
+	@Autowired
+	private UserRepository userRepository;
 
-    public Optional<User> lookupUser(String username) {
+	public Optional<User> lookupUser(String username) {
 
-        User user = userRepository.getByusername(username);
-        return Optional.of(user);
-    }
+		User user = userRepository.getByusername(username);
+		return Optional.of(user);
+	}
 
-	public UserDto getUserDtoData(String username){
+	public UserDto getUserDtoData(String username) {
 
 		UserDto userDto = new UserDto();
-		Optional<User> optUser = lookupUser( username);
+		Optional<User> optUser = lookupUser(username);
 
 		if (optUser.isPresent()) {
 			User user = optUser.get();
@@ -42,15 +41,15 @@ public class UserManager {
 			userDto.setStreetNr(user.getStreetNr());
 			userDto.setZip(user.getZip());
 			userDto.setUserName(user.getUsername());
-			userDto.setPassword("");            // placeholder
-		}else{
+			userDto.setPassword(""); // placeholder
+		} else {
 			userDto = null;
 		}
 		return userDto;
 	}
 
-    public Optional<User> register(UserDto data) throws Exception {
-        User user = new User();
+	public Optional<User> register(UserDto data) throws Exception {
+		User user = new User();
 		user.setCity(data.getCity());
 		user.setMail(data.getEmail());
 		user.setFirstname(data.getFirstName());
@@ -83,8 +82,8 @@ public class UserManager {
 		user.setPasswordSalt(salt);
 		user.setPasswordHash(passwordHash);
 
-        final User createdUser = userRepository.save(user);
-		
-        return Optional.of(createdUser);
-    }
+		final User createdUser = userRepository.save(user);
+
+		return Optional.of(createdUser);
+	}
 }

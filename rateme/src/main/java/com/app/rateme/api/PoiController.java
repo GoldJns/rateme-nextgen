@@ -1,6 +1,5 @@
 package com.app.rateme.api;
 
-
 import com.app.rateme.dao.PoiDAO;
 import com.app.rateme.dao.PoiTagRepository;
 import com.app.rateme.model.Poi;
@@ -18,25 +17,12 @@ import java.util.List;
 @RequestMapping("/pois")
 public class PoiController {
 
-
-
     @Autowired
-    PoiService poiService ;
-
-
-<<<<<<< HEAD
-    @GetMapping
-    public ResponseEntity getAllPois() {
-        final List<Poi> allPois = poiService.getAllPois();
-=======
-    @Autowired
-    PoiTagRepository Poitagrepo;
-
+    PoiService poiService;
 
     @GetMapping
     public ResponseEntity<List<Poi>> getAllPois() {
-        final List<Poi> allPois = PoiDaorepo.findAll();
->>>>>>> origin/main
+        final List<Poi> allPois = poiService.getAllPois();
         return ResponseEntity.ok(allPois);
     }
 
@@ -44,7 +30,7 @@ public class PoiController {
     public ResponseEntity<List<PoiTag>> getTagsByOsmId(@PathVariable Long osmId) {
         List<PoiTag> tags = poiService.getTagsByOsmId(osmId);
 
-            return ResponseEntity.ok(tags); // Return the found tags
+        return ResponseEntity.ok(tags); // Return the found tags
 
     }
-    }
+}

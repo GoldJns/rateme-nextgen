@@ -50,11 +50,6 @@ Following services will start:
 - springboot app on port `8080`
 - loki on port `3100`
 
-<<<<<<< HEAD
-
-
-=======
->>>>>>> origin/main
 ## Features Added
 -Display all pois in map
 -Display information of poi when it selectd

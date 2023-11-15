@@ -18,8 +18,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.app.rateme.api.dto.UserDto;
 import com.app.rateme.model.User;
 import com.app.rateme.security.LoginToken;
-import com.app.rateme.service.AccessManager;
-import com.app.rateme.service.UserManager;
+import com.app.rateme.services.AccessManager;
+import com.app.rateme.services.UserManager;
 
 @RestController
 @CrossOrigin("*")

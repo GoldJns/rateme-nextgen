@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.app.rateme.security.LoginToken;
-import com.app.rateme.service.AccessManager;
+import com.app.rateme.services.AccessManager;
 
 @RestController
 @RequestMapping("access")
