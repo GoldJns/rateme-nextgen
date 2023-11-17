@@ -101,9 +101,7 @@ async function onPoiSelected(poi, event) {
   prevSelectedMarker.setIcon(redIcon);
 
   selectedPoiId = poi.osmId;
-   getPoitags(poi.osmId);
- // drawPoiInfo(poi.tags);
- // await drawPoiRating(selectedPoiId);
+  getPoitags(poi.osmId);
 }
 
 function drawPoiInfo(poi) {
@@ -116,11 +114,9 @@ function drawPoiInfo(poi) {
   }
 }
 
-
-
 function getPoitags(id) {
-  console.log(id)
-  fetch("http://localhost:8080/pois/" + id, {
+  console.log(id);
+  fetch(`${serviceUrl}/pois/ ${id}`, {
     method: "get",
     headers: {
       Accept: "application/json",
@@ -128,16 +124,14 @@ function getPoitags(id) {
     },
   })
     .then((response) => response.json())
-    .then((poitag) => { 
-      console.log(poitag)
+    .then((poitag) => {
+      console.log(poitag);
       for (const p of poitag) {
         if (p.tag === "name") {
           document.getElementById("poiinfo").innerHTML = p.value;
           break;
         }
       }
-   
-      
     })
     .catch((error) => console.error("Error:", error));
 }
