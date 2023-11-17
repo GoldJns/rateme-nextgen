@@ -66,7 +66,6 @@ public class UserController {
         }
 
         Optional<String> optUsername = accessManager.getLoginName(UUID.fromString(loginToken));
-        System.err.println("OPTUSERNAME"+ optUsername);
 
         if (optUsername.isPresent()) {
 
