@@ -2,7 +2,7 @@ window.addEventListener("load", initUser);
 window.addEventListener("beforeunload", checkLoginStatus);
 
 let user;
-const serviceUrl = window.endpointConfig.local.SERVICES_BASE_URL;
+
 
 async function checkLoginStatus() {
   const token = sessionStorage.getItem("accessToken");
@@ -137,7 +137,7 @@ function drawCanvas(pwdStrength) {
 
 async function getUserById(userId) {
   try {
-    const response = await fetch(serviceUrl + `/user/${userId}`, {
+    const response = await fetch(`http://localhost:8080/user/${userId}`, {
       method: "GET",
       headers: { "Content-type": "application/json" },
     });
@@ -173,7 +173,7 @@ function handlePasswordToggle() {
 
 async function fetchUser(token) {
   try {
-    const response = await fetch(serviceUrl + "/user/get", {
+    const response = await fetch("http://localhost:8080/user/", {
       method: "GET",
       headers: {
         "Content-type": "application/json",
@@ -245,7 +245,7 @@ async function handleRegistrationSubmit(event) {
   var json = JSON.stringify(registerData);
 
   try {
-    const response = await fetch(serviceUrl + "/user/register", {
+    const response = await fetch("http://localhost:8080/user/register", {
       method: "POST",
       headers: {
         "Content-type": "application/json",
@@ -316,7 +316,7 @@ async function drawTable() {
 
 function handleLogout() {
   const id = sessionStorage.getItem("accessToken");
-  fetch(serviceUrl + "/access/logout", {
+  fetch("http://localhost:8080/access/logout", {
     method: "delete",
     headers: { token: id },
   })

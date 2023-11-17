@@ -6,17 +6,15 @@ import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.app.rateme.api.dto.UserDto;
-import com.app.rateme.model.User;
 import com.app.rateme.security.LoginToken;
 import com.app.rateme.service.AccessManager;
 import com.app.rateme.service.UserManager;
@@ -55,7 +53,7 @@ public class UserController {
         }
     }
 
-    @GetMapping("/get")
+    @GetMapping("/")
     public ResponseEntity<UserDto> getUser(@RequestHeader("token") String loginToken) {
 
         // Access-control
