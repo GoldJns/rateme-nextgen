@@ -66,10 +66,12 @@ public class UserController {
         }
 
         Optional<String> optUsername = accessManager.getLoginName(UUID.fromString(loginToken));
+        System.err.println("OPTUSERNAME"+ optUsername);
 
         if (optUsername.isPresent()) {
 
-            UserDto userDto = userManager.getUserDtoData(optUsername.toString());
+           
+            UserDto userDto = userManager.getUserDtoData(optUsername.get());
             if (userDto != null) {
                 return ResponseEntity.ok(userDto);
             } else {
