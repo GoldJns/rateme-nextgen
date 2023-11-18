@@ -3,7 +3,6 @@ window.addEventListener("beforeunload", checkLoginStatus);
 
 let user;
 
-
 async function checkLoginStatus() {
   const token = sessionStorage.getItem("accessToken");
 
@@ -173,7 +172,7 @@ function handlePasswordToggle() {
 
 async function fetchUser(token) {
   try {
-    const response = await fetch("http://localhost:8082" + "/user/get", {
+    const response = await fetch("http://localhost:8082" + "/user/", {
       method: "GET",
       headers: {
         "Content-type": "application/json",

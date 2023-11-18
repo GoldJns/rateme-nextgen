@@ -55,7 +55,7 @@ public class UserController {
         }
     }
 
-    @GetMapping("/get")
+    @GetMapping("/")
     public ResponseEntity<UserDto> getUser(@RequestHeader("token") String loginToken) {
 
         // Access-control
