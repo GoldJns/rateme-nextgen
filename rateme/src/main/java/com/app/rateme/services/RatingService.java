@@ -22,12 +22,12 @@ public class RatingService {
         return ratingRepository.save(rating);
     }
 
-    public List<Rating> getRatingByUser(int user){
-        return ratingRepository.getRatingByUser(user);
+    public List<Rating> getRatingByUser(Rating userId){
+        return ratingRepository.getRatingByUser(userId);
     }
 
-    public List<Rating> getRatingByPoi(long poi){
-        return ratingRepository.getRatingByPoi(poi);
+    public List<Rating> getRatingByPoi(Rating osmId){
+        return ratingRepository.getRatingByPoi(osmId);
     }
 
 }

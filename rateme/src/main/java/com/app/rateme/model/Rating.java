@@ -61,20 +61,36 @@ public class Rating {
         this.ratingId = ratingId;
     }
 
-    public int getUser() {
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Poi getPoi() {
+        return poi;
+    }
+
+    public void setPoi(Poi poi) {
+        this.poi = poi;
+    }
+
+    public int getUserId() {
         return user.getUserId();
     }
 
-    public void setUser(int user) {
+    public void setUserId(int user) {
         this.user.setUserId(user);
     }
 
-    public long getPoi() {
+    public long getosmId() {
         return poi.getOsmId();
     }
 
-    public void setPoi(long poi) {
-        this.poi.setOsmId(poi);
+    public void setosmId(long osmId) {
+        this.poi.setOsmId(osmId);
     }
 
     public String getText() {
