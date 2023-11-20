@@ -18,45 +18,40 @@ public class Rating {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long ratingId;
 
-	private String text;
-	private int stars;
-	private LocalDateTime createdAt;
-
-
-	
-	private byte[] image;
+    @ManyToOne
+	@JoinColumn(name = "user_id")
+	private User user;
 
     @ManyToOne
 	@JoinColumn(name = "osm_id")
 	private Poi poi;
 
-	@ManyToOne
-	@JoinColumn(name = "user_id")
-	private User user;
+	private String text;
+	private int stars;
+	private LocalDateTime createdAt;
+	private byte[] image;
 
     public Rating(){
 
     };
-    
-    public Rating(long ratingId, String text, int stars, LocalDateTime createdAt, Poi poi, User user) {
+
+    public Rating(long ratingId, User user, Poi poi, String text, int stars, LocalDateTime createdAt, byte[] image) {
         this.ratingId = ratingId;
-        this.text = text;
-        this.stars = stars;
-        this.createdAt = createdAt;
-        this.poi = poi;
         this.user = user;
+        this.poi = poi;
+        this.text = text;
+        this.stars = stars;
+        this.createdAt = createdAt;
+        this.image = image;
     }
 
-    public Rating(long ratingId, String text, int stars, LocalDateTime createdAt) {
+    public Rating(long ratingId, String text, int stars, LocalDateTime createdAt, byte[] image) {
         this.ratingId = ratingId;
         this.text = text;
         this.stars = stars;
         this.createdAt = createdAt;
+         this.image = image;
     }
-
-
-
-
 
     public long getRatingId() {
         return ratingId;
@@ -64,6 +59,22 @@ public class Rating {
 
     public void setRatingId(long ratingId) {
         this.ratingId = ratingId;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Poi getPoi() {
+        return poi;
+    }
+
+    public void setPoi(Poi poi) {
+        this.poi = poi;
     }
 
     public String getText() {
@@ -90,22 +101,6 @@ public class Rating {
         this.createdAt = createdAt;
     }
 
-    public Poi getPoi() {
-        return poi;
-    }
-
-    public void setPoi(Poi poi) {
-        this.poi = poi;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
     public byte[] getImage() {
         return image;
     }
@@ -115,6 +110,8 @@ public class Rating {
     }
 
     
+    
+    /*
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -157,6 +154,6 @@ public class Rating {
         return "Rating [ratingId=" + ratingId + ", text=" + text + ", stars=" + stars + ", createdAt=" + createdAt
                 + ", poi=" + poi + ", user=" + user + "]";
     }	
-
+     */
     
 }
