@@ -61,20 +61,20 @@ public class Rating {
         this.ratingId = ratingId;
     }
 
-    public User getUser() {
-        return user;
+    public int getUser() {
+        return user.getUserId();
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUser(int user) {
+        this.user.setUserId(user);
     }
 
-    public Poi getPoi() {
-        return poi;
+    public long getPoi() {
+        return poi.getOsmId();
     }
 
-    public void setPoi(Poi poi) {
-        this.poi = poi;
+    public void setPoi(long poi) {
+        this.poi.setOsmId(poi);
     }
 
     public String getText() {
