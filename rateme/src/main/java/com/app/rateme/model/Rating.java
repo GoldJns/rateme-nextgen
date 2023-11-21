@@ -76,7 +76,7 @@ public class Rating {
     public void setPoi(Poi poi) {
         this.poi = poi;
     }
-
+    /* 
     public int getUserId() {
         return user.getUserId();
     }
@@ -92,7 +92,7 @@ public class Rating {
     public void setosmId(long osmId) {
         this.poi.setOsmId(osmId);
     }
-
+    */
     public String getText() {
         return text;
     }

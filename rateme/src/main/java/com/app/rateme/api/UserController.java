@@ -55,7 +55,7 @@ public class UserController {
         }
     }
 
-    @GetMapping("/get")
+    @GetMapping("/")
     public ResponseEntity<UserDto> getUser(@RequestHeader("token") String loginToken) {
 
         // Access-control
@@ -69,7 +69,7 @@ public class UserController {
 
         if (optUsername.isPresent()) {
 
-            UserDto userDto = userManager.getUserDtoData(optUsername.toString());
+            UserDto userDto = userManager.getUserDtoData(optUsername.get());
             if (userDto != null) {
                 return ResponseEntity.ok(userDto);
             } else {
