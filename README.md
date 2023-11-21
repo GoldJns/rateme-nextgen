@@ -1,22 +1,11 @@
 # rateme-nextgen
 
+Discover great restaurants with ease! Use our map 🗺️ to find amazing places, see what others think with star ratings ⭐, and share your own reviews hassle-free. Sign up quickly and start rating your favorite spots right away 🚀. Add photos to your reviews 📸 and manage them easily. This project involves migrating an existing application to the cloud ☁️ 
 
 
-## Build
+## Installation
 
-Run `./mvnw clean package` to build the project.
-
-## Run
-
-Ensure you have rights to execute start script
-```sh
-  sudo chown +x start.sh   
-```
-
-This commmand will start the springboot application and setup additional services e.g. monitoring
-```sh
-  ./start.sh
-```
+The Installation and development process is documented in [INSTALLATION.md](https://github.com/GoldJns/rateme-nextgen/blob/main/INSTALLATION.md)
 
 ## Docker
 
@@ -38,21 +27,19 @@ There are two docker compose projects:
 
 ## Observability
 
-Follow guide to start the project:
+The whole setup is monitored with prometheus, loki and node exporter.
+Metrics and logs are visualized using Grafana
 
-Go to path: `./rateme/monitoring`
 
-```sh
-  docker compose up --build
-```
+## Services
 
-Following services will start:
+The backend consists of 3 services:
 
-- prometheus on port `9090`
-- grafana on port `3000`
-- node-exporter on port `9100`
-- springboot app on port `8080`
-- loki on port `3100`
+`Poi Service`: The Poi Service manages locations of the restaurants.
+
+`User Service`: The User Service handles user-related operations, including authentication, user profiles, and access control within the platform.
+
+`Rating Service`: The Rating Service focuses on managing and storing ratings and reviews provided by users for different points of interest or establishments.
 
 
 ## Changelog/Releasenotes
