@@ -71,35 +71,42 @@ public class RatingController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
 	}
-
+ 
 	@GetMapping("/user/{userId}")
 	public ResponseEntity<List<Rating>> getRatingByUser(@PathVariable("userId")int userId){
-		Rating rating = new Rating();
+		try{//besser UserService benutzen anstatt Repo ->clean code
+			User user = userRepository.findById(userId)
+						.orElseThrow(() -> new EntityNotFoundException("User not found with ID: " + userId));;
 
-		User user = userRepository.findById(userId)
-					.orElseThrow(() -> new EntityNotFoundException("User not found with ID: " + userId));;
-
-		rating.setUser(user);
-		final List<Rating> ratingByUser = ratingService.getRatingByUser(rating);
-		return new ResponseEntity<>(ratingByUser, HttpStatus.OK);
+			final List<Rating> ratingByUser = ratingService.getRatingByUser(user);
+			return new ResponseEntity<>(ratingByUser, HttpStatus.OK);
+		}catch(EntityNotFoundException ex) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
 	}
 
     @GetMapping("/poi/{osmId}")
 	public ResponseEntity<List<Rating>> getRatingsByPoi(@PathVariable("osmId") long osmId) {
-		Rating rating = new Rating();
+		try{
+			Poi poi = poiDAO.findById(osmId)
+						.orElseThrow(() -> new EntityNotFoundException("Poi not found with ID: " + osmId));
 
-		Poi poi = poiDAO.findById(osmId)
-					.orElseThrow(() -> new EntityNotFoundException("Poi not found with ID: " + osmId));;;
-
-		rating.setPoi(poi);
-		final List<Rating> ratingsByPoi = ratingService.getRatingByPoi(rating);
-		return new ResponseEntity<>(ratingsByPoi,HttpStatus.OK);
+			final List<Rating> ratingsByPoi = ratingService.getRatingByPoi(poi);
+			return new ResponseEntity<>(ratingsByPoi,HttpStatus.OK);
+		}catch(EntityNotFoundException ex) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
 	}
     
 	@GetMapping("/test")
 	public String getTest(){
 		return "Test";
 	}
-	//"token": "fd361438-a0ef-45ac-bf47-ebb536e5b1a0"
-
+	 
 }

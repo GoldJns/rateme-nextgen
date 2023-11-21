@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.app.rateme.dao.RatingRepository;
+import com.app.rateme.model.Poi;
 import com.app.rateme.model.Rating;
+import com.app.rateme.model.User;
 
 @Service
 public class RatingService {
@@ -22,12 +24,12 @@ public class RatingService {
         return ratingRepository.save(rating);
     }
 
-    public List<Rating> getRatingByUser(Rating userId){
-        return ratingRepository.getRatingByUser(userId);
+    public List<Rating> getRatingByUser(User user){
+        return ratingRepository.getRatingByUser(user);
     }
 
-    public List<Rating> getRatingByPoi(Rating osmId){
-        return ratingRepository.getRatingByPoi(osmId);
+    public List<Rating> getRatingByPoi(Poi poi){
+        return ratingRepository.getRatingByPoi(poi);
     }
 
 }

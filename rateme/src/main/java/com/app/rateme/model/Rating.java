@@ -2,6 +2,8 @@ package com.app.rateme.model;
 
 import java.time.LocalDateTime;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -12,6 +14,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "rateme_rating")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"}) // Ignore these properties during serialization
 public class Rating {
     
     @Id
@@ -20,13 +23,15 @@ public class Rating {
 
     @ManyToOne
 	@JoinColumn(name = "user_id")
+    @JsonIgnoreProperties("ratings")
 	private User user;
 
     @ManyToOne
 	@JoinColumn(name = "osm_id")
+    @JsonIgnoreProperties("ratings")
 	private Poi poi;
 
-	private String text;
+	private String txt;
 	private int stars;
 	private LocalDateTime createdAt;
 	private byte[] image;
@@ -35,19 +40,19 @@ public class Rating {
 
     };
 
-    public Rating(long ratingId, User user, Poi poi, String text, int stars, LocalDateTime createdAt, byte[] image) {
+    public Rating(long ratingId, User user, Poi poi, String txt, int stars, LocalDateTime createdAt, byte[] image) {
         this.ratingId = ratingId;
         this.user = user;
         this.poi = poi;
-        this.text = text;
+        this.txt = txt;
         this.stars = stars;
         this.createdAt = createdAt;
         this.image = image;
     }
 
-    public Rating(long ratingId, String text, int stars, LocalDateTime createdAt, byte[] image) {
+    public Rating(long ratingId, String txt, int stars, LocalDateTime createdAt, byte[] image) {
         this.ratingId = ratingId;
-        this.text = text;
+        this.txt = txt;
         this.stars = stars;
         this.createdAt = createdAt;
          this.image = image;
@@ -94,11 +99,11 @@ public class Rating {
     }
     */
     public String getText() {
-        return text;
+        return txt;
     }
 
-    public void setText(String text) {
-        this.text = text;
+    public void setText(String txt) {
+        this.txt = txt;
     }
 
     public int getStars() {
