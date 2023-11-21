@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.app.rateme.api.dto.RatingDto;
 import com.app.rateme.model.Rating;
 import com.app.rateme.services.RatingService;
-import jakarta.websocket.server.PathParam;
 
 @RestController
 @CrossOrigin("*")
