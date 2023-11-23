@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: "./Store"
+        working-directory: "."
     steps:
       - name: "Checkout GitHub Action"
         uses: actions/checkout@main
