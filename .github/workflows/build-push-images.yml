@@ -10,8 +10,8 @@ jobs:
     permissions: write-all
     runs-on: ubuntu-latest
     env:
-      REGISTRY: ${{ REGISTRY }}
-      PIDUSER: ${{ PIDUSER }}
+      REGISTRY: ${{ env.REGISTRY }}
+      PIDUSER: ${{ env.PIDUSER }}
     defaults:
       run:
         working-directory: "./rateme"
