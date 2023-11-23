@@ -1,4 +1,4 @@
-name: Deploy Images to GHCR
+name: Maven Docker Build
 
 on:
   push:
@@ -23,7 +23,7 @@ jobs:
           username: ${{github.actor}}
           password: ${{secrets.GITHUB_TOKEN}}
 
-      - name: "Build Frontend Image"
+      - name: "Build Tag Push Frontend Image"
         run: |
           docker build -t rateme-nextgen-ui:latest -f Dockerfile.ui .
           docker tag rateme-nextgen-ui:latest ghcr.io/goldjns/rateme-nextgen-ui:latest
@@ -35,17 +35,17 @@ jobs:
           java-version: "17"
           distribution: "temurin"
           cache: maven
+
       - name: Build with Maven
         run: mvn -B package --file pom.xml
 
-      - name: "Build Backend Image"
+      - name: "Build Tag Push Backend Image"
         run: |
           docker build -t rateme-nextgen-backend:latest -f Dockerfile.backend .
           docker tag rateme-nextgen-backend:latest ghcr.io/goldjns/rateme-nextgen-backend:latest
           docker push ghcr.io/goldjns/rateme-nextgen-backend:latest
-           - name: "Build Frontend Image"
 
-      - name: "Build Database Image"
+      - name: "Build Tag Push Database Image"
         run: |
           docker build -t rateme-nextgen-database:latest -f Dockerfile.database .
           docker tag rateme-nextgen-database:latest ghcr.io/goldjns/rateme-nextgen-database:latest
