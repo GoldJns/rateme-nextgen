@@ -33,15 +33,12 @@ jobs:
           username: ${{github.actor}}
           password: ${{secrets.GITHUB_TOKEN}}
 
-      - name: "Get Git Tag"
-        id: git_tag
-        run: echo ::set-output name=TAG::$(git describe --tags --abbrev=0)
-
       - name: "Build Tag Push Frontend Image"
         run: |
-          docker build -t rateme-nextgen-ui:${{github.ref_name}} -f Dockerfile.ui .
-          docker tag rateme-nextgen-ui:${{github.ref_name}} ${{ secrets.REGISTRY }}/${{ secrets.PIDUSER }}/rateme-nextgen-ui:${{github.ref_name}}
-          docker push ${{ secrets.REGISTRY }}/${{ secrets.PIDUSER }}/rateme-nextgen-ui:${{github.ref_name}}
+          TAG=$(git describe --tags --abbrev=0)
+          docker build -t rateme-nextgen-ui:${TAG} -f Dockerfile.ui .
+          docker tag rateme-nextgen-ui:$TAG ${{ secrets.REGISTRY }}/${{ secrets.PIDUSER }}/rateme-nextgen-ui:${TAG}
+          docker push ${{ secrets.REGISTRY }}/${{ secrets.PIDUSER }}/rateme-nextgen-ui:${TAG}
 
       - name: "Build Tag Push Backend Image"
         run: |
