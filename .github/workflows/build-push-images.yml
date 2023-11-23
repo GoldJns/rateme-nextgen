@@ -8,7 +8,7 @@ on:
 jobs:
   push-docker-images:
     permissions: write-all
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-$TAG
 
     defaults:
       run:
@@ -52,12 +52,12 @@ jobs:
 
       - name: "Build Tag Push Backend Image"
         run: |
-          docker build -t rateme-nextgen-backend:latest -f Dockerfile.backend .
-          docker tag rateme-nextgen-backend:latest ${{ secrets.REGISTRY }}/${{ secrets.PIDUSER }}/rateme-nextgen-database:latest
-          docker push ${{ secrets.REGISTRY }}/${{ secrets.PIDUSER }}/rateme-nextgen-backend:latest
+          docker build -t rateme-nextgen-backend:$TAG -f Dockerfile.backend .
+          docker tag rateme-nextgen-backend:$TAG ${{ secrets.REGISTRY }}/${{ secrets.PIDUSER }}/rateme-nextgen-database:$TAG
+          docker push ${{ secrets.REGISTRY }}/${{ secrets.PIDUSER }}/rateme-nextgen-backend:$TAG
 
       - name: "Build Tag Push Database Image"
         run: |
-          docker build -t rateme-nextgen-database:latest -f Dockerfile.database .
-          docker tag rateme-nextgen-database:latest ${{ secrets.REGISTRY }}/${{ secrets.PIDUSER }}/rateme-nextgen-database:latest
-          docker push ${{ secrets.REGISTRY }}/${{ secrets.PIDUSER }}/rateme-nextgen-database:latest
+          docker build -t rateme-nextgen-database:$TAG -f Dockerfile.database .
+          docker tag rateme-nextgen-database:$TAG ${{ secrets.REGISTRY }}/${{ secrets.PIDUSER }}/rateme-nextgen-database:$TAG
+          docker push ${{ secrets.REGISTRY }}/${{ secrets.PIDUSER }}/rateme-nextgen-database:$TAG
