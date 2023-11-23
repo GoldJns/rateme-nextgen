@@ -41,7 +41,7 @@ jobs:
       - name: "Build Backend Image"
         run: |
           docker build -t rateme-nextgen-backend:latest -f Dockerfile.backend .
-          docker tag rateme-nextgen-backend:latest ghcr.io/goldjns/rateme-nextgen:latest
+          docker tag rateme-nextgen-backend:latest ghcr.io/goldjns/rateme-nextgen-backend:latest
           docker push ghcr.io/goldjns/rateme-nextgen-backend:latest
            - name: "Build Frontend Image"
 
