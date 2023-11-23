@@ -1,6 +1,8 @@
 
 # Guidelines
 
+Sticking with the rules has a purpose! Release notes e.g. only work correct when guidelines are respected.
+
 ## Branches
 
 When creating branches, please use the following naming convention:
