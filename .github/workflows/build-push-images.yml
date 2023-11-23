@@ -25,4 +25,4 @@ jobs:
       - name: "Build Frontend Image"
         run: |
           docker build -t ratemeui:latest -f Dockerfile.ui .
-          docker push ghcr.io/goldjns/ratemeui:latest
+          docker push ghcr.io/goldjns/rateme-nextgen:latest
