@@ -16,6 +16,15 @@ jobs:
       - name: "Checkout GitHub Action"
         uses: actions/checkout@main
 
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          java-version: "17"
+          distribution: "temurin"
+          cache: maven
+
+      - name: Build with Maven
+        run: mvn -B package --file pom.xml
       - name: "Login to GitHub Container Registry"
         uses: docker/login-action@v1
         with:
@@ -27,26 +36,16 @@ jobs:
         run: |
           docker build -t rateme-nextgen-ui:latest -f Dockerfile.ui .
           docker tag rateme-nextgen-ui:latest ${{ env.REGISTRY }}/${{ env.PIDUSER }}/rateme-nextgen-ui:latest
-          docker push ghcr.io/goldjns/rateme-nextgen-ui:latest
-
-      - name: Set up JDK 17
-        uses: actions/setup-java@v3
-        with:
-          java-version: "17"
-          distribution: "temurin"
-          cache: maven
-
-      - name: Build with Maven
-        run: mvn -B package --file pom.xml
+          docker push ${{ env.REGISTRY }}/${{ env.PIDUSER }}/rateme-nextgen-ui:latest
 
       - name: "Build Tag Push Backend Image"
         run: |
           docker build -t rateme-nextgen-backend:latest -f Dockerfile.backend .
-          docker tag rateme-nextgen-backend:latest ghcr.io/goldjns/rateme-nextgen-backend:latest
-          docker push ghcr.io/goldjns/rateme-nextgen-backend:latest
+          docker tag rateme-nextgen-backend:latest ${{ env.REGISTRY }}/${{ env.PIDUSER }}/rateme-nextgen-database:latest
+          docker push ${{ env.REGISTRY }}/${{ env.PIDUSER }}/rateme-nextgen-backend:latest
 
       - name: "Build Tag Push Database Image"
         run: |
           docker build -t rateme-nextgen-database:latest -f Dockerfile.database .
-          docker tag rateme-nextgen-database:latest ghcr.io/goldjns/rateme-nextgen-database:latest
-          docker push ghcr.io/goldjns/rateme-nextgen-database:latest
+          docker tag rateme-nextgen-database:latest ${{ env.REGISTRY }}/${{ env.PIDUSER }}/rateme-nextgen-database:latest
+          docker push ${{ env.REGISTRY }}/${{ env.PIDUSER }}/rateme-nextgen-database:latest
