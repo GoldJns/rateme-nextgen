@@ -36,9 +36,9 @@ jobs:
       - name: "Build Tag Push Frontend Image"
         run: |
           TAG=$(git describe --tags --abbrev=0)
-          docker build -t rateme-nextgen-ui:${TAG} -f Dockerfile.ui .
-          docker tag rateme-nextgen-ui:$TAG ${{ secrets.REGISTRY }}/${{ secrets.PIDUSER }}/rateme-nextgen-ui:${TAG}
-          docker push ${{ secrets.REGISTRY }}/${{ secrets.PIDUSER }}/rateme-nextgen-ui:${TAG}
+          docker build -t rateme-nextgen-ui:$TAG -f Dockerfile.ui .
+          docker tag rateme-nextgen-ui:$TAG ${{ secrets.REGISTRY }}/${{ secrets.PIDUSER }}/rateme-nextgen-ui:$TAG
+          docker push ${{ secrets.REGISTRY }}/${{ secrets.PIDUSER }}/rateme-nextgen-ui:$TAG
 
       - name: "Build Tag Push Backend Image"
         run: |
