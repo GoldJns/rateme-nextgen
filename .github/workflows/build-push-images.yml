@@ -9,6 +9,7 @@ jobs:
   push-docker-images:
     permissions: write-all
     runs-on: ubuntu-latest
+
     defaults:
       run:
         working-directory: "./rateme"
@@ -35,9 +36,16 @@ jobs:
           username: ${{github.actor}}
           password: ${{secrets.GITHUB_TOKEN}}
 
-      - name: "Build Tag Push Frontend Image"
+      - name: "Get git tag"
         run: |
           TAG=$(git describe --tags --abbrev=0)
+          echo "TAG=$TAG" >> $GITHUB_ENV
+
+        env:
+          TAG: ${{ steps.git_tag.outputs.tag }}
+
+      - name: "Build Tag Push Frontend Image"
+        run: |
           docker build -t rateme-nextgen-ui:$TAG -f Dockerfile.ui .
           docker tag rateme-nextgen-ui:$TAG ${{ secrets.REGISTRY }}/${{ secrets.PIDUSER }}/rateme-nextgen-ui:$TAG
           docker push ${{ secrets.REGISTRY }}/${{ secrets.PIDUSER }}/rateme-nextgen-ui:$TAG
