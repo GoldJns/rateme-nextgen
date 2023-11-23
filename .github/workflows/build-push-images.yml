@@ -9,6 +9,9 @@ jobs:
   push-docker-images:
     permissions: write-all
     runs-on: ubuntu-latest
+    env:
+      REGISTRY: ${{ REGISTRY }}
+      PIDUSER: ${{ PIDUSER }}
     defaults:
       run:
         working-directory: "./rateme"
