@@ -6,7 +6,8 @@ on:
       - feature/*
   workflow_dispatch:
 jobs:
-  push-store-image:
+  push-docker-images:
+    permissions: write-all
     runs-on: ubuntu-latest
     defaults:
       run:
