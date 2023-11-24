@@ -47,6 +47,14 @@ The backend consists of 3 services:
 The Release notes are pusblished as artifacts of a github release.
 Take a look here: [Releasenotes](https://github.com/GoldJns/rateme-nextgen/releases)
 
+## CI/CD
+
+We use Github Actions to build the projects/dockerfiles and pusht them to the Github Container Registry.
+Currently there are 3 published containers:
+- `rateme-nextgen-ui`
+- `rateme-nextgen-backend`
+- `rateme-nextgen-database`
+
 ## Credits
 This project includes code adapted from [rateme](https://github.com/alex9849/rateme) by [alex9849](https://github.com/alex9849) 
 
