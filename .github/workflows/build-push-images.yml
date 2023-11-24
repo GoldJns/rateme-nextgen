@@ -8,7 +8,7 @@ on:
 jobs:
   push-docker-images:
     permissions: write-all
-    runs-on: ubuntu-$TAG
+    runs-on: ubuntu-latest
 
     defaults:
       run:
