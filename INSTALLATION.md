@@ -57,7 +57,7 @@ Ensure you have rights to execute start script e.g with linux
 This commmand will run the two docker-compose projects(Main Project and Monitoring project)
 ```sh
   ./start.sh
-
+```
 
 In development or testing it makes sense to start project manually with docker compose. 
 Just run 
@@ -73,7 +73,7 @@ Alternatively you can start services like db and frontend with docker compose
 ```
 and start springboot manually via terminal or vs code extension.
 
-Make sure to run ./mvnw clean package from time to time
+Make sure to run `./mvnw clean package` from time to time
 
 
 
@@ -101,7 +101,7 @@ docker pull ghcr.io/goldjns/IMAGE_NAME:TAG
 Replace `IMAGE_NAME` with the name of the Docker image you want to pull and `TAG` with the specific version or tag of the image. For example:
 
 ```bash
-docker pull ghcr.io/goldjns/my-application:latest
+docker pull ghcr.io/goldjns/my-rateme-nextgen-ui:latest
 ```
 
 Replace `latest` with the specific tag/version of the image you want to pull.
@@ -110,7 +110,7 @@ Replace `latest` with the specific tag/version of the image you want to pull.
 Once the image is pulled successfully, you can use it to run containers on your local machine or deploy it to your environment using the `docker run` command.
 
 ```bash
-docker run -d --name my-container -p 8080:80 ghcr.io/goldjns/rateme-nextgen-ui:latest
+docker run -d -p 8080:80 ghcr.io/goldjns/rateme-nextgen-ui:latest
 ```
 
 This command will run a container named `rateme-nextgen-ui` based on the pulled image `ghcr.io/goldjns/rateme-nextgen-ui:latest`, forwarding port `8080` on your local machine to port `80` inside the container.
