@@ -57,7 +57,7 @@ Ensure you have rights to execute start script e.g with linux
 This commmand will run the two docker-compose projects(Main Project and Monitoring project)
 ```sh
   ./start.sh
-
+```
 
 In development or testing it makes sense to start project manually with docker compose. 
 Just run 
@@ -73,7 +73,49 @@ Alternatively you can start services like db and frontend with docker compose
 ```
 and start springboot manually via terminal or vs code extension.
 
-Make sure to run ./mvnw clean package from time to time
+Make sure to run `./mvnw clean package` from time to time
+
+
+
+### Pulling Docker Images from GitHub Container Registry (ghcr.io)
+
+The ui, backend and database images are build and pushed in a github actions workflow. The Images are stored in the github container registry. You can see more information when clicking on the published packages in the repo
+
+### 1. Authenticate with GitHub Container Registry
+Before pulling images, you need to authenticate with GitHub Container Registry using the GitHub Personal Access Token (PAT).
+
+```bash
+docker login ghcr.io -u YOUR_GITHUB_USERNAME
+# Enter your GitHub Personal Access Token (PAT) as the password when prompted
+```
+
+Replace `YOUR_GITHUB_USERNAME` with your GitHub username. Use a GitHub Personal Access Token as the password when prompted.
+
+### 2. Pull Docker Image
+Use the following command to pull an image from `ghcr.io/goldjns`:
+
+```bash
+docker pull ghcr.io/goldjns/IMAGE_NAME:TAG
+```
+
+Replace `IMAGE_NAME` with the name of the Docker image you want to pull and `TAG` with the specific version or tag of the image. For example:
+
+```bash
+docker pull ghcr.io/goldjns/my-rateme-nextgen-ui:latest
+```
+
+Replace `latest` with the specific tag/version of the image you want to pull.
+
+### 3. Use the Pulled Image
+Once the image is pulled successfully, you can use it to run containers on your local machine or deploy it to your environment using the `docker run` command.
+
+```bash
+docker run -d -p 8080:80 ghcr.io/goldjns/rateme-nextgen-ui:latest
+```
+
+This command will run a container named `rateme-nextgen-ui` based on the pulled image `ghcr.io/goldjns/rateme-nextgen-ui:latest`, forwarding port `8080` on your local machine to port `80` inside the container.
+
+Adjust the image names, tags, and run configurations based on your specific requirements and application setup.
 
 ## Swagger
 
@@ -89,3 +131,6 @@ Following services will start:
 - Node Exporter 🖥️ on port `9100`
 - Spring Boot App 🚀 on port `8080`
 - Loki 🌀 on port `3100`
+
+
+![Docker Desktop View](image.png)

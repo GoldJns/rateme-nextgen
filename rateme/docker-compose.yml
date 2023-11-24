@@ -5,8 +5,7 @@ networks:
     driver: bridge
 
 services:
-  app:
-    image: app
+  backend:
     build:
       context: .
       dockerfile: "Dockerfile.backend"
@@ -29,9 +28,8 @@ services:
       - 8082:80
   database:
     build:
-      context: ./database
+      context: .
       dockerfile: Dockerfile.database
-    image: ratemedb:latest
     volumes:
       - ./database/DbVolume:/var/lib/mysql
       - ./database/config:/etc/mysql/conf.d
