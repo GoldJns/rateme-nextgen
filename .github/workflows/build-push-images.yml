@@ -51,7 +51,12 @@ jobs:
           docker build -t rateme-nextgen-backend:$TAG -f Dockerfile.backend .
           docker build -t rateme-nextgen-database:$TAG -f Dockerfile.database .
 
-          docker push ${{ secrets.REGISTRY }}/${{ secrets.PIDUSER }}/rateme-nextgen-ui:$TAG
+      - name: Check Branch Name
+        run: |
+          if [ "${GITHUB_REF#refs/heads/}" != "main" ]; then
+            echo "Not on the 'main' branch. Skipping Docker image build and push."
+            exit 0
+          fi
 
       - name: "Tag Images"
         run: |
@@ -59,12 +64,6 @@ jobs:
           docker tag rateme-nextgen-backend:$TAG ${{ secrets.REGISTRY }}/${{ secrets.PIDUSER }}/rateme-nextgen-backend:$TAG
           docker tag rateme-nextgen-database:$TAG ${{ secrets.REGISTRY }}/${{ secrets.PIDUSER }}/rateme-nextgen-database:$TAG
 
-      - name: Check Branch Name
-        run: |
-          if [ "${GITHUB_REF#refs/heads/}" != "main" ]; then
-            echo "Not on the 'main' branch. Skipping Docker image build and push."
-            exit 0
-          fi
       - name: "Push Images"
         run: |
           docker push ${{ secrets.REGISTRY }}/${{ secrets.PIDUSER }}/rateme-nextgen-database:$TAG
