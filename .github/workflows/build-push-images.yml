@@ -68,7 +68,7 @@ jobs:
           BETA_TAG = $TAG;
           append_beta=${{ steps.check_branch.outputs.append_beta }}
            if [ "$append_beta" == "true" ]; then
-             BETA_TAG+="-beta"
+             $BETA_TAG+="-beta"
            fi
            docker tag rateme-nextgen-ui:$TAG ${{ secrets.REGISTRY }}/${{ secrets.PIDUSER }}/rateme-nextgen-ui:$BETA_TAG
            docker tag rateme-nextgen-backend:$TAG ${{ secrets.REGISTRY }}/${{ secrets.PIDUSER }}/rateme-nextgen-backend:$BETA_TAG
