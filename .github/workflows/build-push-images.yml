@@ -61,21 +61,20 @@ jobs:
             echo "On the 'main' branch."
             echo "::set-output name=append_beta::false"
           fi
-      - name: "Tag Images"
-        id: tag_images
+      - name: "Push Images"
+        id: push_images
         run: |
-          BETA_TAG=$TAG  # Corrected variable assignment, removed spaces around '='
           append_beta=${{ steps.check_branch.outputs.append_beta }}
           if [ "$append_beta" == "true" ]; then
-            BETA_TAG+="-beta"
-            echo "BETA_TAG=$BETA_TAG" >> $GITHUB_ENV  # Set BETA_TAG as an environment variable
+            BETA_TAG="${TAG}-beta" 
+          else
+            BETA_TAG="$TAG"
           fi
+          echo "Generated tag: $BETA_TAG"
+          BETA_TAG="$BETA_TAG" >> $GITHUB_ENV
           docker tag rateme-nextgen-ui:$TAG ${{ secrets.REGISTRY }}/${{ secrets.PIDUSER }}/rateme-nextgen-ui:$BETA_TAG
           docker tag rateme-nextgen-backend:$TAG ${{ secrets.REGISTRY }}/${{ secrets.PIDUSER }}/rateme-nextgen-backend:$BETA_TAG
           docker tag rateme-nextgen-database:$TAG ${{ secrets.REGISTRY }}/${{ secrets.PIDUSER }}/rateme-nextgen-database:$BETA_TAG
-
-      - name: "Push Images"
-        run: |
           docker push ${{ secrets.REGISTRY }}/${{ secrets.PIDUSER }}/rateme-nextgen-database:$BETA_TAG
           docker push ${{ secrets.REGISTRY }}/${{ secrets.PIDUSER }}/rateme-nextgen-backend:$BETA_TAG
           docker push ${{ secrets.REGISTRY }}/${{ secrets.PIDUSER }}/rateme-nextgen-ui:$BETA_TAG
