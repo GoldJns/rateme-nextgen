@@ -53,7 +53,7 @@ jobs:
       - name: "Build Tag Push Backend Image"
         run: |
           docker build -t rateme-nextgen-backend:$TAG -f Dockerfile.backend .
-          docker tag rateme-nextgen-backend:$TAG ${{ secrets.REGISTRY }}/${{ secrets.PIDUSER }}/rateme-nextgen-database:$TAG
+          docker tag rateme-nextgen-backend:$TAG ${{ secrets.REGISTRY }}/${{ secrets.PIDUSER }}/rateme-nextgen-backend:$TAG
           docker push ${{ secrets.REGISTRY }}/${{ secrets.PIDUSER }}/rateme-nextgen-backend:$TAG
 
       - name: "Build Tag Push Database Image"
