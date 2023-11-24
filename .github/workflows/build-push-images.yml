@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+      - feature/*
   workflow_dispatch:
 jobs:
   push-docker-images:
@@ -44,20 +45,28 @@ jobs:
         env:
           TAG: ${{ steps.git_tag.outputs.tag }}
 
-      - name: "Build Tag Push Frontend Image"
+      - name: "Build Images"
         run: |
           docker build -t rateme-nextgen-ui:$TAG -f Dockerfile.ui .
-          docker tag rateme-nextgen-ui:$TAG ${{ secrets.REGISTRY }}/${{ secrets.PIDUSER }}/rateme-nextgen-ui:$TAG
+          docker build -t rateme-nextgen-backend:$TAG -f Dockerfile.backend .
+          docker build -t rateme-nextgen-database:$TAG -f Dockerfile.database .
+
           docker push ${{ secrets.REGISTRY }}/${{ secrets.PIDUSER }}/rateme-nextgen-ui:$TAG
 
-      - name: "Build Tag Push Backend Image"
+      - name: "Tag Images"
         run: |
-          docker build -t rateme-nextgen-backend:$TAG -f Dockerfile.backend .
+          docker tag rateme-nextgen-ui:$TAG ${{ secrets.REGISTRY }}/${{ secrets.PIDUSER }}/rateme-nextgen-ui:$TAG
           docker tag rateme-nextgen-backend:$TAG ${{ secrets.REGISTRY }}/${{ secrets.PIDUSER }}/rateme-nextgen-backend:$TAG
-          docker push ${{ secrets.REGISTRY }}/${{ secrets.PIDUSER }}/rateme-nextgen-backend:$TAG
-
-      - name: "Build Tag Push Database Image"
-        run: |
-          docker build -t rateme-nextgen-database:$TAG -f Dockerfile.database .
           docker tag rateme-nextgen-database:$TAG ${{ secrets.REGISTRY }}/${{ secrets.PIDUSER }}/rateme-nextgen-database:$TAG
+
+      - name: Check Branch Name
+        run: |
+          if [ "${GITHUB_REF#refs/heads/}" != "main" ]; then
+            echo "Not on the 'main' branch. Skipping Docker image build and push."
+            exit 0
+          fi
+      - name: "Push Images"
+        run: |
           docker push ${{ secrets.REGISTRY }}/${{ secrets.PIDUSER }}/rateme-nextgen-database:$TAG
+          docker push ${{ secrets.REGISTRY }}/${{ secrets.PIDUSER }}/rateme-nextgen-backend:$TAG
+          docker push ${{ secrets.REGISTRY }}/${{ secrets.PIDUSER }}/rateme-nextgen-ui:$TAG
