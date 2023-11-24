@@ -51,18 +51,28 @@ jobs:
           docker build -t rateme-nextgen-backend:$TAG -f Dockerfile.backend .
           docker build -t rateme-nextgen-database:$TAG -f Dockerfile.database .
 
-      - name: Check Branch Name
+      - name: "Check Branch Name"
+        id: check_branch
         run: |
           if [ "${GITHUB_REF#refs/heads/}" != "main" ]; then
-            echo "Not on the 'main' branch. Skipping Docker image build and push."
-            exit 0
+            echo "Branch is not 'main'."
+            echo "::set-output name=append_beta::true"
+          else
+            echo "On the 'main' branch."
+            echo "::set-output name=append_beta::false"
           fi
 
       - name: "Tag Images"
+        id: tag_images
         run: |
-          docker tag rateme-nextgen-ui:$TAG ${{ secrets.REGISTRY }}/${{ secrets.PIDUSER }}/rateme-nextgen-ui:$TAG
-          docker tag rateme-nextgen-backend:$TAG ${{ secrets.REGISTRY }}/${{ secrets.PIDUSER }}/rateme-nextgen-backend:$TAG
-          docker tag rateme-nextgen-database:$TAG ${{ secrets.REGISTRY }}/${{ secrets.PIDUSER }}/rateme-nextgen-database:$TAG
+
+          append_beta=${{ steps.check_branch.outputs.append_beta }}
+           if [ "$append_beta" == "true" ]; then
+             TAG+="beta"
+           fi
+           docker tag rateme-nextgen-ui:$TAG ${{ secrets.REGISTRY }}/${{ secrets.PIDUSER }}/rateme-nextgen-ui:$TAG
+           docker tag rateme-nextgen-backend:$TAG ${{ secrets.REGISTRY }}/${{ secrets.PIDUSER }}/rateme-nextgen-backend:$TAG
+           docker tag rateme-nextgen-database:$TAG ${{ secrets.REGISTRY }}/${{ secrets.PIDUSER }}/rateme-nextgen-database:$TAG
 
       - name: "Push Images"
         run: |
