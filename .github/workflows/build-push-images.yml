@@ -64,13 +64,14 @@ jobs:
       - name: "Tag Images"
         id: tag_images
         run: |
-          BETA_TAG=""
+          BETA_TAG=""  >> $GITHUB_ENV
           append_beta=${{ steps.check_branch.outputs.append_beta }}
           if [ "$append_beta" == "true" ]; then
-            BETA_TAG="${TAG}-beta"
+            BETA_TAG="${TAG}-beta" 
           else
             BETA_TAG="$TAG"
           fi
+          echo "Generated tag: $BETA_TAG"
           docker tag rateme-nextgen-ui:$TAG ${{ secrets.REGISTRY }}/${{ secrets.PIDUSER }}/rateme-nextgen-ui:$BETA_TAG
           docker tag rateme-nextgen-backend:$TAG ${{ secrets.REGISTRY }}/${{ secrets.PIDUSER }}/rateme-nextgen-backend:$BETA_TAG
           docker tag rateme-nextgen-database:$TAG ${{ secrets.REGISTRY }}/${{ secrets.PIDUSER }}/rateme-nextgen-database:$BETA_TAG
