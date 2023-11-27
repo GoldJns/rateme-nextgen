@@ -1,5 +1,6 @@
 FROM nginx:latest
 
+LABEL org.opencontainers.image.source="https://github.com/GoldJns/rateme-nextgen"
 # Set the working directory in the container
 WORKDIR /usr/share/nginx/html
 

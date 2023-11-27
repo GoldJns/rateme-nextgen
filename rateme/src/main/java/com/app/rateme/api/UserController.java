@@ -69,6 +69,7 @@ public class UserController {
 
         if (optUsername.isPresent()) {
 
+           
             UserDto userDto = userManager.getUserDtoData(optUsername.get());
             if (userDto != null) {
                 return ResponseEntity.ok(userDto);

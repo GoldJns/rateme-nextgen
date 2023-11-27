@@ -1,0 +1,1 @@
+Spread joy, not confusion; code with fun, respect, and inclusion 🙃

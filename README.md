@@ -1,102 +1,59 @@
 # rateme-nextgen
 
+Discover great restaurants with ease! Use our map 🗺️ to find amazing places, see what others think with star ratings ⭐, and share your own reviews hassle-free. Sign up quickly and start rating your favorite spots right away 🚀. Add photos to your reviews 📸 and manage them easily. This project involves migrating an existing application to the cloud ☁️ 
 
 
-## Build
+## Installation
 
-Run `./mvnw clean package` to build the project.
-
-## Run
-
-Ensure you have rights to execute start script
-```sh
-  sudo chown +x start.sh   
-```
-
-This commmand will start the springboot application and setup additional services e.g. monitoring
-```sh
-  ./start.sh
-```
-
+The Installation and development process is documented in [INSTALLATION.md](https://github.com/GoldJns/rateme-nextgen/blob/main/INSTALLATION.md)
 
 ## Docker
 
-Build a new image:
+### Container:
 
-```sh
-  docker build -t <image-name>:<tag> .
-```
+Following parts are containerized:
+-  frontend (nginx image)
+-  backend (openjdk image)
+-  database (mysql image)
 
-Run image:
-```sh
-  docker run  -d -p 8080:8080 <image-name>:<tag>
-```
+### Docker compose:
+There are two docker compose projects:
+
+1. Monitoring project:
+  - Responsible for starting containers related to monitoring
+2. Main Project
+  - Used for local development, starts database frontend and backend
+
 
 ## Observability
 
-Follow guide to start the project:
+The whole setup is monitored with prometheus, loki and node exporter.
+Metrics and logs are visualized using Grafana
 
-Go to path: `./rateme/monitoring`
 
-```sh
-  docker compose up --build
-```
+## Services
 
-Following services will start:
+The backend consists of 3 services:
 
-- prometheus on port `9090`
-- grafana on port `3000`
-- node-exporter on port `9100`
-- springboot app on port `8080`
-- loki on port `3100`
+`Poi Service`: The Poi Service manages locations of the restaurants.
 
-## Features Added
--Display all pois in map
--Display information of poi when it selectd
-#  Backend
-## Classes Added
-### poicontroller class in api package
-A java Rest Controller Class have two Autowired object:
--PoiDAO PoiDaorepo
--PoiTagRepository Poitagrepo
-and have two functions for Get mapping requestes:
--getAllPois : which do not  take any arguments and retrun Response Entity have List of Poi Entity-Modell in it's Body
--getTagsByOsmId:which takes Long argument (osmid) and return Responce Entity have List of PoiTag Entity-Modell in it's Body
-### Poi Class in Model Package
-A java Entity Class resperent Poi Table in Database (rateme_poi) 
-### poiTag Class in Model Package
-A java Entity Class resperent PoiTag Table in Database (rateme_poi_tag)
-### POiTagId Class in Model Package
-A java Class which is IDENTITY for PoiTag Class 
-### Position Class in Model Package
-A java Class which is dto for Position Attribuite in Database
-### PositionConverter Class in Converter Package
-A java Class implementation Position Class 
-### PoiDAO Interface in dao Package
-A java Interface extended JpaRepository for Poi Entity
-### PoiTagRepository Interface in dao Package
-A java Interface extended JpaRepository for PoiTag Entity and have Function to return List of PoiTag by osmid
+`User Service`: The User Service handles user-related operations, including authentication, user profiles, and access control within the platform.
 
-## Database Configuration
--in application.properties added Datasource with Value: 
-spring.datasource.url=jdbc:mysql://database:3306/rateme_swtp
-spring.datasource.username=root
-spring.datasource.password=
-spring.jpa.hibernate.ddl-auto=none
-spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
-spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQL8Dialect
-Note: in Docker sql_server name is (database) in Lockal Maschine sql_server name is (localhost)
-## Dependencies 
--mysql-connector-java
--spring-boot-starter-data-jpa
-#  Frontend
-## Files Added 
--Added Icons images in Icons Folder for Marker Pois in Maps
-## Changes:
--Hide aside Content to display Poi Information when it selected 
--Added div for Poi Information with css Styles
--Added js Function to get Poi Info.
+`Rating Service`: The Rating Service focuses on managing and storing ratings and reviews provided by users for different points of interest or establishments.
 
+
+## Changelog/Releasenotes
+
+The Release notes are pusblished as artifacts of a github release.
+Take a look here: [Releasenotes](https://github.com/GoldJns/rateme-nextgen/releases)
+
+## CI/CD
+
+We use Github Actions to build the projects/dockerfiles and pusht them to the Github Container Registry.
+Currently there are 3 published containers:
+- `rateme-nextgen-ui`
+- `rateme-nextgen-backend`
+- `rateme-nextgen-database`
 
 ## Credits
 This project includes code adapted from [rateme](https://github.com/alex9849/rateme) by [alex9849](https://github.com/alex9849) 
