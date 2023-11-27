@@ -3,7 +3,6 @@ package com.app.rateme.dao;
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-
 import com.app.rateme.model.Poi;
 import com.app.rateme.model.Rating;
 import com.app.rateme.model.User;

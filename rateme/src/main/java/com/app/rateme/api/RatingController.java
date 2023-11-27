@@ -12,16 +12,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.app.rateme.api.dto.RatingDto;
 import com.app.rateme.dao.PoiDAO;
 import com.app.rateme.dao.UserRepository;
 import com.app.rateme.model.Poi;
 import com.app.rateme.model.Rating;
 import com.app.rateme.model.User;
-import com.app.rateme.services.PoiService;
 import com.app.rateme.services.RatingService;
-
 import jakarta.persistence.EntityNotFoundException;
 
 @RestController
@@ -61,9 +58,7 @@ public class RatingController {
             rating.setImage(ratingDto.getImage());
 
 			Rating savedRating = ratingService.createRating(rating);
-			
 			return new ResponseEntity<>(savedRating, HttpStatus.CREATED);
-
         } catch (Exception e) {
             e.printStackTrace();
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -73,7 +68,6 @@ public class RatingController {
 	@GetMapping("/user")
 	public ResponseEntity<List<RatingDto>> getRatingByUser(@RequestHeader("userId")int userId){
 		try{//besser UserService benutzen anstatt Repo ->clean code
-			System.err.println(userId);
 			User user = userRepository.findById(userId)
 						.orElseThrow(() -> new EntityNotFoundException("User not found with ID: " + userId));;
 
@@ -102,10 +96,4 @@ public class RatingController {
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
-    
-	@GetMapping("/test")
-	public String getTest(){
-		return "Test";
-	}
-	 
 }

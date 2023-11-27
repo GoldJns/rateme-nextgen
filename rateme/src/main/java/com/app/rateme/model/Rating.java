@@ -1,9 +1,7 @@
 package com.app.rateme.model;
 
 import java.time.LocalDateTime;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -82,23 +80,7 @@ public class Rating {
     public void setPoi(Poi poi) {
         this.poi = poi;
     }
-    /* 
-    public int getUserId() {
-        return user.getUserId();
-    }
 
-    public void setUserId(int user) {
-        this.user.setUserId(user);
-    }
-
-    public long getosmId() {
-        return poi.getOsmId();
-    }
-
-    public void setosmId(long osmId) {
-        this.poi.setOsmId(osmId);
-    }
-    */
     public String getText() {
         return txt;
     }
@@ -130,8 +112,6 @@ public class Rating {
     public void setImage(byte[] image) {
         this.image = image;
     }
-
-    
     
     /*
     @Override
