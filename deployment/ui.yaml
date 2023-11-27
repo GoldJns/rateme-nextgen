@@ -6,7 +6,7 @@ metadata:
     app: ui
 data:
   apiConfig.js: |
-    window.endpointConfig = {  local: { SERVICES_BASE_URL: "http://backend-service:8080" }}
+    window.endpointConfig = {  local: { SERVICES_BASE_URL: "rateme.com/api" }}
 
 ---
 apiVersion: apps/v1
