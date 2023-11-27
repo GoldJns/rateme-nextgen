@@ -136,7 +136,7 @@ function drawCanvas(pwdStrength) {
 
 async function getUserById(userId) {
   try {
-    const response = await fetch("http://localhost:8082" + `/user/${userId}`, {
+    const response = await fetch(window.endpointConfig.local.SERVICES_BASE_URL + `/user/${userId}`, {
       method: "GET",
       headers: { "Content-type": "application/json" },
     });
@@ -172,7 +172,7 @@ function handlePasswordToggle() {
 
 async function fetchUser(token) {
   try {
-    const response = await fetch("http://localhost:8082" + "/user/", {
+    const response = await fetch(window.endpointConfig.local.SERVICES_BASE_URL + "/user/", {
       method: "GET",
       headers: {
         "Content-type": "application/json",
@@ -190,7 +190,7 @@ async function fetchUser(token) {
 
 async function loginUser(credentials) {
   try {
-    const response = await fetch("http://localhost:8080/access/login", {
+    const response = await fetch(window.endpointConfig.local.SERVICES_BASE_URL + "/access/login", {
       method: "POST",
       headers: {
         "Content-type": "application/json",
@@ -244,7 +244,7 @@ async function handleRegistrationSubmit(event) {
   var json = JSON.stringify(registerData);
 
   try {
-    const response = await fetch("http://localhost:8082" + "/user/register", {
+    const response = await fetch(window.endpointConfig.local.SERVICES_BASE_URL + "/user/register", {
       method: "POST",
       headers: {
         "Content-type": "application/json",
@@ -315,7 +315,7 @@ async function drawTable() {
 
 function handleLogout() {
   const id = sessionStorage.getItem("accessToken");
-  fetch("http://localhost:8082" + "/access/logout", {
+  fetch(window.endpointConfig.local.SERVICES_BASE_URL + "/access/logout", {
     method: "delete",
     headers: { token: id },
   })

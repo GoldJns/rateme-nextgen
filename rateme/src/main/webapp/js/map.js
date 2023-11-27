@@ -49,7 +49,7 @@ function initIcons() {
 }
 
 async function getPoiById(poiId) {
-  const response = await fetch(`http://localhost:8082/pois/${poiId}`, {
+  const response = await fetch(window.endpointConfig.local.SERVICES_BASE_URL+ `/pois/${poiId}`, {
     method: "GET",
     headers: {
       Accept: "application/json",
@@ -65,7 +65,7 @@ async function getPoiById(poiId) {
 }
 
 async function getAllPois() {
-  const response = await fetch("http://localhost:8082/pois", {
+  const response = await fetch(window.endpointConfig.local.SERVICES_BASE_URL + "/pois", {
     method: "get",
     headers: {
       Accept: "application/json",
@@ -116,7 +116,7 @@ function drawPoiInfo(poi) {
 
 function getPoitags(id) {
   console.log(id);
-  fetch(`http://localhost:8082}/pois/${id}`, {
+  fetch(window.endpointConfig.local.SERVICES_BASE_URL+ `/pois/${id}`, {
     method: "get",
     headers: {
       Accept: "application/json",
