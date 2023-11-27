@@ -26,7 +26,7 @@ spec:
     spec:
       containers:
         - name: rateme-nextgen-ui
-          image: ghcr.io/goldjns/rateme-nextgen-ui:v1.4.2
+          image: ghcr.io/goldjns/rateme-nextgen-ui:1.4.2-beta
           ports:
             - containerPort: 80
           volumeMounts:

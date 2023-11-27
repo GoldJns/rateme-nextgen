@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: backend
+  template:
+    metadata:
+      name: backend
+      labels:
+        app: backend
+    spec:
+      containers:
+        - name: rateme-nextgen-backend
+          image: ghcr.io/goldjns/rateme-nextgen-backend:v1.4.2
+          ports:
+            - containerPort: 8080
+          env:
+            - name: DB_HOST # Setting Database host address from configMap
+              valueFrom:
+                configMapKeyRef:
+                  name: mysql-configuration # name of configMap
+                  key: host
+            - name: DB_NAME # Setting Database name from configMap
+              valueFrom:
+                configMapKeyRef:
+                  name: mysql-configuration
+                  key: name
+            - name: DB_USERNAME # Setting Database username from Secret
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-user-credentials # Secret Name
+                  key: username
+            - name: DB_PASSWORD # Setting Database password from Secret
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-user-credentials
+                  key: password
+
+            - name: SPRING_DATASOURCE_URL
+              value: "jdbc:mysql://database:3306/rateme_swtp"
+      restartPolicy: Always

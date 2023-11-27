@@ -264,13 +264,16 @@ async function drawPoiRating(poiId) {
 
 async function getRatingsByPoi(poiId) {
   try {
-    const response = await fetch("http://localhost:8082" + `/ratings/poi/${poiId}`, {
-      method: "GET",
-      headers: {
-        "Content-type": "application/json",
-        "Access-Control-Allow-Origin": "*",
-      },
-    });
+    const response = await fetch(
+      "http://localhost:8082" + `/ratings/poi/${poiId}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-type": "application/json",
+          "Access-Control-Allow-Origin": "*",
+        },
+      }
+    );
     if (!response.ok) {
       throw new Error("Failed to get Poi");
     }

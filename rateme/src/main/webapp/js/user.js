@@ -136,10 +136,13 @@ function drawCanvas(pwdStrength) {
 
 async function getUserById(userId) {
   try {
-    const response = await fetch("http://localhost:8082" + `/user/${userId}`, {
-      method: "GET",
-      headers: { "Content-type": "application/json" },
-    });
+    const response = await fetch(
+      window.endpointConfig.local.SERVICES_BASE_URL + `/user/${userId}`,
+      {
+        method: "GET",
+        headers: { "Content-type": "application/json" },
+      }
+    );
     const user = await response.json();
     return user;
   } catch (error) {
@@ -172,13 +175,16 @@ function handlePasswordToggle() {
 
 async function fetchUser(token) {
   try {
-    const response = await fetch("http://localhost:8082" + "/user/", {
-      method: "GET",
-      headers: {
-        "Content-type": "application/json",
-        token: token,
-      },
-    });
+    const response = await fetch(
+      window.endpointConfig.local.SERVICES_BASE_URL + "/user/",
+      {
+        method: "GET",
+        headers: {
+          "Content-type": "application/json",
+          token: token,
+        },
+      }
+    );
 
     const responseUser = await response.json();
     user = responseUser;
@@ -190,14 +196,17 @@ async function fetchUser(token) {
 
 async function loginUser(credentials) {
   try {
-    const response = await fetch("http://localhost:8080/access/login", {
-      method: "POST",
-      headers: {
-        "Content-type": "application/json",
-        "Access-Control-Allow-Origin": "*",
-      },
-      body: JSON.stringify(credentials),
-    });
+    const response = await fetch(
+      window.endpointConfig.local.SERVICES_BASE_URL + "/access/login",
+      {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+          "Access-Control-Allow-Origin": "*",
+        },
+        body: JSON.stringify(credentials),
+      }
+    );
     const data = await response.json();
 
     if (data) {
@@ -244,14 +253,17 @@ async function handleRegistrationSubmit(event) {
   var json = JSON.stringify(registerData);
 
   try {
-    const response = await fetch("http://localhost:8082" + "/user/register", {
-      method: "POST",
-      headers: {
-        "Content-type": "application/json",
-        "Access-Control-Allow-Origin": "*",
-      },
-      body: json,
-    });
+    const response = await fetch(
+      window.endpointConfig.local.SERVICES_BASE_URL + "/user/register",
+      {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+          "Access-Control-Allow-Origin": "*",
+        },
+        body: json,
+      }
+    );
     if (!response.ok) {
       showSnackbar("Failed to create user", "error");
       throw new Error(
@@ -315,7 +327,7 @@ async function drawTable() {
 
 function handleLogout() {
   const id = sessionStorage.getItem("accessToken");
-  fetch("http://localhost:8082" + "/access/logout", {
+  fetch(window.endpointConfig.local.SERVICES_BASE_URL + "/access/logout", {
     method: "delete",
     headers: { token: id },
   })

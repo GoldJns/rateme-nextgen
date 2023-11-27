@@ -41,6 +41,14 @@ spec:
   resources:
     requests:
       storage: 1Mi
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mysql-configuration
+data:
+  host: mysql
+  name: rateme_swtp
 
 ---
 apiVersion: apps/v1
@@ -85,4 +93,3 @@ spec:
         - name: mysql-initdb
           persistentVolumeClaim:
             claimName: mysql-initdb-pv-claim
-# Define a 'Persistent Volume Claim'(PVC) for MySQL Storage, dynamically provisioned by cluster
