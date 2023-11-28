@@ -1,6 +1,6 @@
 FROM eclipse-temurin:17-jdk-alpine
-RUN addgroup demogroup; adduser  --ingroup demogroup --disabled-password demo
-USER demo
+RUN addgroup techusergroup; adduser  --ingroup techusergroup --disabled-password techuser
+USER techuser
 
 WORKDIR /app
 
