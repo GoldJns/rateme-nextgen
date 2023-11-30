@@ -30,10 +30,17 @@ public class AccessManager {
     public Optional<String> getLoginName(UUID loginID) {
 
         String loginname = this.logins.get(loginID);
-        if (loginname != null) {
+
+
+        if (!loginname.isEmpty()) {
+            System.out.println("Loginname found");
             return Optional.of(loginname);
+            
         } else {
+            System.out.println("Loginname not found");
             return Optional.empty();
+            
+            
         }
     }
 

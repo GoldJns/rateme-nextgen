@@ -13,9 +13,9 @@ public interface UserRepository extends CrudRepository<User, Integer>{
     
     public User getByusername(String userName);
 
-
     @Modifying
     @Transactional
     @Query("UPDATE User u SET u.streetNr = :streetNr WHERE u.userId = :id")
     public void updateStreetNrById(@Param("id") int id, @Param("streetNr") String streetNr);
+    
 }

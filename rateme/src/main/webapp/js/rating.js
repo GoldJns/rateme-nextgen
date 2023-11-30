@@ -192,7 +192,7 @@ async function displayUserRatingRow(rating) {
 async function getAllRatingsByUser() {
   try {
     const accessToken = sessionStorage.getItem("accessToken");
-    const response = await fetch(serviceUrl + "/ratings/user", {
+    const response = await fetch(window.endpointConfig.local.SERVICES_BASE_URL + "/user", {
       method: "GET",
       headers: {
         "Content-type": "application/json",
@@ -264,7 +264,7 @@ async function drawPoiRating(poiId) {
 
 async function getRatingsByPoi(poiId) {
   try {
-    const response = await fetch(serviceUrl + `/ratings/poi/${poiId}`, {
+    const response = await fetch(window.endpointConfig.local.SERVICES_BASE_URL + `/ratings/poi/${poiId}`, {
       method: "GET",
       headers: {
         "Content-type": "application/json",
@@ -297,7 +297,7 @@ function showSnackbar(message, severity) {
 async function postRating(rating) {
   try {
     const accessToken = sessionStorage.getItem("accessToken");
-    await fetch(serviceUrl + "/ratings", {
+    await fetch(window.endpointConfig.local.SERVICES_BASE_URL + "/ratings", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
