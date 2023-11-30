@@ -198,74 +198,10 @@ hr {
 	width: 100%;
 	border-top: 2px solid #333;
 }
-#ratingContainer {
+/* #ratingContainer {
 	display: none;
 }
 #poiinfo {
 	text-align: left;
 	padding: 5px;
-}
-
-@charset "UTF-8";
-
-/* Resetting default styles */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-/* Fonts import */
-@import url('https://fonts.googleapis.com/css2?family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap');
-
-/* Global styles */
-body {
-  font-family: 'PT Sans', sans-serif;
-  background-color: #222;
-  color: #fff;
-  margin: 0;
-}
-
-/* Header Styles */
-header {
-  padding: 15px;
-  border-bottom: 1px solid #fff;
-  background-color: #333;
-  grid-area: login;
-}
-
-/* Article (Map) Styles */
-article {
-  border-bottom: 2px solid #fff;
-  background-color: #0a192f;
-  padding: 20px;
-  grid-area: map;
-}
-
-/* Aside (Rating Container) Styles */
-aside {
-  border-bottom: 2px solid #fff;
-  background-color: #112240;
-  padding: 20px;
-  grid-area: rating;
-}
-
-/* Footer Styles */
-footer {
-  padding: 15px;
-  border-bottom: 2px solid #fff;
-  background-color: #333;
-  color: #fff;
-  grid-area: userRating;
-}
-
-/* Specific Element Styles - Update as needed */
-#ratingContainer {
-  margin: 1em;
-  background-color: #112240;
-  border: 1px dotted #4682b4;
-  display: flex;
-  flex-direction: column;
-  gap: 1em;
-  padding: 1em;
-}
+} */

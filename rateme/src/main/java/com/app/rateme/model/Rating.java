@@ -1,8 +1,9 @@
 package com.app.rateme.model;
 
 import java.time.LocalDateTime;
-
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -12,51 +13,49 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "rateme_rating")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"}) // Ignore these properties during serialization
 public class Rating {
     
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long ratingId;
 
-	private String text;
-	private int stars;
-	private LocalDateTime createdAt;
+    @ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "user_id")
+    @JsonIgnoreProperties("ratings")
+	private User user;
 
-
-	
-	private byte[] image;
-
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "osm_id")
+    @JsonIgnoreProperties("ratings")
 	private Poi poi;
 
-	@ManyToOne
-	@JoinColumn(name = "user_id")
-	private User user;
+	private String txt;
+	private int stars;
+	private LocalDateTime createdAt;
+	private byte[] image;
 
     public Rating(){
 
     };
-    
-    public Rating(long ratingId, String text, int stars, LocalDateTime createdAt, Poi poi, User user) {
+
+    public Rating(long ratingId, User user, Poi poi, String txt, int stars, LocalDateTime createdAt, byte[] image) {
         this.ratingId = ratingId;
-        this.text = text;
-        this.stars = stars;
-        this.createdAt = createdAt;
-        this.poi = poi;
         this.user = user;
-    }
-
-    public Rating(long ratingId, String text, int stars, LocalDateTime createdAt) {
-        this.ratingId = ratingId;
-        this.text = text;
+        this.poi = poi;
+        this.txt = txt;
         this.stars = stars;
         this.createdAt = createdAt;
+        this.image = image;
     }
 
-
-
-
+    public Rating(long ratingId, String txt, int stars, LocalDateTime createdAt, byte[] image) {
+        this.ratingId = ratingId;
+        this.txt = txt;
+        this.stars = stars;
+        this.createdAt = createdAt;
+         this.image = image;
+    }
 
     public long getRatingId() {
         return ratingId;
@@ -66,12 +65,28 @@ public class Rating {
         this.ratingId = ratingId;
     }
 
-    public String getText() {
-        return text;
+    public User getUser() {
+        return user;
     }
 
-    public void setText(String text) {
-        this.text = text;
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Poi getPoi() {
+        return poi;
+    }
+
+    public void setPoi(Poi poi) {
+        this.poi = poi;
+    }
+
+    public String getText() {
+        return txt;
+    }
+
+    public void setText(String txt) {
+        this.txt = txt;
     }
 
     public int getStars() {
@@ -90,22 +105,6 @@ public class Rating {
         this.createdAt = createdAt;
     }
 
-    public Poi getPoi() {
-        return poi;
-    }
-
-    public void setPoi(Poi poi) {
-        this.poi = poi;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
     public byte[] getImage() {
         return image;
     }
@@ -113,8 +112,8 @@ public class Rating {
     public void setImage(byte[] image) {
         this.image = image;
     }
-
     
+    /*
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -157,6 +156,6 @@ public class Rating {
         return "Rating [ratingId=" + ratingId + ", text=" + text + ", stars=" + stars + ", createdAt=" + createdAt
                 + ", poi=" + poi + ", user=" + user + "]";
     }	
-
+     */
     
 }

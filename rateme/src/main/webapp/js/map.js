@@ -48,13 +48,16 @@ function initIcons() {
 }
 
 async function getPoiById(poiId) {
-  const response = await fetch(`http://localhost:8082/pois/${poiId}`, {
-    method: "GET",
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
-    },
-  });
+  const response = await fetch(
+    window.endpointConfig.local.SERVICES_BASE_URL + `/pois/${poiId}`,
+    {
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+    }
+  );
 
   if (!response.ok) {
     throw new Error(`Http Error! status:  ${response.status}`);

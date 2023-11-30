@@ -192,14 +192,17 @@ async function displayUserRatingRow(rating) {
 async function getAllRatingsByUser() {
   try {
     const accessToken = sessionStorage.getItem("accessToken");
-    const response = await fetch("http://localhost:8082/ratings/user", {
-      method: "GET",
-      headers: {
-        "Content-type": "application/json",
-        "Access-Control-Allow-Origin": "*",
-        token: accessToken,
-      },
-    });
+    const response = await fetch(
+      window.endpointConfig.local.SERVICES_BASE_URL + "/user",
+      {
+        method: "GET",
+        headers: {
+          "Content-type": "application/json",
+          "Access-Control-Allow-Origin": "*",
+          token: accessToken,
+        },
+      }
+    );
     const data = await response.json();
     return data;
   } catch (error) {
@@ -265,7 +268,7 @@ async function drawPoiRating(poiId) {
 async function getRatingsByPoi(poiId) {
   try {
     const response = await fetch(
-      "http://localhost:8082" + `/ratings/poi/${poiId}`,
+      window.endpointConfig.local.SERVICES_BASE_URL + `/ratings/poi/${poiId}`,
       {
         method: "GET",
         headers: {
@@ -300,7 +303,7 @@ function showSnackbar(message, severity) {
 async function postRating(rating) {
   try {
     const accessToken = sessionStorage.getItem("accessToken");
-    await fetch("http://localhost:8082/ratings", {
+    await fetch(window.endpointConfig.local.SERVICES_BASE_URL + "/ratings", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
