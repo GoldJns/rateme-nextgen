@@ -1,11 +1,10 @@
-FROM openjdk:latest
+FROM eclipse-temurin:17-jdk-alpine
+RUN addgroup techusergroup; adduser  --ingroup techusergroup --disabled-password techuser
+USER techuser
 
 WORKDIR /app
 
 COPY target/*.jar app.jar
 COPY src/main/resources/application.properties /app/application.properties
 
-EXPOSE 8080
-
 ENTRYPOINT ["java", "-jar", "app.jar", "--spring.config.location=file:/app/application.properties"]
-
