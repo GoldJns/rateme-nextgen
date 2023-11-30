@@ -1,0 +1,44 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Values.configMapName }}
+  labels:
+    app: helm-{{ .Chart.Name }}
+    app.kubernetes.io/managed-by: Helm
+  annotations:
+    meta.helm.sh/release-name: helm-{{ .Chart.Name }}
+    meta.helm.sh/release-namespace: default}
+data:
+  apiConfig.js: |
+    {{ .Values.apiConfig }}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: helm-{{ .Chart.Name}}
+spec:
+  replicas: {{ .Values.replicas }}
+  selector:
+    matchLabels:
+      app: helm-{{ .Chart.Name }}
+  template:
+    metadata:
+      name: helm-{{ .Chart.Name }}
+      labels:
+        app: helm-{{ .Chart.Name }}
+    spec:
+      containers:
+        - name: helm-{{ .Chart.Name }}
+          image: {{ .Values.image.repository }}
+          ports:
+            - containerPort: {{ .Values.targetPort }}
+          volumeMounts:
+            - name: {{ .Values.volumes.name }}
+              mountPath: {{ .Values.volumes.mountPath }}
+              subPath: {{ .Values.volumes.subPath }}
+              readOnly: {{ .Values.volumes.readOnly }}
+      restartPolicy: {{ .Values.restartPolicy }}
+      volumes:
+        - name: {{ .Values.volumes.name }}
+          configMap:
+            name: {{ .Values.configMapName }}
