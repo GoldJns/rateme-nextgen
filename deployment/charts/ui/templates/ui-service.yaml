@@ -4,10 +4,10 @@ metadata:
   name: helm-{{ .Chart.Name }}
 spec:
   selector:
-    app: helm-{{ .Chart.Name}}
+    app: helm-{{ .Chart.Name }}
   type: {{ .Values.serviceType }}
   ports:
     - protocol: TCP
       port: {{ .Values.targetPort }}
       targetPort: {{ .Values.targetPort }}
-      nodePort: {{ .Values.nodePort }}
+      nodePort: {{ .Values.nodePort }}    

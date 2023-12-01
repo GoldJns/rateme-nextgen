@@ -1,15 +1,10 @@
 nodePort: 30082
 targetPort: 80
 serviceType: NodePort
-restartPolicy: always
+restartPolicy: Always
 configMapName: ui-config-map
 replicas: 1
-apiConfig: |
-  window.endpointConfig = {  local: { SERVICES_BASE_URL: "rateme.com/api" }}
 image:
-  repository: ghcr.io/goldjns/rateme-nextgen-ui:1.4.2-beta
-volumes:
-  name: cfg
-  mountPath: /usr/share/nginx/html/apiConfig.js
-  subPath: apiConfig.js
-  readOnly: true
+  registry: ghcr.io/goldjns
+  repository: rateme-nextgen-ui
+  tag: v1.5.2-beta

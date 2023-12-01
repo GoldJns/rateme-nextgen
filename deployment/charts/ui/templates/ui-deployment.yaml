@@ -15,16 +15,15 @@ spec:
     spec:
       containers:
         - name: helm-{{ .Chart.Name }}
-          image: {{ .Values.image.repository }}
+          image: {{ include "ui.image" . | quote }}
           ports:
             - containerPort: {{ .Values.targetPort }}
           volumeMounts:
-            - name: {{ .Values.volumes.name }}
-              mountPath: {{ .Values.volumes.mountPath }}
-              subPath: {{ .Values.volumes.subPath }}
-              readOnly: {{ .Values.volumes.readOnly }}
-      restartPolicy: {{ .Values.restartPolicy }}
+            - name: cfg
+              mountPath: /usr/share/nginx/html/js/apiConfig.js
+              subPath: apiConfig.js
+              readOnly: true
       volumes:
-        - name: {{ .Values.volumes.name }}
+        - name: cfg
           configMap:
             name: {{ .Values.configMapName }}
