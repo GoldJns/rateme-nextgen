@@ -1,7 +1,9 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: backend
+  name: backend-deployment
+  labels:
+    app: backend
 spec:
   replicas: 1
   selector:
@@ -9,37 +11,47 @@ spec:
       app: backend
   template:
     metadata:
-      name: backend
       labels:
         app: backend
     spec:
       containers:
-        - name: rateme-nextgen-backend
-          image: ghcr.io/goldjns/rateme-nextgen-backend:v1.4.2
+        - name: backend-container
+          image: hoho:1.0
           ports:
-            - containerPort: 8080
-          env:
-            - name: DB_HOST # Setting Database host address from configMap
+            - name: http
+              containerPort: 8080
+          env: # Environment variables supplied to the Pod
+            - name: SPRING_DATASOURCE_USERNAME # Name of the environment variable
               valueFrom:
                 configMapKeyRef:
-                  name: mysql-configuration # name of configMap
-                  key: host
-            - name: DB_NAME # Setting Database name from configMap
-              valueFrom:
-                configMapKeyRef:
-                  name: mysql-configuration
-                  key: name
-            - name: DB_USERNAME # Setting Database username from Secret
+                  name: mysql-config-map
+                  key: mysql-user-username
+            - name: SPRING_DATASOURCE_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: mysql-user-credentials # Secret Name
-                  key: username
-            - name: DB_PASSWORD # Setting Database password from Secret
-              valueFrom:
-                secretKeyRef:
-                  name: mysql-user-credentials
-                  key: password
-
+                  name: mysql-pass
+                  key: mysql-user-password
             - name: SPRING_DATASOURCE_URL
-              value: "jdbc:mysql://database:3306/rateme_swtp"
-      restartPolicy: Always
+              valueFrom:
+                configMapKeyRef:
+                  name: mysql-config-map
+                  key: mysql-db-url
+            - name: SPRING_PROFILES_ACTIVE
+              value: prod
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: backend-service
+  labels:
+    app: backend
+spec:
+  type: NodePort
+  selector:
+    app: backend
+  ports:
+    - protocol: TCP
+      name: http
+      port: 8080
+      targetPort: 8080
+      nodePort: 30012

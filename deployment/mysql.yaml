@@ -1,10 +1,23 @@
 apiVersion: v1
+kind: Service
+metadata:
+  name: database-service
+  labels:
+    app: database
+spec:
+  ports:
+    - port: 3306
+  selector:
+    app: database
+    tier: mysql
+  clusterIP: None
+---
+apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: mysql-pv-claim
+  name: mysql-pvc
   labels:
-    app: mysql
-    tier: database
+    app: database
 spec:
   accessModes:
     - ReadWriteOnce
@@ -12,84 +25,59 @@ spec:
     requests:
       storage: 1Gi
 ---
-kind: PersistentVolume
-apiVersion: v1
-metadata:
-  name: mysql-initdb-pv-volume
-  labels:
-    type: local
-    app: mysql
-spec:
-  storageClassName: manual
-  capacity:
-    storage: 1Mi
-  accessModes:
-    - ReadOnlyMany
-  hostPath:
-    path: "/InitScripts"
----
-kind: PersistentVolumeClaim
-apiVersion: v1
-metadata:
-  name: mysql-initdb-pv-claim
-  labels:
-    app: mysql
-spec:
-  storageClassName: manual
-  accessModes:
-    - ReadOnlyMany
-  resources:
-    requests:
-      storage: 1Mi
----
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: mysql-configuration
-data:
-  host: mysql
-  name: rateme_swtp
-
----
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: mysql
+  name: database-deployment
   labels:
-    app: mysql
-    tier: database
+    app: database
 spec:
-  selector: # mySQL Pod Should contain same labels
+  selector:
     matchLabels:
-      app: mysql
+      app: database
+      tier: mysql
   strategy:
     type: Recreate
   template:
     metadata:
-      labels: # Must match 'Service' and 'Deployment' selectors
-        app: mysql
-        tier: database
+      labels:
+        app: database
+        tier: mysql
     spec:
       containers:
-        - image: mysql
+        - image: mysql:8.0
           name: mysql
           env:
             - name: MYSQL_DATABASE
-              value: "rateme_swtp"
-            - name: MYSQL_ALLOW_EMPTY_PASSWORD
-              value: "true"
+              valueFrom:
+                configMapKeyRef:
+                  name: mysql-config-map
+                  key: mysql-database-name
+            - name: MYSQL_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-pass
+                  key: mysql-root-password
+            - name: MYSQL_USER
+              valueFrom:
+                configMapKeyRef:
+                  name: mysql-config-map
+                  key: mysql-user-username
+            - name: MYSQL_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-pass
+                  key: mysql-user-password
+          livenessProbe:
+            tcpSocket:
+              port: 3306
           ports:
             - containerPort: 3306
               name: mysql
           volumeMounts:
-            - mountPath: /var/lib/mysql
-              name: mysql-persistance-storage
-            - mountPath: /docker-entrypoint-initdb.d
-              name: mysql-initdb
+            - name: mysql-persistent-storage
+              mountPath: /var/lib/mysql
       volumes:
-        - name: mysql-persistance-storage
+        - name: mysql-persistent-storage
           persistentVolumeClaim:
-            claimName: mysql-pv-claim
-        - name: mysql-initdb
-          persistentVolumeClaim:
-            claimName: mysql-initdb-pv-claim
+            claimName: mysql-pvc

@@ -4,10 +4,10 @@ metadata:
   name: app-ingress
 spec:
   rules:
-    - host: rateme.com # Replace with your desired hostname or use *
+    - host: rateme-nextgen.com # Replace with your desired hostname or use *
       http:
         paths:
-          - path: /app # Path for the frontend service
+          - path: / # Path for the frontend service
             pathType: Prefix
             backend:
               service:
