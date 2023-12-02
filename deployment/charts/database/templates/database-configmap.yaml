@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Chart.Name }}-config-map
+data:
+  mysql-server: {{ .Values.mysql-config-map.mysql-server }}
+  mysql-database-name: {{ .Values.mysql-config-map.mysql-database-name }}
+  mysql-user-username: {{ .Values.mysql-config-map.mysql-user-username }}
+  mysql-db-url: {{ .Values.mysql-config-map.mysql-db-url }}
