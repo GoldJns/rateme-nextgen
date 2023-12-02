@@ -12,6 +12,7 @@ services:
     environment:
       - SPRING_DATASOURCE_URL=jdbc:mysql://database:3306/rateme_swtp
       - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_PROFILES_ACTIVE=dev
     labels:
       logging: "promtail"
       logging_jobname: "containerlogs"
