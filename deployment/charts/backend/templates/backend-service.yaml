@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: helm-{{ .Chart.Name }}
+  labels:
+    app: backend
+spec:
+  type: {{ .Values.service.type }}
+  selector:
+    app: backend
+  ports:
+    - protocol: TCP
+      name: http
+      port: {{ .Values.service.port }}
+      targetPort: {{ .Values.service.targetPort }}
+      nodePort: {{ .Values.service.nodePort }}
