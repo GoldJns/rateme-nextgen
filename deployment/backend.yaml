@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: backend-container
-          image: hoho:1.0
+          image: ghcr.io/goldjns/rateme-nextgen-backend:backend-0.1.0-beta
           ports:
             - name: http
               containerPort: 8080
@@ -36,8 +36,8 @@ spec:
                 configMapKeyRef:
                   name: mysql-config-map
                   key: mysql-db-url
-            - name: SPRING_PROFILES_ACTIVE
-              value: prod
+            - name: MYSQL_HOST
+              value: backend-service
 ---
 apiVersion: v1
 kind: Service
