@@ -1,9 +1,16 @@
 #/bin/sh
 
 echo "Deploy services..."
-kubectl apply -f mysql.yaml
-kubectl apply -f mysql-service.yaml
-kubectl apply -f backend.yaml
-kubectl apply -f backend-service.yaml
-kubectl apply -f ui.yaml
-kubectl apply -f ui-service.yaml
+
+NAMESPACE="default"
+
+helm install ui-release ./charts/ui \
+    --namespace $NAMESPACE \
+
+helm install backend-release ./charts/backend \
+    --namespace $NAMESPACE \
+
+helm install database-release ./charts/database \
+    --namespace $NAMESPACE \
+
+$SHELL
