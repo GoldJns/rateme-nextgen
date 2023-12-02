@@ -4,6 +4,8 @@ import java.util.Set;
 
 import org.hibernate.annotations.ColumnDefault;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -27,8 +29,10 @@ public class User {
 
     private String firstname;
     private String lastname;
-    private byte[] passwordHash;
-    private byte[] passwordSalt;
+
+    @JsonIgnore
+    private String password;
+
     private String street;
 
    // @Column(name = "street_nr",length = 20)
@@ -41,10 +45,32 @@ public class User {
     @OneToMany(mappedBy = "user")
     Set<Rating> ratings;
     
+    
+   
+	private String roles;
+
+    
 
     public User() {
 
     }
+
+    
+
+    public User(String city, String mail, String firstname, String lastname, String password, String street,
+            String streetNr, String username, String zip) {
+        this.city = city;
+        this.mail = mail;
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.password = password;
+        this.street = street;
+        this.streetNr = streetNr;
+        this.username = username;
+        this.zip = zip;
+    }
+
+
 
     public int getUserId() {
         return userId;
@@ -52,14 +78,6 @@ public class User {
 
     public void setUserId(int userId) {
         this.userId = userId;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String userName) {
-        this.username = userName;
     }
 
     public String getMail() {
@@ -118,21 +136,7 @@ public class User {
         this.zip = zip;
     }
 
-    public byte[] getPasswordHash() {
-        return passwordHash;
-    }
-
-    public void setPasswordHash(byte[] passwordHash) {
-        this.passwordHash = passwordHash;
-    }
-
-    public byte[] getPasswordSalt() {
-        return passwordSalt;
-    }
-
-    public void setPasswordSalt(byte[] passwordSalt) {
-        this.passwordSalt = passwordSalt;
-    }
+    
 
     public Set<Rating> getRatings() {
         return ratings;
@@ -141,5 +145,43 @@ public class User {
     public void setRatings(Set<Rating> ratings) {
         this.ratings = ratings;
     }
+
+
+
+    public String getRoles() {
+		return roles;
+	}
+
+	public void setRoles(String roles) {
+		this.roles = roles;
+	}
+
+
+
+    public String getPassword() {
+        return password;
+    }
+
+
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+
+
+    public String getUsername() {
+        return username;
+    }
+
+
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    
+
+
 
 }

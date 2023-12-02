@@ -7,8 +7,7 @@ CREATE TABLE `rateme_user` (
   `street` varchar(30) NOT NULL,
   `zip` varchar(20) NOT NULL,
   `city` varchar(30) NOT NULL,
-  `password_hash` varbinary(1000) NOT NULL,
-  `password_salt` varbinary(1000) NOT NULL,
+  `password` varchar(255) NOT NULL,
   `street_nr` varchar(20) NOT NULL,
   PRIMARY KEY (`user_id`),
   UNIQUE KEY `username` (`username`)

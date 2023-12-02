@@ -1,7 +1,5 @@
 package com.app.rateme.api;
 
-import com.app.rateme.dao.PoiDAO;
-import com.app.rateme.dao.PoiTagRepository;
 import com.app.rateme.model.Poi;
 import com.app.rateme.model.PoiTag;
 import com.app.rateme.services.PoiService;
