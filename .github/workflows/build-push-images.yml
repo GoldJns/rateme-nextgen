@@ -51,6 +51,7 @@ jobs:
         run: |
           docker build -t rateme-nextgen-ui:$TAG -f Dockerfile.ui .
           docker build -t rateme-nextgen-backend:$TAG -f Dockerfile.backend .
+          docker build -t rateme-nextgen-database:$TAG -f Dockerfile.database .
 
       - name: "Check Branch Name"
         id: check_branch
@@ -75,5 +76,7 @@ jobs:
           BETA_TAG="$BETA_TAG" >> $GITHUB_ENV
           docker tag rateme-nextgen-ui:$TAG ${{ secrets.REGISTRY }}/${{ secrets.PIDUSER }}/rateme-nextgen-ui:$BETA_TAG
           docker tag rateme-nextgen-backend:$TAG ${{ secrets.REGISTRY }}/${{ secrets.PIDUSER }}/rateme-nextgen-backend:$BETA_TAG
+          docker tag rateme-nextgen-database:$TAG ${{ secrets.REGISTRY }}/${{ secrets.PIDUSER }}/rateme-nextgen-database:$BETA_TAG
+          docker push ${{ secrets.REGISTRY }}/${{ secrets.PIDUSER }}/rateme-nextgen-database:$BETA_TAG
           docker push ${{ secrets.REGISTRY }}/${{ secrets.PIDUSER }}/rateme-nextgen-backend:$BETA_TAG
           docker push ${{ secrets.REGISTRY }}/${{ secrets.PIDUSER }}/rateme-nextgen-ui:$BETA_TAG
