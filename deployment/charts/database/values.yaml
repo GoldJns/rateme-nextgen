@@ -10,7 +10,7 @@ mysqlpvc:
 image:
   registry: ghcr.io/goldjns
   repository: rateme-nextgen-database
-  tag: v1.5.1-beta
+  tag: v1.5.5-beta
   pullPolicy: "Always"
 
 database:

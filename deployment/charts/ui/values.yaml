@@ -7,4 +7,4 @@ replicas: 1
 image:
   registry: ghcr.io/goldjns
   repository: rateme-nextgen-ui
-  tag: v1.5.2-beta
+  tag: v1.5.5-beta
