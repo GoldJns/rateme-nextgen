@@ -11,7 +11,7 @@ replicaCount: 1
 image:
   registry: ghcr.io/goldjns
   repository: rateme-nextgen-backend
-  tag: v1.5.2-beta
+  tag: backend-0.1.0-beta
   pullPolicy: "Always"
 
 containerPort: 8080
@@ -25,4 +25,4 @@ secret:
   name: "mysql-pass"
   passwordKey: "mysql-user-password"
 
-mysqlHost: "backend-service"
+mysqlHost: "helm-backend-service"

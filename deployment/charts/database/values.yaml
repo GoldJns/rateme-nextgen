@@ -1,24 +1,20 @@
-mysql-config-map:
-  mysql-server: database-service
-  mysql-database-name: rateme_swtp
-  mysql-user-username: custom
-  mysql-db-url: jdbc:mysql://database-service:3306/rateme_swtp
+mysqlconfigmap:
+  server: helm-database-service
+  databasename: rateme_swtp
+  username: custom
+  dburl: jdbc:mysql://helm-database-service:3306/rateme_swtp
 
-
-mysql-pass:
-  mysql-root-password: 
-  mysql-user-password: 
-
-
-mysql-pvc:
+mysqlpvc:
   storageSize: 1Gi
 
-database-deployment:
-  image: backend-0.1.0-beta
-  livenessProbe:
-    tcpSocketPort: 3306
-  containerPort: 3306
+image:
+  registry: ghcr.io/goldjns
+  repository: rateme-nextgen-database
+  tag: v1.5.1-beta
+  pullPolicy: "Always"
 
+database:
+  containerPort: 3306
 database-service:
   clusterIP: None
   servicePort: 3306

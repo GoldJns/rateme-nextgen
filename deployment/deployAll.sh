@@ -1,16 +1,21 @@
 #/bin/sh
 
-echo "Deploy services..."
+echo "Deploy services using helm..."
 
 NAMESPACE="default"
 
-helm install ui-release ./charts/ui \
+UI_TAG=0.1
+BACKEND_TAG=0.1
+DATABASE_TAG=0.1
+
+
+helm upgrade ui-release ./charts/ui \
     --namespace $NAMESPACE \
 
-helm install backend-release ./charts/backend \
+helm upgrade backend-release ./charts/backend \
     --namespace $NAMESPACE \
 
-helm install database-release ./charts/database \
+helm upgrade database-release ./charts/database \
     --namespace $NAMESPACE \
 
 $SHELL

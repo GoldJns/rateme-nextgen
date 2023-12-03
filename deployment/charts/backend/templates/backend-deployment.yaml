@@ -3,16 +3,16 @@ kind: Deployment
 metadata:
   name: helm-{{ .Chart.Name }}
   labels:
-    app: helm-{{ .Chart.Name }}
+    app: backend
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      app: helm-{{ .Chart.Name }}
+      app: backend
   template:
     metadata:
       labels:
-        app: helm-{{ .Chart.Name }}
+        app: backend
     spec:
       containers:
         - name: backend-container

@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ .Chart.Name }}-deployment
+  name: helm-{{ .Chart.Name }}
   labels:
     app: database
 spec:
@@ -18,14 +18,14 @@ spec:
         tier: mysql
     spec:
       containers:
-        - image: {{ .Values.database-deployment.image }}
+        - image: {{ include "database.image" . | quote }}
           name: mysql
           env:
             - name: MYSQL_DATABASE
               valueFrom:
                 configMapKeyRef:
                   name: {{ .Chart.Name }}-config-map
-                  key: mysql-database-name
+                  key: dbname
             - name: MYSQL_ROOT_PASSWORD
               valueFrom:
                 secretKeyRef:
@@ -35,17 +35,15 @@ spec:
               valueFrom:
                 configMapKeyRef:
                   name: {{ .Chart.Name }}-config-map
-                  key: mysql-user-username
+                  key: username
             - name: MYSQL_PASSWORD
               valueFrom:
                 secretKeyRef:
                   name: mysql-pass
                   key: mysql-user-password
-          livenessProbe:
-            tcpSocket:
-              port: {{ .Values.database-deployment.livenessProbe.tcpSocketPort }}
+         
           ports:
-            - containerPort: {{ .Values.database-deployment.containerPort }}
+            - containerPort: {{ .Values.database.containerPort }}
               name: mysql
           volumeMounts:
             - name: mysql-persistent-storage
