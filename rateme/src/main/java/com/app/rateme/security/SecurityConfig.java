@@ -14,7 +14,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-
+import static io.micrometer.core.ipc.http.HttpSender.Method.OPTIONS;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.Cookie;
 
@@ -49,6 +49,7 @@ public class SecurityConfig {
 		.csrf(csrf -> csrf.disable())
 		.authorizeHttpRequests((authorize) -> authorize
 			.requestMatchers("/auth/**").permitAll()
+			.requestMatchers("/pois", "/actuator/health" , "/swagger-ui/**" ,"/","/swagger-ui.html","/openapi/openapi.yml","/api/**").permitAll()
 			.anyRequest().authenticated()
 			
 			
