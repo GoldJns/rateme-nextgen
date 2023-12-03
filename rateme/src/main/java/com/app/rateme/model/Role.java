@@ -1,52 +1,44 @@
 package com.app.rateme.model;
 
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.stereotype.Repository;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name="roles")
-public class Role implements GrantedAuthority {
+@Table(name="rateme_roles")
+public class Role   {
 
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
-    @Column(name="role_id")
-    private Integer roleId;
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @Column(name="id")
+    private int id;
 
-    private String authority;
+    private String name;
 
-    public Role(){
-        super();
+    public int getId() {
+        return id;
     }
 
-    public Role(String authority){
-        this.authority = authority;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public Role(Integer roleId, String authority){
-        this.roleId = roleId;
-        this.authority = authority;
+    public String getName() {
+        return name;
     }
 
-    @Override
-    public String getAuthority() {
-        return this.authority;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public void setAuthority(String authority){
-        this.authority = authority;
-    }
+    
 
-    public Integer getRoleId(){
-        return this.roleId;
-    }
-
-    public void setRoleId(Integer roleId){
-        this.roleId = roleId;
-    }
+    
 }

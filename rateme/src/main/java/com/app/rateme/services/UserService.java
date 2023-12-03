@@ -8,9 +8,9 @@ import org.springframework.stereotype.Service;
 import com.app.rateme.model.User;
 import com.app.rateme.repository.UserRepository;
 
-@Service
-public class UserService {
 
+public class UserService {
+/* 
     @Autowired
     private UserRepository userRepository;
 
@@ -23,11 +23,18 @@ public class UserService {
 		return this.userRepository.findById(id);
 	}
 
-    public Optional<User> findByUsername(String username){
-        return this.userRepository.findByusername(username);
+    public User findByUsername(String username){
+        Optional<User> user =  this.userRepository.findByusername(username);
+		if(user.isPresent()){
+			return new User();
+		}else{
+			return user.orElse(null);
+		}
     }
 	
 	public User save(User userEntity) {
 		return this.userRepository.save(userEntity);
 	}
+
+	*/
 }

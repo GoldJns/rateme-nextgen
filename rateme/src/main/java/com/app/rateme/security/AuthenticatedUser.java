@@ -1,9 +1,12 @@
 package com.app.rateme.security;
 
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import com.app.rateme.model.User;
@@ -19,11 +22,17 @@ public class AuthenticatedUser extends User implements UserDetails {
 		this.setMail(userEntity.getMail());
 		this.setPassword(userEntity.getPassword());
 		this.setRoles(userEntity.getRoles());
+		this.setCity(userEntity.getCity());
+		this.setStreet(userEntity.getStreet());
+		this.setStreetNr(userEntity.getStreetNr());
+		this.setUsername(userEntity.getUsername());
+		this.setZip(userEntity.getZip());
 	}
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		return AuthorityUtils.commaSeparatedStringToAuthorityList(String.join(",", getRoles()));
+		 SimpleGrantedAuthority authority = new SimpleGrantedAuthority(this.getRoles());
+		 return Arrays.asList(authority);
 	}
 
 	@Override
