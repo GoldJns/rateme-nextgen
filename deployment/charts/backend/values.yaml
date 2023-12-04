@@ -1,0 +1,28 @@
+service:
+  type: NodePort
+  port: 8080
+  targetPort: 8080
+  nodePort: 30012
+
+fullnameOverride: ""
+
+replicaCount: 1
+
+image:
+  registry: ghcr.io/goldjns
+  repository: rateme-nextgen-backend
+  tag: backend-0.1.0-beta
+  pullPolicy: "Always"
+
+containerPort: 8080
+
+configMap:
+  name: "mysql-config-map"
+  usernameKey: "mysql-user-username"
+  dbURLKey: "mysql-db-url"
+
+secret:
+  name: "mysql-pass"
+  passwordKey: "mysql-user-password"
+
+mysqlHost: "helm-backend-service"

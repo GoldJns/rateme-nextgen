@@ -1,0 +1,23 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: app-ingress
+spec:
+  rules:
+    - host: rateme-nextgen.com # Replace with your desired hostname or use *
+      http:
+        paths:
+          - path: / # Path for the frontend service
+            pathType: Prefix
+            backend:
+              service:
+                name: ui-service # Replace with the name of your frontend service
+                port:
+                  number: 80
+          - path: /api # Path for the frontend service
+            pathType: Prefix
+            backend:
+              service:
+                name: backend-service # Replace with the name of your frontend service
+                port:
+                  number: 8080
