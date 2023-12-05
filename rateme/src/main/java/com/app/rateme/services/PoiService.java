@@ -1,6 +1,11 @@
 package com.app.rateme.services;
 
+<<<<<<< HEAD
 
+=======
+import com.app.rateme.dao.PoiDAO;
+import com.app.rateme.dao.PoiTagRepository;
+>>>>>>> origin/main
 import com.app.rateme.model.Poi;
 import com.app.rateme.model.PoiTag;
 import com.app.rateme.repository.PoiDAO;
@@ -21,9 +26,10 @@ public class PoiService {
         final List<Poi> allPois = PoiDaoRepo.findAll();
         return allPois;
     }
-    public List<PoiTag>   getTagsByOsmId( Long osmId) {
+
+    public List<PoiTag> getTagsByOsmId(Long osmId) {
         List<PoiTag> tags = PoitagRepo.findByOsmId(osmId);
-        return  tags;
+        return tags;
     }
 
 }

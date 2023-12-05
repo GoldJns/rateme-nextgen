@@ -10,7 +10,6 @@ let blueIcon;
 let prevSelectedMarker = null;
 let selectedPoiId = null;
 
-
 // Initialisierung der Karte
 function initMap() {
   myMap = L.map("mapid").setView([49.250723, 7.377122], 13);
@@ -49,13 +48,16 @@ function initIcons() {
 }
 
 async function getPoiById(poiId) {
-  const response = await fetch(window.endpointConfig.local.SERVICES_BASE_URL+ `/pois/${poiId}`, {
-    method: "GET",
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
-    },
-  });
+  const response = await fetch(
+    window.endpointConfig.local.SERVICES_BASE_URL + `/pois/${poiId}`,
+    {
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+    }
+  );
 
   if (!response.ok) {
     throw new Error(`Http Error! status:  ${response.status}`);
@@ -65,13 +67,16 @@ async function getPoiById(poiId) {
 }
 
 async function getAllPois() {
-  const response = await fetch(window.endpointConfig.local.SERVICES_BASE_URL + "/pois", {
-    method: "get",
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
-    },
-  });
+  const response = await fetch(
+    window.endpointConfig.local.SERVICES_BASE_URL + "/pois",
+    {
+      method: "get",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+    }
+  );
 
   if (!response.ok) {
     const message = `An error has occured: ${response.status}`;
@@ -116,7 +121,7 @@ function drawPoiInfo(poi) {
 
 function getPoitags(id) {
   console.log(id);
-  fetch(window.endpointConfig.local.SERVICES_BASE_URL+ `/pois/${id}`, {
+  fetch(window.endpointConfig.local.SERVICES_BASE_URL + `/pois/${id}`, {
     method: "get",
     headers: {
       Accept: "application/json",

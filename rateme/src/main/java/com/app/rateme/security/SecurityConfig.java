@@ -14,16 +14,24 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/main
 import static io.micrometer.core.ipc.http.HttpSender.Method.OPTIONS;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.Cookie;
 
+<<<<<<< HEAD
 import static org.springframework.security.config.Customizer.withDefaults;
 
+=======
+>>>>>>> origin/main
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
 
+<<<<<<< HEAD
 	@Bean
 	public PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();

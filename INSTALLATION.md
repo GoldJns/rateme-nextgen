@@ -5,6 +5,7 @@
 - [Development](#development)
 - [Swagger](#swagger)
 - [Services](#services)
+- [Helm](#helm)
 
 ## Prerequisites
 
@@ -134,3 +135,17 @@ Following services will start:
 
 
 ![Docker Desktop View](image.png)
+
+
+
+## Helm
+
+k8 deployment is done via helm-charts. All files are located in `./deployment` folder.
+
+The `deployAll` script will install/upgrade the helm charts. You can configure the script(toggle between install/upgrade) or you can add additional
+release names
+
+```sh
+  ./deployAll.sh
+```
+

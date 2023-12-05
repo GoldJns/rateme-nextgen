@@ -192,14 +192,17 @@ async function displayUserRatingRow(rating) {
 async function getAllRatingsByUser() {
   try {
     const accessToken = sessionStorage.getItem("accessToken");
-    const response = await fetch(window.endpointConfig.local.SERVICES_BASE_URL + "/user", {
-      method: "GET",
-      headers: {
-        "Content-type": "application/json",
-        "Access-Control-Allow-Origin": "*",
-        token: accessToken,
-      },
-    });
+    const response = await fetch(
+      window.endpointConfig.local.SERVICES_BASE_URL + "/user",
+      {
+        method: "GET",
+        headers: {
+          "Content-type": "application/json",
+          "Access-Control-Allow-Origin": "*",
+          token: accessToken,
+        },
+      }
+    );
     const data = await response.json();
     return data;
   } catch (error) {
@@ -264,13 +267,16 @@ async function drawPoiRating(poiId) {
 
 async function getRatingsByPoi(poiId) {
   try {
-    const response = await fetch(window.endpointConfig.local.SERVICES_BASE_URL + `/ratings/poi/${poiId}`, {
-      method: "GET",
-      headers: {
-        "Content-type": "application/json",
-        "Access-Control-Allow-Origin": "*",
-      },
-    });
+    const response = await fetch(
+      window.endpointConfig.local.SERVICES_BASE_URL + `/ratings/poi/${poiId}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-type": "application/json",
+          "Access-Control-Allow-Origin": "*",
+        },
+      }
+    );
     if (!response.ok) {
       throw new Error("Failed to get Poi");
     }
