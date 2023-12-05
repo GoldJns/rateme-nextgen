@@ -1,8 +1,4 @@
-mysqlconfigmap:
-  server: helm-database-service
-  databasename: rateme_swtp
-  username: custom
-  dburl: jdbc:mysql://helm-database-service:3306/rateme_swtp
+configMapName: mysql-config-map
 
 mysqlpvc:
   storageSize: 1Gi
@@ -18,3 +14,16 @@ database:
 database-service:
   clusterIP: None
   servicePort: 3306
+
+configMap:
+  server: helm-database-service
+  name: mysql-config-map
+  username: custom
+  dburl: jdbc:mysql://helm-database-service:3306/rateme_swtp
+  dbname: rateme_swtp
+
+  
+
+secret:
+  name: "mysql-pass"
+  passwordKey: "mysql-password"

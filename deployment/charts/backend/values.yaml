@@ -16,13 +16,9 @@ image:
 
 containerPort: 8080
 
-configMap:
-  name: "mysql-config-map"
-  usernameKey: "mysql-user-username"
-  dbURLKey: "mysql-db-url"
 
 secret:
   name: "mysql-pass"
-  passwordKey: "mysql-user-password"
+  passwordKey: "mysql-password"
 
 mysqlHost: "helm-backend-service"

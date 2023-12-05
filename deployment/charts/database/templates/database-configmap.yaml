@@ -1,9 +1,9 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: {{ .Chart.Name }}-config-map
+  name: {{ .Values.configMap.name }}
 data:
-  server: {{ .Values.mysqlconfigmap.server }}
-  dbname: {{ .Values.mysqlconfigmap.databasename }}
-  username: {{ .Values.mysqlconfigmap.username }}
-  url: {{ .Values.mysqlconfigmap.dburl }}
+  server: {{ .Values.configMap.server }}
+  dbname: {{ .Values.configMap.dbname }}
+  username: {{ .Values.configMap.username }}
+  dburl: {{ .Values.configMap.dburl }}

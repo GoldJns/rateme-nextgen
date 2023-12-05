@@ -24,7 +24,7 @@ spec:
             - name: MYSQL_DATABASE
               valueFrom:
                 configMapKeyRef:
-                  name: {{ .Chart.Name }}-config-map
+                  name: mysql-config-map
                   key: dbname
             - name: MYSQL_ROOT_PASSWORD
               valueFrom:
@@ -34,13 +34,13 @@ spec:
             - name: MYSQL_USER
               valueFrom:
                 configMapKeyRef:
-                  name: {{ .Chart.Name }}-config-map
+                  name: mysql-config-map
                   key: username
             - name: MYSQL_PASSWORD
               valueFrom:
                 secretKeyRef:
                   name: mysql-pass
-                  key: mysql-user-password
+                  key: mysql-password
          
           ports:
             - containerPort: {{ .Values.database.containerPort }}

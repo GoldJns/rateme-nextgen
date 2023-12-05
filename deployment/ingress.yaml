@@ -1,23 +1,59 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: app-ingress
+  name: MyIngress
+  namespace: default
 spec:
   rules:
-    - host: rateme-nextgen.com # Replace with your desired hostname or use *
+    - host: rateme-nextgen.com
       http:
         paths:
-          - path: / # Path for the frontend service
+          - path: /
             pathType: Prefix
             backend:
               service:
-                name: ui-service # Replace with the name of your frontend service
+                name: helm-ui-service
                 port:
-                  number: 80
-          - path: /api # Path for the frontend service
+                  name: httpui
+          - path: /api
             pathType: Prefix
             backend:
               service:
-                name: backend-service # Replace with the name of your frontend service
+                name: helm-backend-service
                 port:
-                  number: 8080
+                  name: httpbackend
+# spec:
+#   defaultBackend:
+#     service:
+#       name: helm-backend-service
+#       port:
+#         number: 3000
+
+# ---
+# apiVersion: cloud.google.com/v1
+# kind: BackendConfig
+# metadata:
+#   name: my-backendconfig
+# spec:
+#   timeoutSec: 120
+
+# ---
+# apiVersion: networking.gke.io/v1beta1
+# kind: FrontendConfig
+# metadata:
+#   name: ssl-redirect
+# spec:
+#   redirectToHttps:
+#     enabled: true
+
+# ---
+# apiVersion: networking.gke.io/v1
+# kind: ManagedCertificate
+# metadata:
+#   name: managed-cert
+# spec:
+#   domains:
+#     - subdomain.put-your-domain-here.com
+
+# ---
+
