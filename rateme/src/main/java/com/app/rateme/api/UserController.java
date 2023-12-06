@@ -1,31 +1,7 @@
 package com.app.rateme.api;
 
-import java.util.Collections;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.app.rateme.api.dto.LoginRequestBody;
-import com.app.rateme.api.dto.UserDto;
-import com.app.rateme.model.Role;
-import com.app.rateme.model.User;
-import com.app.rateme.repository.RoleRepository;
-import com.app.rateme.repository.UserRepository;
-import com.app.rateme.services.AuthenticationService;
 
 @RestController
 @RequestMapping("user")

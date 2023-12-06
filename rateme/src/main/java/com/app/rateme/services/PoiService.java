@@ -1,19 +1,15 @@
 package com.app.rateme.services;
 
-<<<<<<< HEAD
 
-=======
-import com.app.rateme.dao.PoiDAO;
-import com.app.rateme.dao.PoiTagRepository;
->>>>>>> origin/main
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.app.rateme.model.Poi;
 import com.app.rateme.model.PoiTag;
 import com.app.rateme.repository.PoiDAO;
 import com.app.rateme.repository.PoiTagRepository;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import java.util.List;
 
 @Service
 public class PoiService {

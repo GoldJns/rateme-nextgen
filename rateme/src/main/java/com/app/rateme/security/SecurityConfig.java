@@ -5,33 +5,19 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.ProviderManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
-import org.springframework.security.config.Customizer;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
-import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-<<<<<<< HEAD
-=======
 
->>>>>>> origin/main
-import static io.micrometer.core.ipc.http.HttpSender.Method.OPTIONS;
-import jakarta.servlet.ServletException;
-import jakarta.servlet.http.Cookie;
 
-<<<<<<< HEAD
-import static org.springframework.security.config.Customizer.withDefaults;
-
-=======
->>>>>>> origin/main
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
 
-<<<<<<< HEAD
+
 	@Bean
 	public PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
@@ -56,9 +42,10 @@ public class SecurityConfig {
 		http
 		.csrf(csrf -> csrf.disable())
 		.authorizeHttpRequests((authorize) -> authorize
-			.requestMatchers("/auth/**").permitAll()
-			.requestMatchers("/pois", "/actuator/health" , "/swagger-ui/**" ,"/","/swagger-ui.html","/openapi/openapi.yml","/api/**").permitAll()
-			.anyRequest().authenticated()
+			//.requestMatchers("/auth/**").permitAll()
+			//.requestMatchers("/pois", "/actuator/health" , "/swagger-ui/**" ,"/","/swagger-ui.html","/openapi/openapi.yml","/api/**").permitAll()
+			//.anyRequest().authenticated()
+			.anyRequest().permitAll()
 			
 			
 		)

@@ -8,8 +8,6 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,10 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.app.rateme.api.dto.LoginRequestBody;
 import com.app.rateme.api.dto.UserDto;
 import com.app.rateme.model.User;
-import com.app.rateme.repository.RoleRepository;
 import com.app.rateme.repository.UserRepository;
-
-import jakarta.servlet.http.HttpServletRequest;
 
 @RestController
 @RequestMapping("/auth")

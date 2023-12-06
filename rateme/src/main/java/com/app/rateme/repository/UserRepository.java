@@ -12,8 +12,8 @@ import com.app.rateme.model.User;
 @Repository
 public interface UserRepository extends JpaRepository<User, Integer>{
 
-    @Query("SELECT u FROM User u WHERE u.username = :name")
-    Optional<User> findByusername(String name);
+    //@Query("SELECT u FROM User u WHERE u.username = :username")
+    Optional<User> findByusername(String username);
 
     
 }
