@@ -30,7 +30,7 @@ Before starting with this project, ensure you have the following software instal
   - [Oracle JDK](https://www.oracle.com/java/technologies/javase-jdk11-downloads.html) or [OpenJDK](https://adoptopenjdk.net/): Download and install the JDK appropriate for your operating system.
 
 **Maven**
-  - No further need to install Maven. We suggest using the Maven Wrapper defined in the `./rateme/` folder.
+  - No further need to install Maven. We suggest using the Maven Wrapper defined in the project root.
 
 **Verify Installation**
 

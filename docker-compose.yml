@@ -6,7 +6,9 @@ networks:
 
 services:
   backend:
-    image: ghcr.io/goldjns/rateme-nextgen-backend:backend-0.1.0-beta
+    build:
+      context: .
+      dockerfile: Dockerfile.backend
     environment:
       - SPRING_DATASOURCE_URL=jdbc:mysql://database:3306/rateme_swtp
       - SPRING_DATASOURCE_USERNAME=root
