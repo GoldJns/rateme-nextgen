@@ -1,12 +1,16 @@
-FROM nginx:1.24.0-alpine-slim
-
-LABEL org.opencontainers.image.source="https://github.com/GoldJns/rateme-nextgen"
+FROM nginx:1.24.0-alpine-slim AS build
 
 WORKDIR /usr/share/nginx/html
 
 COPY src/main/webapp/ .
 
+FROM nginx:1.24.0-alpine-slim 
+
+LABEL org.opencontainers.image.source="https://github.com/GoldJns/rateme-nextgen"
+
 WORKDIR /app
+
+COPY --from=build /usr/share/nginx/html/ /usr/share/nginx/html/
 
 RUN chown -R nginx:nginx /app && chmod -R 755 /app && \
   chown -R nginx:nginx /var/cache/nginx && \

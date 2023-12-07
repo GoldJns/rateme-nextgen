@@ -1,3 +1,8 @@
-FROM mysql:8.0
+FROM mysql:8.0 AS build
 COPY database/config/config-file.cnf /etc/mysql/conf.d
 COPY database/InitScripts/* /docker-entrypoint-initdb.d/  
+
+FROM mysql:8.0
+
+COPY --from=build /etc/mysql/conf.d /etc/mysql/conf.d/
+COPY --from=build /docker-entrypoint-initdb.d /docker-entrypoint-initdb.d/

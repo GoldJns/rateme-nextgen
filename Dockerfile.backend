@@ -1,3 +1,15 @@
+FROM openjdk:17-jdk-alpine AS build
+
+RUN adduser -u 8877 appuser -D
+USER appuser
+
+WORKDIR /app
+
+COPY src /app/src
+COPY pom.xml /app/pom.xml
+
+RUN ./mvnw clean package -DskipTests
+
 FROM openjdk:17-jdk-alpine
 
 RUN adduser -u 8877 appuser -D
@@ -5,8 +17,8 @@ USER appuser
 
 WORKDIR /app
 
-COPY target/*.jar app.jar
-COPY src/main/resources/application.properties /app/application.properties
+COPY --from=build /app/target/*.jar app.jar
+COPY --from=build /app/src/main/resources/application.properties /app/application.properties
 EXPOSE 8080
 
 ENTRYPOINT ["java", "-jar", "app.jar", "--spring.config.location=file:/app/application.properties"]
