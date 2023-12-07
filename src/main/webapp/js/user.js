@@ -197,7 +197,7 @@ async function fetchUser(token) {
 async function loginUser(credentials) {
   try {
     const response = await fetch(
-      window.endpointConfig.local.SERVICES_BASE_URL + "/access/login",
+      window.endpointConfig.local.SERVICES_BASE_URL + "/auth/login",
       {
         method: "POST",
         headers: {
@@ -254,7 +254,7 @@ async function handleRegistrationSubmit(event) {
 
   try {
     const response = await fetch(
-      window.endpointConfig.local.SERVICES_BASE_URL + "/user/register",
+      window.endpointConfig.local.SERVICES_BASE_URL + "/auth/register",
       {
         method: "POST",
         headers: {

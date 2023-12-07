@@ -1,6 +1,6 @@
-FROM openjdk:17-jdk-alpine
+FROM eclipse-temurin:17
 
-RUN adduser -u 8877 appuser -D
+RUN adduser -u 8877 appuser -disabled-password
 USER appuser
 
 WORKDIR /app

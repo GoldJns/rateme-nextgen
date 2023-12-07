@@ -12,6 +12,22 @@ public class UserDto {
 	private String zip;
 	private String city;
 
+
+
+	
+
+	public UserDto(String userName, String email, String firstName, String lastName, String street, String streetNr,
+			String zip, String city) {
+		this.userName = userName;
+		this.email = email;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.street = street;
+		this.streetNr = streetNr;
+		this.zip = zip;
+		this.city = city;
+	}
+
 	public String getUserName() {
 		return userName;
 	}
