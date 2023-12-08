@@ -1,13 +1,24 @@
-FROM maven:3.8.6-eclipse-temurin-17-alpine@sha256:e88c1a981319789d0c00cd508af67a9c46524f177ecc66ca37c107d4c371d23b AS builder
-WORKDIR /build
-COPY . .
-RUN mvn clean package -DskipTests
 
-FROM eclipse-temurin:17.0.5_8-jre-alpine@sha256:02c04793fa49ad5cd193c961403223755f9209a67894622e05438598b32f210e
-WORKDIR /opt/app
-RUN addgroup --system javauser && adduser -S -s /usr/sbin/nologin -G javauser javauser
-COPY --from=builder build/target/*.jar app.jar
-RUN chown -R javauser:javauser .
-USER javauser
-HEALTHCHECK --interval=30s --timeout=3s --retries=1 CMD wget -qO- http://localhost:8080/actuator/health/ | grep UP || exit 1
-ENTRYPOINT ["java", "-jar", "app.jar"]
+# RUN groupadd -r user
+# RUN useradd -r -g user user
+# RUN chown -R user:user .
+# USER user
+
+FROM maven:3-eclipse-temurin-17 AS maven
+RUN mkdir -p /opt/app/src
+COPY src /opt/app/src
+COPY pom.xml /opt/app
+RUN --mount=type=cache,target=/root/.m2 mvn -f /opt/app/pom.xml -DskipTests=true clean package
+
+FROM eclipse-temurin:17-jre-focal as builder
+WORKDIR application
+COPY --from=maven /opt/app/target/rateme-1.0.0.jar application.jar
+RUN java -Djarmode=layertools -jar application.jar extract
+
+FROM eclipse-temurin:17-jre-focal
+WORKDIR application
+COPY --from=builder application/dependencies/ ./
+COPY --from=builder application/spring-boot-loader/ ./
+COPY --from=builder application/snapshot-dependencies/ ./
+COPY --from=builder application/application/ ./
+ENTRYPOINT ["java","org.springframework.boot.loader.JarLauncher"]
