@@ -1,12 +1,18 @@
-FROM openjdk:17-jdk-alpine
+FROM maven:3-eclipse-temurin-17 AS maven
+RUN mkdir -p /opt/app/src
+COPY src /opt/app/src
+COPY pom.xml /opt/app
+RUN --mount=type=cache,target=/root/.m2 mvn -f /opt/app/pom.xml -DskipTests=true clean package
 
-RUN adduser -u 8877 appuser -D
-USER appuser
+FROM eclipse-temurin:17-jre-focal as builder
+WORKDIR application
+COPY --from=maven /opt/app/target/rateme-1.0.0.jar application.jar
+RUN java -Djarmode=layertools -jar application.jar extract
 
-WORKDIR /app
-
-COPY target/*.jar app.jar
-COPY src/main/resources/application.properties /app/application.properties
-EXPOSE 8080
-
-ENTRYPOINT ["java", "-jar", "app.jar", "--spring.config.location=file:/app/application.properties"]
+FROM eclipse-temurin:17-jre-focal
+WORKDIR application
+COPY --from=builder application/dependencies/ ./
+COPY --from=builder application/spring-boot-loader/ ./
+COPY --from=builder application/snapshot-dependencies/ ./
+COPY --from=builder application/application/ ./
+ENTRYPOINT ["java","org.springframework.boot.loader.JarLauncher"]
