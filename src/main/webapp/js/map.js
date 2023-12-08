@@ -70,7 +70,7 @@ async function getAllPois() {
   const response = await fetch(
     window.endpointConfig.local.SERVICES_BASE_URL + "/pois",
     {
-      method: "get",
+      method: "GET",
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
@@ -122,7 +122,7 @@ function drawPoiInfo(poi) {
 function getPoitags(id) {
   console.log(id);
   fetch(window.endpointConfig.local.SERVICES_BASE_URL + `/pois/${id}`, {
-    method: "get",
+    method: "GET",
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",

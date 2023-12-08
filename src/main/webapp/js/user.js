@@ -3,6 +3,7 @@ window.addEventListener("beforeunload", checkLoginStatus);
 
 let user;
 
+
 async function checkLoginStatus() {
   const token = sessionStorage.getItem("accessToken");
 
@@ -20,6 +21,7 @@ async function checkLoginStatus() {
     }
   }
 }
+
 
 function initUser() {
   checkLoginStatus();
@@ -140,7 +142,10 @@ async function getUserById(userId) {
       window.endpointConfig.local.SERVICES_BASE_URL + `/user/${userId}`,
       {
         method: "GET",
-        headers: { "Content-type": "application/json" },
+        headers: {  "Content-type": "application/json",
+                    
+                  },
+        
       }
     );
     const user = await response.json();
@@ -176,17 +181,19 @@ function handlePasswordToggle() {
 async function fetchUser(token) {
   try {
     const response = await fetch(
-      window.endpointConfig.local.SERVICES_BASE_URL + "/user/",
+      window.endpointConfig.local.SERVICES_BASE_URL + "/auth/user",
       {
         method: "GET",
         headers: {
           "Content-type": "application/json",
-          token: token,
+          "Authorization": "Bearer " + token
         },
+        
       }
     );
 
     const responseUser = await response.json();
+    console.log(responseUser);
     user = responseUser;
     return user;
   } catch (error) {
@@ -202,8 +209,10 @@ async function loginUser(credentials) {
         method: "POST",
         headers: {
           "Content-type": "application/json",
-          "Access-Control-Allow-Origin": "*",
+          
+          
         },
+        
         body: JSON.stringify(credentials),
       }
     );
@@ -226,15 +235,15 @@ async function handleLogin() {
   const userNameElement = document.getElementById("userNameLogin");
   const passwordElement = document.getElementById("passwordLogin");
 
-  const userName = userNameElement.value.trim();
+  const username = userNameElement.value.trim();
   const password = passwordElement.value.trim();
 
-  if (!(userName && password)) {
+  if (!(username && password)) {
     showSnackbar("Please fill out every field", "error");
     return;
   }
 
-  const credentials = { userName, password };
+  const credentials = { username, password };
   await loginUser(credentials);
 }
 
@@ -259,7 +268,7 @@ async function handleRegistrationSubmit(event) {
         method: "POST",
         headers: {
           "Content-type": "application/json",
-          "Access-Control-Allow-Origin": "*",
+          
         },
         body: json,
       }
@@ -326,17 +335,9 @@ async function drawTable() {
 }
 
 function handleLogout() {
-  const id = sessionStorage.getItem("accessToken");
-  fetch(window.endpointConfig.local.SERVICES_BASE_URL + "/access/logout", {
-    method: "delete",
-    headers: { token: id },
-  })
-    .then((response) => {
-      if (response.ok) {
+  
         sessionStorage.removeItem("accessToken");
         showSnackbar("Logged out", "error");
         showLoginView();
-      }
-    })
-    .catch((error) => console.error("Error:", error));
+      
 }

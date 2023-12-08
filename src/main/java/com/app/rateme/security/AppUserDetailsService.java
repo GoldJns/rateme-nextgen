@@ -1,5 +1,6 @@
 package com.app.rateme.security;
 
+import java.util.ArrayList;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,21 +16,18 @@ import com.app.rateme.repository.UserRepository;
 public class AppUserDetailsService implements UserDetailsService {
 
 	@Autowired
-	private UserRepository userRepository;
+    private UserRepository userRepository;
 
-	@Override
-	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		Optional<User> optUser = userRepository.findByusername(username);
-	 	User user = new User();
-		if (optUser.isPresent()) {
-			user = optUser.get();
-		}
 
-		System.out.println("Loaded user: " + user.getUsername() + ", Password: " + user.getPassword() + ", Roles: "
-				+ user.getRoles());
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-		return new AuthenticatedUser(user);
-
-	}
+        
+        User user = userRepository.findByusername(username);
+        if(user == null){
+            throw new UsernameNotFoundException("User not found",null);
+        }
+        return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), new ArrayList<>());
+    }
 
 }

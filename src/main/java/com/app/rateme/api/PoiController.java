@@ -15,7 +15,6 @@ import com.app.rateme.model.PoiTag;
 import com.app.rateme.services.PoiService;
 
 @RestController
-@CrossOrigin("*")
 @RequestMapping("/pois")
 public class PoiController {
 

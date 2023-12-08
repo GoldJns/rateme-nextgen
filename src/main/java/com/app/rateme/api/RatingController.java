@@ -22,7 +22,6 @@ import com.app.rateme.services.RatingService;
 import jakarta.persistence.EntityNotFoundException;
 
 @RestController
-@CrossOrigin("*")
 @RequestMapping("rating")
 public class RatingController {
 
