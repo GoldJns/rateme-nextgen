@@ -38,7 +38,7 @@ jobs:
       - uses: trstringer/manual-approval@v1
         with:
           secret: ${{ github.TOKEN }}
-          approvers: GoldJns,Zohaib770,wong030,amza94
+          approvers: eae-team
       - name: Terraform Destroy
         run: |
           echo "** Running Terraform Destroy**"
