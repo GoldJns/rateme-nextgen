@@ -6,11 +6,11 @@ permissions:
   contents: read
 
 jobs:
-  terraform:
+  terraform-create:
     name: "Terraform"
     runs-on: ubuntu-latest
-    environment: production
-
+    environment:
+      name: production
     defaults:
       run:
         shell: bash
@@ -45,5 +45,37 @@ jobs:
       - name: Terraform Apply
         #if: github.ref == 'refs/heads/main' && github.event_name == 'push'
         run: terraform apply -auto-approve -input=false
+        env:
+          GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
+
+  terraform-destroy:
+    name: "Terraform"
+    runs-on: ubuntu-latest
+    environment:
+      name: production
+    defaults:
+      run:
+        shell: bash
+        working-directory: ./terraform
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v1
+
+      - name: Terraform Init
+        run: terraform init
+        env:
+          GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
+
+      - uses: trstringer/manual-approval@v1
+        with:
+          secret: ${{ github.TOKEN }}
+      - name: Terraform Destroy
+        run: |
+          echo "** Running Terraform Destroy**"
+          terraform destroy -lock=false -auto-approve
         env:
           GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
