@@ -14,7 +14,7 @@ permissions:
 
 jobs:
   terraform-create:
-    name: "Terraform"
+    name: "Terraform create"
     runs-on: ubuntu-latest
     environment:
       name: production
@@ -56,10 +56,10 @@ jobs:
           GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
 
   terraform-destroy:
-    name: "Terraform"
+    name: "Terraform destroy"
     runs-on: ubuntu-latest
     environment:
-      name: production
+      name: production-destroy
     defaults:
       run:
         shell: bash
