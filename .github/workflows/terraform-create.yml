@@ -37,6 +37,7 @@ jobs:
           cat > pipeline.auto.tfvars <<EOF
           region="${{ vars.GCP_REGION }}" 
           project="${{ vars.GCP_PROJECT }}" 
+          data-project="${{ vars.GCP_DATA_PROJECT }}"
           bucketstate="${{vars.BUCKET_STATE}}"
           EOF
 
