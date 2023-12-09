@@ -38,7 +38,7 @@ jobs:
       - name: Terraform Destroy
         run: |
           echo "** Running Terraform Destroy**"
-          terraform plan -destroy
+          terraform plan  -lock=false -destroy
           terraform destroy -auto-approve
         env:
           GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
