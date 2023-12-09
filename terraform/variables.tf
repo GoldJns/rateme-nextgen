@@ -18,8 +18,3 @@ variable "data-project" {
     type = string
     description = "Name of data pipeline project to use as resource prefix"
 }
-
-variable "bucketstate" {
-    type = string
-    description = "Name of bucket"
-}

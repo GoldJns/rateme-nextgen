@@ -1,6 +1,6 @@
 terraform {
   backend "gcs" {
-    bucket = var.bucketstate
+    bucket = "terraform-state-rateme-nextgen"
   }
 }
 
