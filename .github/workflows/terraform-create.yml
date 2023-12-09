@@ -37,7 +37,7 @@ jobs:
           cat > pipeline.auto.tfvars <<EOF
           region="${{ vars.GCP_REGION }}" 
           project="${{ vars.GCP_PROJECT }}" 
-          stateBucketName="${{ state-bucket-name }}"
+          bucketstate="${{vars.BUCKET_STATE}}"
           EOF
 
       - name: Terraform Init
