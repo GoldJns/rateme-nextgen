@@ -1,8 +1,7 @@
 service:
-  type: NodePort
+  type: LoadBalancer
   port: 8080
   targetPort: 8080
-  nodePort: 30012
 
 fullnameOverride: ""
 
@@ -11,7 +10,7 @@ replicaCount: 1
 image:
   registry: ghcr.io/goldjns
   repository: rateme-nextgen-backend
-  tag: backend-0.1.0-beta
+  tag: v1.7.0
   pullPolicy: "Always"
 
 containerPort: 8080
