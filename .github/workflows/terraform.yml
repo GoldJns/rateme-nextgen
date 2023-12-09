@@ -77,9 +77,6 @@ jobs:
         env:
           GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
 
-      - uses: trstringer/manual-approval@v1
-        with:
-          secret: ${{ github.TOKEN }}
       - name: Terraform Destroy
         run: |
           echo "** Running Terraform Destroy**"
