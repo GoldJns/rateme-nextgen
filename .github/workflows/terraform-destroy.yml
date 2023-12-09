@@ -35,6 +35,13 @@ jobs:
         env:
           GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
 
+      - name: Wait for Approval
+        if: always()
+        uses: "technosophos/wait-for-input@v1"
+        with:
+          message: "Please review the changes and approve to destroy the infrastructure"
+          timeout_seconds: 604800 # Adjust timeout as needed
+
       - name: Terraform Destroy
         run: |
           echo "** Running Terraform Destroy**"
