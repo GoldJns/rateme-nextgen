@@ -1,6 +1,13 @@
 name: "Terraform Destroy"
 
 on:
+  push:
+    branches:
+      - main
+      - feature/*
+      - fix/*
+      - chore/*
+      - refactor/*
   workflow_dispatch:
 permissions:
   contents: read
