@@ -68,6 +68,10 @@ Currently there are 3 published containers:
 - `rateme-nextgen-backend`
 - `rateme-nextgen-database`
 
+## IaC
+
+We use terraform to provision our cloud ressources(e.g. gke cluster). Terraform files are located in "./terraform" folder.
+
 ## Credits
 This project includes code adapted from [rateme](https://github.com/alex9849/rateme) by [alex9849](https://github.com/alex9849) 
 
