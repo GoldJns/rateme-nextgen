@@ -1,19 +1,20 @@
 package com.app.rateme.api;
 
-import com.app.rateme.dao.PoiDAO;
-import com.app.rateme.dao.PoiTagRepository;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
 import com.app.rateme.model.Poi;
 import com.app.rateme.model.PoiTag;
 import com.app.rateme.services.PoiService;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
-
 @RestController
-@CrossOrigin("*")
 @RequestMapping("/pois")
 public class PoiController {
 

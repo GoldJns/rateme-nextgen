@@ -193,12 +193,12 @@ async function getAllRatingsByUser() {
   try {
     const accessToken = sessionStorage.getItem("accessToken");
     const response = await fetch(
-      window.endpointConfig.local.SERVICES_BASE_URL + "/user",
+      window.endpointConfig.local.SERVICES_BASE_URL + "/rating/user",
       {
         method: "GET",
         headers: {
           "Content-type": "application/json",
-          "Access-Control-Allow-Origin": "*",
+          
           token: accessToken,
         },
       }
@@ -273,7 +273,7 @@ async function getRatingsByPoi(poiId) {
         method: "GET",
         headers: {
           "Content-type": "application/json",
-          "Access-Control-Allow-Origin": "*",
+          
         },
       }
     );
