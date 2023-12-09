@@ -1,14 +1,6 @@
 name: "Terraform"
 
 on:
-  push:
-    branches:
-      - main
-      - feature/*
-      - fix/*
-      - chore/*
-      - refactor/*
-  pull_request:
   workflow_dispatch:
 permissions:
   contents: read

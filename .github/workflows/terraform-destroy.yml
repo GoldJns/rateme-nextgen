@@ -1,14 +1,6 @@
 name: "Terraform"
 
 on:
-  push:
-    branches:
-      - main
-      - feature/*
-      - fix/*
-      - chore/*
-      - refactor/*
-  pull_request:
   workflow_dispatch:
 permissions:
   contents: read
@@ -37,6 +29,9 @@ jobs:
           GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
 
       - name: Terraform Destroy
-        run: terraform destroy -auto-approve
+        run: |
+          echo "** Running Terraform Destroy**"
+          terraform plan -destroy
+          terraform destroy -auto-approve
         env:
           GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
