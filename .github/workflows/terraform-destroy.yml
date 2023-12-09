@@ -16,8 +16,8 @@ jobs:
   terraform:
     name: "Terraform"
     runs-on: ubuntu-latest
-    environment: production
-
+    environment:
+      name: production
     defaults:
       run:
         shell: bash
