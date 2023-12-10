@@ -79,6 +79,8 @@ jobs:
       - name: Show Destroy plan
         run: terraform plan -destroy
         continue-on-error: true
+        env:
+          GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
 
       - name: Destroy resources jobs
         id: destroy
