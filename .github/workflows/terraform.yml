@@ -36,7 +36,6 @@ jobs:
           cat > pipeline.auto.tfvars <<EOF
           region="${{ vars.GCP_REGION }}" 
           project="${{ vars.GCP_PROJECT }}" 
-          data-project="${{ vars.GCP_DATA_PROJECT }}"
           EOF
 
       - name: Terraform Init
@@ -80,6 +79,6 @@ jobs:
       - name: Terraform Destroy
         run: |
           echo "** Running Terraform Destroy**"
-          terraform destroy -lock=false -force
+          terraform destroy -lock=false -auto-approve
         env:
           GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
