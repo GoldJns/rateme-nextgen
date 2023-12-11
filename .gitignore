@@ -46,3 +46,6 @@ database/DbVolume/
 
 terraform/*.lock.hcl
 terraform/.terraform/
+
+helm/charts/**/Chart.lock
+helm/charts/**/*.tgz
