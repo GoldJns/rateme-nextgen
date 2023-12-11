@@ -37,7 +37,7 @@ jobs:
           cat > pipeline.auto.tfvars <<EOF
           region="${{ vars.GCP_REGION }}" 
           project="${{ vars.GCP_PROJECT }}"
-          cluster-name=${{ vars.CLUSTER_NAME }}
+          cluster-name="${{ vars.CLUSTER_NAME }}""
           terraform-state-bucket-name="${{ vars.TERRAFORM_STATE_BUCKET_NAME}}"
           terraform-state-bucket-prefix="${{ vars.TERRAFORM_STATE_BUCKET_PREFIX}}"
           service-account-id="${{ secrets.SERVICE_ACCOUNT_ID }}"
