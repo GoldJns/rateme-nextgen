@@ -1,7 +1,7 @@
 terraform {
   backend "gcs" {
-    bucket = var.terraform-state-bucket-name
-    prefix = var.terraform-state-bucket-prefix
+    bucket = "terraform-state-rateme-nextgen"
+    prefix = "prod"
   }
 }
 
