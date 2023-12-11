@@ -22,7 +22,6 @@ resource "google_container_node_pool" "gke_nodes" {
   location   = var.region
   cluster    = google_container_cluster.gke_cluster.name
   node_count = 1
-  version    = "1.23.8"
 
   node_config {
     preemptible  = true
