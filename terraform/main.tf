@@ -14,7 +14,7 @@ resource "google_container_cluster" "gke_cluster" {
   name                     = var.cluster-name
   location                 = var.region
   remove_default_node_pool = true
-  initial_node_count       = 0
+  initial_node_count       = 1
 }
 
 resource "google_container_node_pool" "gke_nodes" {
