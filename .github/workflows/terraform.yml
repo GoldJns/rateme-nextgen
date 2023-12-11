@@ -82,13 +82,13 @@ jobs:
           GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
 
       - name: Show Destroy plan
-        run: terraform plan -destroy -lock=false
+        run: terraform plan --destroy -lock=false -input=false
         continue-on-error: true
         env:
           GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
 
       - name: Destroy resources jobs
         id: destroy
-        run: terraform destroy -auto-approve -lock=false
+        run: terraform destroy -auto-approve -lock=false -input=false
         env:
           GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
