@@ -9,7 +9,10 @@ provider "google" {
   project = var.project
   region  = var.region
 }
-
+resource "google_service_account" "gke_sa" {
+  account_id   = var.service-account-id
+  display_name = "Service Account"
+}
 
 resource "google_container_cluster" "gke_cluster" {
   name                     = var.cluster-name
