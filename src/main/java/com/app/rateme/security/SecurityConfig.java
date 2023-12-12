@@ -45,7 +45,7 @@ public class SecurityConfig {
 		return http.cors().and().csrf().disable()
 				.authorizeHttpRequests()
 				.requestMatchers("/auth/**", "/pois/**", "/rating/**", "/actuator/health", "/swagger-ui/**",
-						"/", "/swagger-ui.html", "/openapi/openapi.yml", "/api/**")
+						"/", "/swagger-ui.html", "/openapi/openapi.yml", "/api/**", "/user/**")
 				.permitAll()
 				.and()
 				.authorizeHttpRequests().requestMatchers("/api/**")
