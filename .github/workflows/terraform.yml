@@ -86,9 +86,8 @@ jobs:
         continue-on-error: true
         env:
           GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
-
       - name: Destroy resources jobs
         id: destroy
-        run: terraform destroy -auto-approve -lock=false -input=false -var="deletion_protection=false"
+        run: terraform destroy -auto-approve -lock=false -input=false
         env:
           GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
