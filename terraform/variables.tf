@@ -19,7 +19,7 @@ variable "cluster-name" {
 variable "service-account-id" {
   type        = string
   description = "Service account id"
-  default=""
+  default= ""
 }
 
 variable "terraform-state-bucket-name" {
