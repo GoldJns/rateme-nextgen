@@ -55,7 +55,7 @@ jobs:
 
       - name: Terraform Apply
         #if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-        run: terraform apply -auto-approve -input=false -var="deletion_protection=false" -lock=false
+        run: terraform apply -auto-approve -input=false -lock=false
         env:
           GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
 
@@ -89,6 +89,6 @@ jobs:
 
       - name: Destroy resources jobs
         id: destroy
-        run: terraform destroy -auto-approve -lock=false -input=false
+        run: terraform destroy -auto-approve -lock=false -input=false -var="deletion_protection=false"
         env:
           GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
