@@ -1,4 +1,4 @@
-package com.app.rateme.dao;
+package com.app.rateme.repository;
 
 import java.util.List;
 

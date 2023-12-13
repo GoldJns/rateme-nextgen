@@ -13,16 +13,15 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.app.rateme.api.dto.RatingDto;
-import com.app.rateme.dao.PoiDAO;
-import com.app.rateme.dao.UserRepository;
 import com.app.rateme.model.Poi;
 import com.app.rateme.model.Rating;
 import com.app.rateme.model.User;
+import com.app.rateme.repository.PoiDAO;
+import com.app.rateme.repository.UserRepository;
 import com.app.rateme.services.RatingService;
 import jakarta.persistence.EntityNotFoundException;
 
 @RestController
-@CrossOrigin("*")
 @RequestMapping("rating")
 public class RatingController {
 
