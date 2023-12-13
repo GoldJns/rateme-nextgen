@@ -4,7 +4,7 @@ echo "Deploy services using helm..."
 
 NAMESPACE="default"
 
-MODE=install
+MODE=upgrade
 
 helm $MODE ui-release ./charts/ui \
     --namespace $NAMESPACE \
