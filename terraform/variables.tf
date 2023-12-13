@@ -8,7 +8,7 @@ variable "project" {
 variable "region" {
   type        = string
   description = "Region Google project"
-  default     = "US_CENTRAL1"
+  default     = "US_CENTRAL1_C"
 }
 
 variable "cluster-name" {
