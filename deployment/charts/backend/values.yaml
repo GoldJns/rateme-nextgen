@@ -15,6 +15,10 @@ image:
 
 containerPort: 8080
 
+configMap:
+  name: "database-config-map"
+  usernameKey: "mysql-user-username"
+  dbURLKey: "mysql-db-url"
 
 secret:
   name: "mysql-pass"

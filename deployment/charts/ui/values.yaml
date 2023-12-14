@@ -1,4 +1,3 @@
-
 targetPort: 80
 serviceType: LoadBalancer
 restartPolicy: Always
