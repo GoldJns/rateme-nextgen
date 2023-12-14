@@ -8,25 +8,13 @@ metadata:
     cert-manager.io/cluster-issuer: letsencrypt-production
 spec:
   ingressClassName: "gce"
-  tls:
-    - hosts:
-      - fd
-    secretName: hallo-welt 
   rules:
     - http:
         paths:
-          - path: /app # Path for the frontend service
+          - path: / # Path for the frontend service
             pathType: Prefix
             backend:
               service:
                 name: helm-ui-service
                 port:
                   number: 80
-          - path: /pois # Path for the frontend service
-            pathType: Prefix
-            backend:
-              service:
-                name: helm-backend-service
-                port:
-                  number: 8080
-                    - path: /pois # Path for the frontend service

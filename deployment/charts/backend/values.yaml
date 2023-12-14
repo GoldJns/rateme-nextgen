@@ -10,7 +10,7 @@ replicaCount: 1
 image:
   registry: ghcr.io/goldjns
   repository: rateme-nextgen-backend
-  tag: v1.7.0
+  tag: v1.7.3-beta
   pullPolicy: "Always"
 
 containerPort: 8080
