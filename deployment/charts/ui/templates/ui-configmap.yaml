@@ -10,6 +10,6 @@ data:
   apiConfig.js: |
     window.endpointConfig = {
       local: {
-        SERVICES_BASE_URL: "helm-backend-service",
+        SERVICES_BASE_URL: "34.172.67.156:8080/api",
       }
     }
