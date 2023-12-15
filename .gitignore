@@ -43,3 +43,17 @@ database/DbVolume/
 
 ### macOS ###
 *.DS_Store
+
+
+#### terraform ####
+terraform/*.lock.hcl
+terraform/.terraform
+terraform/.tfvars
+terraform/*.tfstate
+terraform/*.tfstate.json
+terraform/crash.log
+terraform/  crash.*.log
+
+### helm ###
+helm/charts/**/Chart.lock
+helm/charts/**/*.tgz
