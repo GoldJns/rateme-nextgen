@@ -5,16 +5,36 @@ metadata:
   namespace: default
   annotations:
     kubernetes.io/ingress.class: gce
-    cert-manager.io/cluster-issuer: letsencrypt-production
 spec:
   ingressClassName: "gce"
   rules:
     - http:
         paths:
-          - path: / # Path for the frontend service
+          - path: /
             pathType: Prefix
             backend:
               service:
                 name: helm-ui-service
                 port:
                   number: 80
+          - path: /pois
+            pathType: Prefix
+            backend:
+              service:
+                name: helm-backend-service
+                port:
+                  number: 8080
+          - path: /user
+            pathType: Prefix
+            backend:
+              service:
+                name: helm-backend-service
+                port:
+                  number: 8080
+          - path: /actuator/health
+            pathType: Prefix
+            backend:
+              service:
+                name: helm-backend-service
+                port:
+                  number: 8080

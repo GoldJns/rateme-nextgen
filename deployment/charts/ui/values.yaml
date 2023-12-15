@@ -1,9 +1,9 @@
 targetPort: 80
-serviceType: LoadBalancer
+serviceType: ClusterIP
 restartPolicy: Always
 configMapName: ui-config-map
 replicas: 1
 image:
   registry: ghcr.io/goldjns
   repository: rateme-nextgen-ui
-  tag: v1.6.1-beta
+  tag: v1.7.3-beta

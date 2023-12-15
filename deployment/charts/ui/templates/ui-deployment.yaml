@@ -16,6 +16,7 @@ spec:
       containers:
         - name: helm-{{ .Chart.Name }}
           image: {{ include "ui.image" . | quote }}
+          imagePullPolicy: Always
           ports:
             - containerPort: {{ .Values.targetPort }}
           volumeMounts:

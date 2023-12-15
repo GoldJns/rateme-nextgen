@@ -3,9 +3,7 @@ kind: Service
 metadata:
   name: helm-{{ .Chart.Name }}-service
   labels:
-    app: backend
-  annotations:
-    cloud.google.com/backend-config: '{"ports": {"3000":"my-backendconfig"}}'
+    app: helm-{{ .Chart.Name }}
 spec:
   type: {{ .Values.service.type }}
   selector:
