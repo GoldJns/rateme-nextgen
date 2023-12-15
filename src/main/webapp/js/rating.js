@@ -198,7 +198,7 @@ async function getAllRatingsByUser() {
         method: "GET",
         headers: {
           "Content-type": "application/json",
-          
+          "Access-Control-Allow-Origin": "*",
           token: accessToken,
         },
       }
@@ -273,7 +273,7 @@ async function getRatingsByPoi(poiId) {
         method: "GET",
         headers: {
           "Content-type": "application/json",
-          
+          "Access-Control-Allow-Origin": "*",
         },
       }
     );

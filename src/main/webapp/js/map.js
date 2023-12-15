@@ -55,6 +55,7 @@ async function getPoiById(poiId) {
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
       },
     }
   );
@@ -74,6 +75,7 @@ async function getAllPois() {
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
       },
     }
   );
@@ -126,6 +128,7 @@ function getPoitags(id) {
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": "*",
     },
   })
     .then((response) => response.json())
