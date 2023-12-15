@@ -16,4 +16,3 @@ helm $MODE database-release ./charts/database \
     --namespace $NAMESPACE \
 
 kubectl apply -f ingress.yaml
-$SHELL

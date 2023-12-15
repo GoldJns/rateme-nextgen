@@ -10,6 +10,6 @@ data:
   apiConfig.js: |
     window.endpointConfig = {
       local: {
-        SERVICES_BASE_URL: "34.144.207.206/api",
+        SERVICES_BASE_URL: "",
       }
     }

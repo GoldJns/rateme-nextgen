@@ -17,21 +17,28 @@ spec:
                 name: helm-ui-service
                 port:
                   number: 80
-          - path: /pois
+          - path: /pois/(.*)
             pathType: Prefix
             backend:
               service:
                 name: helm-backend-service
                 port:
                   number: 8080
-          - path: /user
+          - path: /user/(.*)
             pathType: Prefix
             backend:
               service:
                 name: helm-backend-service
                 port:
                   number: 8080
-          - path: /actuator/health
+          - path: /rating/(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: helm-backend-service
+                port:
+                  number: 8080
+          - path: /actuator/(.*)
             pathType: Prefix
             backend:
               service:
