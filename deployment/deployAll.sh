@@ -1,18 +1,17 @@
-#/bin/sh
+#!/bin/bash
 
-echo "Deploy services using helm..."
+echo "Deploying services using Helm..."
 
 NAMESPACE="default"
 
-MODE=upgrade
+deploy_with_helm() {
+    local release_name=$1
+    local chart_path=$2
 
-helm $MODE ui-release ./charts/ui \
-    --namespace $NAMESPACE \
+    helm upgrade --install $release_name $chart_path --namespace $NAMESPACE
+}
 
-helm $MODE backend-release ./charts/backend \
-    --namespace $NAMESPACE \
-
-helm $MODE database-release ./charts/database \
-    --namespace $NAMESPACE \
-
-kubectl apply -f ingress.yaml
+deploy_with_helm "ui-release" "./charts/ui"
+deploy_with_helm "backend-release" "./charts/backend"
+deploy_with_helm "database-release" "./charts/database"
+deploy_with_helm "common-release" "./charts/common"
