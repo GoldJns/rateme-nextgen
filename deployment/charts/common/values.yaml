@@ -1,0 +1,13 @@
+namespace: default
+
+ingress:
+  name: rateme-nextgen-ingress
+  ingressClass: gce
+
+uiService:
+  name: helm-ui-service
+  port: 80
+
+backendService:
+  name: helm-backend-service
+  port: 8080

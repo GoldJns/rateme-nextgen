@@ -6,7 +6,7 @@ networks:
 
 services:
   backend:
-    image: ghcr.io/goldjns/rateme-nextgen-backend:backend-0.1.0-beta
+    image: ghcr.io/goldjns/rateme-nextgen-backend:v1.5.3-beta
     environment:
       - SPRING_DATASOURCE_URL=jdbc:mysql://database:3306/rateme_swtp
       - SPRING_DATASOURCE_USERNAME=root
