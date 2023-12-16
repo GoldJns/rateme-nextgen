@@ -20,7 +20,7 @@ jobs:
         with:
           ref: ${{ github.event.workflow_run.head_branch }}
       - name: Deploying to dev environment
-        uses: ./templates/action.yml
+        uses: "./.github/template/deploy"
         with:
           environment: dev-deploy
 
@@ -31,10 +31,10 @@ jobs:
       NAMESPACE: ${{ vars.NAMESPACE }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           ref: ${{ github.event.workflow_run.head_branch }}
       - name: Deploying to prod environment
-        uses: ./templates/action.yml
+        uses: "./.github/template/deploy"
         with:
           environment: prod-deploy

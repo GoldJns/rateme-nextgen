@@ -1,4 +1,4 @@
-name: Helm deployment
+name: Helm deployments
 inputs:
   environment:
     required: true
