@@ -25,7 +25,7 @@ jobs:
           environment: dev-deploy
           kubeconfig: $ {{secrets.KUBECONFIG}}
           googlecredentials: ${{secrets.GOOGLE_CREDENTIALS}}
-          googleproject: ${{ secrets. GKE_PROJECT}}
+          googleproject: ${{ secrets.GKE_PROJECT}}
 
   deploy-prod-job:
     runs-on: ubuntu-latest
