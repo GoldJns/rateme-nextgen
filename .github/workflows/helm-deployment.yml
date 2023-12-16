@@ -41,6 +41,6 @@ jobs:
         uses: "./.github/template/deploy"
         with:
           environment: prod-deploy
-          kubeconfig: $ {{secrets.KUBECONFIG}}
+          kubeconfig: ${{ secrets.KUBECONFIG }}
           googlecredentials: ${{secrets.GOOGLE_CREDENTIALS}}
           googleproject: ${{ secrets. GKE_PROJECT}}
