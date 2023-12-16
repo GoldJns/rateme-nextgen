@@ -13,6 +13,6 @@ jobs:
       - name: Deploy
         uses: WyriHaximus/github-action-helm3@v3
         with:
-          exec: chmod +x ./deployment/deployAll.sh && ./deployment/deployAll.sh ${NAMESPACE}
+          exec: chmod go-r ~/.kube/config && chmod +x ./deployment/deployAll.sh && ./deployment/deployAll.sh ${NAMESPACE}
           kubeconfig: "${{ secrets.KUBECONFIG }}"
           overrule_existing_kubeconfig: "true"
