@@ -1,0 +1,27 @@
+service:
+  type: LoadBalancer
+  port: 8080
+  targetPort: 8080
+
+fullnameOverride: ""
+
+replicaCount: 1
+
+image:
+  registry: ghcr.io/goldjns
+  repository: rateme-nextgen-backend
+  tag: v1.5.3-beta
+  pullPolicy: "Always"
+
+containerPort: 8080
+
+configMap:
+  name: "database-config-map"
+  usernameKey: "mysql-user-username"
+  dbURLKey: "mysql-db-url"
+
+secret:
+  name: "mysql-pass"
+  passwordKey: "mysql-password"
+
+mysqlHost: "helm-backend-service"
