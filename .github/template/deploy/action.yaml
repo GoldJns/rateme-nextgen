@@ -35,6 +35,6 @@ runs:
     - name: Deploy
       uses: WyriHaximus/github-action-helm3@v3
       with:
-        exec: cd deployment && chmod go-r ~/.kube/config && chmod +x ./deployAll.sh && ./deployAll.sh $NAMESPACE
+        exec: cd helm && chmod go-r ~/.kube/config && chmod +x ./deployAll.sh && ./deployAll.sh $NAMESPACE
         kubeconfig: $ {{inputs.kubeconfig}}
         overrule_existing_kubeconfig: "true"
