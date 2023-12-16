@@ -1,0 +1,46 @@
+name: Helm deploy
+on:
+  workflow_run:
+    wokflows:
+      - Maven Docker Build
+    types:
+      - completed
+  workflow_dispatch:
+
+jobs:
+  deploy-dev-job:
+    runs-on: ubuntu-latest
+    environment: dev-deploy
+    env:
+      NAMESPACE: ${{ vars.NAMESPACE }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ github.event.workflow_run.head_branch }}
+      - name: Deploying to dev environment
+        uses: "./.github/template/deploy"
+        with:
+          environment: dev-deploy
+          kubeconfig: $ {{secrets.KUBECONFIG}}
+          googlecredentials: ${{secrets.GOOGLE_CREDENTIALS}}
+          googleproject: ${{ secrets.GKE_PROJECT}}
+
+  deploy-prod-job:
+    runs-on: ubuntu-latest
+    needs: deploy-dev-job
+    environment: prod-deploy
+    env:
+      NAMESPACE: ${{ vars.NAMESPACE }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ github.event.workflow_run.head_branch }}
+      - name: Deploying to prod environment
+        uses: "./.github/template/deploy"
+        with:
+          environment: prod-deploy
+          kubeconfig: ${{ secrets.KUBECONFIG }}
+          googlecredentials: ${{secrets.GOOGLE_CREDENTIALS}}
+          googleproject: ${{ secrets. GKE_PROJECT}}
