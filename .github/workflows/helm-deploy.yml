@@ -10,6 +10,18 @@ jobs:
     runs-on: "ubuntu-latest"
     steps:
       - uses: actions/checkout@v3
+      - name: Authenticate to GCP
+        uses: google-github-actions/auth@v1
+        with:
+          credentials_json: ${{ secrets.GOOGLE_CREDENTIALS }}
+          project_id: ${{ secrets.GKE_PROJECT }}
+
+      - uses: simenandre/setup-gke-gcloud-auth-plugin@v1
+
+      - uses: google-github-actions/get-gke-credentials@v1
+        with:
+          cluster_name: ${CLUSTER_NAME}
+          location: ${GCP_REGION}
       - name: Deploy
         uses: WyriHaximus/github-action-helm3@v3
         with:
