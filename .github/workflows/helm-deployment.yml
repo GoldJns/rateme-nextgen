@@ -1,16 +1,14 @@
 name: Helm deploy
 
 on:
-  push:
-    branches:
-      - main
-      - feature/*
-      - fix/*
-      - chore/*
   workflow_dispatch:
+  workflow_run:
+    wokflows: [Maven Docker Build]
+    types:
+      - completed
+
 jobs:
   deploy-dev-job:
-    needs: push-docker-images
     runs-on: ubuntu-latest
     environment: dev-deploy
     env:
