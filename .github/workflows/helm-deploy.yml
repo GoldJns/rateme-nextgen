@@ -5,9 +5,13 @@ on:
     branches: ["main", "feature/*"]
     paths-ignore:
       - "*.md"
+  workflow_dispatch:
 jobs:
-  helm-deploy:
+  helm-deploy-dev:
     runs-on: "ubuntu-latest"
+    environment: dev-deploy
+    env:
+      NAMESPACE: ${{ vars.NAMESPACE }}
     steps:
       - uses: actions/checkout@v3
       - name: Authenticate to GCP
@@ -25,6 +29,34 @@ jobs:
       - name: Deploy
         uses: WyriHaximus/github-action-helm3@v3
         with:
-          exec: cd deployment && chmod go-r ~/.kube/config && chmod +x ./deployAll.sh && ./deployAll.sh ${NAMESPACE}
+          exec: cd deployment && chmod go-r ~/.kube/config && chmod +x ./deployAll.sh && ./deployAll.sh $NAMESPACE
           kubeconfig: "${{ secrets.KUBECONFIG }}"
           overrule_existing_kubeconfig: "true"
+  # helm-deploy-prod:
+  #   runs-on: "ubuntu-latest"
+  #   steps:
+  #     - uses: actions/checkout@v3
+  #     - name: Authenticate to GCP
+  #       uses: google-github-actions/auth@v1
+  #       with:
+  #         credentials_json: ${{ secrets.GOOGLE_CREDENTIALS }}
+  #         project_id: ${{ secrets.GKE_PROJECT }}
+
+  #     - uses: simenandre/setup-gke-gcloud-auth-plugin@v1
+
+  #     - uses: google-github-actions/get-gke-credentials@v1
+  #       with:
+  #         cluster_name: rateme-nextgen-cluster
+  #         location: us-central1
+  #     - name: Deploy
+  #       uses: WyriHaximus/github-action-helm3@v3
+  #       with:
+  #         exec: cd deployment && chmod go-r ~/.kube/config && chmod +x ./deployAll.sh && ./deployAll.sh ${NAMESPACE_PROD}
+  #         kubeconfig: "${{ secrets.KUBECONFIG }}"
+  #         overrule_existing_kubeconfig: "true"
+  #     - name: Deploy
+  #       uses: WyriHaximus/github-action-helm3@v3
+  #       with:
+  #         exec: cd deployment && chmod go-r ~/.kube/config && chmod +x ./deployAll.sh && ./deployAll.sh ${NAMESPACE_PROD}
+  #         kubeconfig: "${{ secrets.KUBECONFIG }}"
+  #         overrule_existing_kubeconfig: "true"
