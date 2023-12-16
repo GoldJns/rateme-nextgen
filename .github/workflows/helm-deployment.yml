@@ -20,7 +20,7 @@ jobs:
         with:
           ref: ${{ github.event.workflow_run.head_branch }}
       - name: Deploying to dev environment
-        uses: ./templates/helm-deploy-action.yml
+        uses: ./templates/action.yml
         with:
           environment: dev-deploy
 
@@ -35,6 +35,6 @@ jobs:
         with:
           ref: ${{ github.event.workflow_run.head_branch }}
       - name: Deploying to prod environment
-        uses: ./templates/helm-deploy-action.yml
+        uses: ./templates/action.yml
         with:
           environment: prod-deploy
