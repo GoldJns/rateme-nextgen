@@ -1,11 +1,11 @@
 name: Helm deploy
-
 on:
-  workflow_dispatch:
   workflow_run:
-    wokflows: [Maven Docker Build]
+    wokflows:
+      - Maven Docker Build
     types:
       - completed
+  workflow_dispatch:
 
 jobs:
   deploy-dev-job:
