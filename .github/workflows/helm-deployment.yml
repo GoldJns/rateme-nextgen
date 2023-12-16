@@ -15,6 +15,10 @@ jobs:
     env:
       NAMESPACE: ${{ vars.NAMESPACE }}
     steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          ref: ${{ github.event.workflow_run.head_branch }}
       - name: Deploying to dev environment
         uses: ./templates/helm-deploy-action.yml
         with:
@@ -26,6 +30,10 @@ jobs:
     env:
       NAMESPACE: ${{ vars.NAMESPACE }}
     steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          ref: ${{ github.event.workflow_run.head_branch }}
       - name: Deploying to prod environment
         uses: ./templates/helm-deploy-action.yml
         with:
