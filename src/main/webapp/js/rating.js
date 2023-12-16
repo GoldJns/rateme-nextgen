@@ -154,7 +154,7 @@ async function displayUserRatingRow(rating) {
 
   const ratedPoi = await getPoiById(rating.osmId);
 
-	for (p of ratedPoi.tags) {
+  for (p of ratedPoi) {
     console.log(p);
     if (p.tag === "name") {
       poiName = p.value;
@@ -202,7 +202,7 @@ async function getAllRatingsByUser(token) {
           //token: accessToken,
           //'Access-Control-Allow-Origin': '*',
           //"Authorization": "Bearer " + token,
-          'Authorization': `Bearer ${token}`,
+          Authorization: `Bearer ${token}`,
           //"token": accessToken,
         },
       }
@@ -316,7 +316,7 @@ async function postRating(rating) {
         "Content-Type": "application/json",
         Accept: "application/json",
         //'Access-Control-Allow-Origin': '*',
-        'Authorization': `Bearer ${token}`,
+        Authorization: `Bearer ${token}`,
         //"token": accessToken,
       },
       body: JSON.stringify(rating),
