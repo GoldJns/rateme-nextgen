@@ -2,6 +2,8 @@ package com.app.rateme.api;
 
 import java.util.Optional;
 
+import org.springframework.web.bind.annotation.PathVariable;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,9 +17,6 @@ import com.app.rateme.api.dto.UserModelAssembler;
 import com.app.rateme.model.User;
 import com.app.rateme.services.UserService;
 
-import jakarta.websocket.server.PathParam;
-
-
 @RestController
 @RequestMapping("/user")
 public class UserController {
@@ -29,8 +28,8 @@ public class UserController {
     UserModelAssembler userModelAssembler;
 
     @GetMapping("/{userId}")
-	public ResponseEntity<UserResponseDto> getUserById(@PathParam("userId") int userId) {
-		final Optional<User> userById = userService.getUserById(userId);
+	public ResponseEntity<UserResponseDto> getUserById(@PathVariable("userId") Integer userId) {
+		final Optional<User> userById = userService.getUserById(userId.intValue());
 		if(userById.isPresent()) {
 			User user = userById.get();
 			UserResponseDto userResponse = userModelAssembler.toModelResponse(user);

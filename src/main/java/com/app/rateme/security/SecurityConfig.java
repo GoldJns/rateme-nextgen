@@ -45,7 +45,7 @@ public class SecurityConfig {
 		return http.cors().and().csrf().disable()
 				.authorizeHttpRequests()
 				.requestMatchers("/auth/**", "/pois/**", "/rating/**", "/actuator/health", "/swagger-ui/**",
-						"/", "/swagger-ui.html", "/openapi/openapi.yml", "/api/**")
+				"/", "/swagger-ui.html", "/openapi/openapi.yml", "/api/**", "/user/**")
 				.permitAll()
 				.and()
 				.authorizeHttpRequests().requestMatchers("/api/**")
@@ -64,7 +64,7 @@ public class SecurityConfig {
 		config.setAllowedOrigins(Arrays.asList("http://localhost:8082"));
 		config.setAllowedMethods(Arrays.asList("GET", "POST", "OPTIONS", "DELETE", "PUT", "PATCH"));
 		config.setAllowCredentials(true);
-		config.setAllowedHeaders(Arrays.asList("Authorization", "Cache-Control", "Content-Type"));
+		config.setAllowedHeaders(Arrays.asList("Authorization", "Cache-Control", "Content-Type", "token"));
 
 		final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
 		source.registerCorsConfiguration("/**", config);

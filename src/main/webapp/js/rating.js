@@ -139,7 +139,8 @@ function drawRatingStars(stars) {
 }
 
 async function fetchUserRatingsEntries() {
-  const ratingsByUser = await getAllRatingsByUser();
+  const token = sessionStorage.getItem("accessToken");
+  const ratingsByUser = await getAllRatingsByUser(token);
   if (!ratingsByUser || ratingsByUser.length == 0) {
     return null;
   }
@@ -153,8 +154,9 @@ async function displayUserRatingRow(rating) {
 
   const ratedPoi = await getPoiById(rating.osmId);
 
-  for (p of ratedPoi.tags) {
-    if (p.id.tag === "name") {
+	for (p of ratedPoi.tags) {
+    console.log(p);
+    if (p.tag === "name") {
       poiName = p.value;
       break;
     }
@@ -189,24 +191,29 @@ async function displayUserRatingRow(rating) {
   cell5.innerHTML = `<image src=${rating.imageBlob} width="60", height="50" alt="rating image"/>`;
 }
 
-async function getAllRatingsByUser() {
+async function getAllRatingsByUser(token) {
   try {
-    const accessToken = sessionStorage.getItem("accessToken");
     const response = await fetch(
       window.endpointConfig.local.SERVICES_BASE_URL + "/rating/user",
       {
         method: "GET",
         headers: {
           "Content-type": "application/json",
-          
-          token: accessToken,
+          //token: accessToken,
+          //'Access-Control-Allow-Origin': '*',
+          //"Authorization": "Bearer " + token,
+          'Authorization': `Bearer ${token}`,
+          //"token": accessToken,
         },
       }
     );
+    console.log(response);
     const data = await response.json();
+    console.log(data);
     return data;
   } catch (error) {
-    console.log(error);
+    console.log("getAllRatingsByUser() had failed !!!!!!!!!!!!!!!!!!!!!!");
+    console.error(error);
   }
 }
 
@@ -268,12 +275,11 @@ async function drawPoiRating(poiId) {
 async function getRatingsByPoi(poiId) {
   try {
     const response = await fetch(
-      window.endpointConfig.local.SERVICES_BASE_URL + `/ratings/poi/${poiId}`,
+      window.endpointConfig.local.SERVICES_BASE_URL + `/rating/poi/${poiId}`,
       {
         method: "GET",
         headers: {
           "Content-type": "application/json",
-          
         },
       }
     );
@@ -281,9 +287,10 @@ async function getRatingsByPoi(poiId) {
       throw new Error("Failed to get Poi");
     }
     const ratingsByPoi = await response.json();
-
+    console.log("getRatingsByPoi is Succcessfull!!!!!!!! ");
     return ratingsByPoi;
   } catch (error) {
+    console.log("getRatingsByPoi is failed!!!!!!!! ");
     console.log(error);
   }
 }
@@ -302,14 +309,15 @@ function showSnackbar(message, severity) {
 
 async function postRating(rating) {
   try {
-    const accessToken = sessionStorage.getItem("accessToken");
-    await fetch(window.endpointConfig.local.SERVICES_BASE_URL + "/ratings", {
+    const token = sessionStorage.getItem("accessToken");
+    await fetch(window.endpointConfig.local.SERVICES_BASE_URL + "/rating/", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json",
-        "Access-Control-Allow-Origin": "*",
-        token: accessToken,
+        //'Access-Control-Allow-Origin': '*',
+        'Authorization': `Bearer ${token}`,
+        //"token": accessToken,
       },
       body: JSON.stringify(rating),
     });

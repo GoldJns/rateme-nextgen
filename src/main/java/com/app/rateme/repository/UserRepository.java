@@ -10,7 +10,5 @@ import com.app.rateme.model.User;
 public interface UserRepository extends JpaRepository<User, Integer>{
 
     User findByusername(String username);
-
-   
     
 }

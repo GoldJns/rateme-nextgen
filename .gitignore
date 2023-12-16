@@ -43,3 +43,8 @@ database/DbVolume/
 
 ### macOS ###
 *.DS_Store
+
+# SQL Server files
+*.mdf
+*.ldf
+rateme/database/DbVolume/mysql.sock
