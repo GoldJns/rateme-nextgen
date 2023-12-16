@@ -24,7 +24,7 @@ runs:
       uses: google-github-actions/auth@v1
       with:
         credentials_json: ${{ inputs.googlecredentials }}
-        project_id: $GKE_PROJECT
+        project_id: ${{ inputs.googleproject }}
 
     - uses: simenandre/setup-gke-gcloud-auth-plugin@v1
 
