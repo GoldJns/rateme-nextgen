@@ -1,0 +1,32 @@
+name: Helm deploy
+
+on:
+  push:
+    branches:
+      - main
+      - feature/*
+      - fix/*
+      - chore/*
+  workflow_dispatch:
+jobs:
+  deploy-dev-job:
+    runs-on: ubuntu-latest
+    environment: dev-deploy
+    env:
+      NAMESPACE: ${{ vars.NAMESPACE }}
+    steps:
+      - name: Deploying to dev environment
+        uses: ./templates/helm-deploy-action.yml
+        with:
+          environment: dev-deploy
+
+  deploy-prod-job:
+    runs-on: ubuntu-latest
+    environment: prod-deploy
+    env:
+      NAMESPACE: ${{ vars.NAMESPACE }}
+    steps:
+      - name: Deploying to prod environment
+        uses: ./templates/helm-deploy-action.yml
+        with:
+          environment: prod-deploy
