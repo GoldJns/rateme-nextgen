@@ -7,7 +7,6 @@ on:
       - feature/*
       - fix/*
       - chore/*
-      - refactor/*
   workflow_dispatch:
 jobs:
   push-docker-images:

@@ -1,18 +1,22 @@
-#/bin/sh
+#!/bin/bash
 
-echo "Deploy services using helm..."
+echo "Deploying services using Helm..."
 
-NAMESPACE="default"
+if [ -z "$1" ]; then
+  NAMESPACE="default"
+else
+  NAMESPACE="$1"
+fi
 
-MODE=upgrade
 
-helm $MODE ui-release ./charts/ui \
-    --namespace $NAMESPACE \
+echo "Using namespace $1"
+deploy_with_helm() {
+    local release_name=$1
+    local chart_path=$2
+    echo "Deploy $release_name"
+    helm upgrade --install $release_name $chart_path --namespace $NAMESPACE
+}
 
-helm $MODE backend-release ./charts/backend \
-    --namespace $NAMESPACE \
-
-helm $MODE database-release ./charts/database \
-    --namespace $NAMESPACE \
-
-$SHELL
+deploy_with_helm "ui-release" "./charts/ui"
+deploy_with_helm "backend-release" "./charts/backend"
+deploy_with_helm "database-release" "./charts/database"

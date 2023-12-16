@@ -1,23 +1,61 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: app-ingress
+  name: rateme-nextgen-ingress
+  namespace: default
+  annotations:
+    kubernetes.io/ingress.class: gce
 spec:
+  ingressClassName: "gce"
   rules:
-    - host: rateme-nextgen.com # Replace with your desired hostname or use *
-      http:
+    - http:
         paths:
-          - path: / # Path for the frontend service
+          - path: /
             pathType: Prefix
             backend:
               service:
-                name: ui-service # Replace with the name of your frontend service
+                name: helm-ui-service
                 port:
                   number: 80
-          - path: /api # Path for the frontend service
+          - path: /pois
             pathType: Prefix
             backend:
               service:
-                name: backend-service # Replace with the name of your frontend service
+                name: helm-backend-service
+                port:
+                  number: 8080
+          - path: /pois/
+            pathType: Prefix
+            backend:
+              service:
+                name: helm-backend-service
+                port:
+                  number: 8080
+          - path: /user(/|$)
+            pathType: Prefix
+            backend:
+              service:
+                name: helm-backend-service
+                port:
+                  number: 8080
+          - path: /rating(/|$)
+            pathType: Prefix
+            backend:
+              service:
+                name: helm-backend-service
+                port:
+                  number: 8080
+          - path: /actuator(/|$)
+            pathType: Prefix
+            backend:
+              service:
+                name: helm-backend-service
+                port:
+                  number: 8080
+          - path: /swagger-ui(/|$)
+            pathType: Prefix
+            backend:
+              service:
+                name: helm-backend-service
                 port:
                   number: 8080
