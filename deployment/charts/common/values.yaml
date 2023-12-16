@@ -11,3 +11,11 @@ uiService:
 backendService:
   name: helm-backend-service
   port: 8080
+
+clusterIssuer:
+  name: letsencrypt-production
+  email: rateme-nextgen@noreply.github.com
+  server: https://acme-v02.api.letsencrypt.org/directory
+  privateKeySecretRef:
+    name: cert-manager-acme
+  ingressClass: gce

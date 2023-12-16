@@ -6,24 +6,33 @@ metadata:
   annotations:
     kubernetes.io/ingress.class: {{ .Values.ingress.ingressClass }}
 spec:
-  ingressClassName: "{{ .Values.ingress.ingressClass }}"
+  ingressClassName: {{ .Values.ingress.ingressClass }}
   rules:
     - http:
         paths:
           - path: /
-            pathType: Prefix
+            pathType: Exact
             backend:
               service:
                 name: {{ .Values.uiService.name }}
                 port:
                   number: {{ .Values.uiService.port }}
-          - path: /pois(/.*|$)
+          - path: /pois
             pathType: Prefix
             backend:
               service:
                 name: {{ .Values.backendService.name }}
                 port:
                   number: {{ .Values.backendService.port }}
+          - path: /pois/
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ .Values.backendService.name }}
+                port:
+                  number: {{ .Values.backendService.port }}
+          
+          
           - path: /user(/.*|$)
             pathType: Prefix
             backend:
