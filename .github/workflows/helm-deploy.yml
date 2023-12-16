@@ -20,8 +20,8 @@ jobs:
 
       - uses: google-github-actions/get-gke-credentials@v1
         with:
-          cluster_name: ${CLUSTER_NAME}
-          location: us-central1-c
+          cluster_name: rateme-nextgen-cluster
+          location: us-central1
       - name: Deploy
         uses: WyriHaximus/github-action-helm3@v3
         with:
