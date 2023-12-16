@@ -43,3 +43,5 @@ database/DbVolume/
 
 ### macOS ###
 *.DS_Store
+
+helm/
