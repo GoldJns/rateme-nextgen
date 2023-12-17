@@ -193,7 +193,6 @@ async function fetchUser(token) {
     );
 
     const responseUser = await response.json();
-    console.log("User: " + responseUser);
     user = responseUser;
     return user;
   } catch (error) {

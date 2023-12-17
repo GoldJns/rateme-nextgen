@@ -157,21 +157,11 @@ public class AuthController {
 
     @GetMapping("user")
     public ResponseEntity<UserResponseDto> fetchUser(@RequestHeader("Authorization") String token) {
-
         String jwt;
-
         String[] headerParts = token.split(" ");
-
         jwt = headerParts[1];
-
-        System.out.println("Usserrrrrrrr GEEEEEEEEEEEEEEEEEEEEEETttttttttttttttttttt JWT");
-        System.out.println("JWT = " + jwt);
-        System.out.println("Tokeeennnnnnnnnnn" + token);
-        System.out.println(jwtUtil.extractUsername(jwt));
-
         UserResponseDto userResponseDto = userModelAssembler
                 .toModelResponse(userRepository.findByusername(jwtUtil.extractUsername(jwt)));
-
         return new ResponseEntity<>(userResponseDto,HttpStatus.OK);
     }
 

@@ -57,6 +57,9 @@ async function handleRatingSubmit(event) {
               osmId: selectedPoiId,
               imageBlob: reader.result,
             };
+            console.log("if Picture");
+            console.log(reader.result);
+            console.log(data);
             postRating(data).then(() => {
               drawPoiRating(selectedPoiId);
               resolve(true);
@@ -73,6 +76,7 @@ async function handleRatingSubmit(event) {
             osmId: selectedPoiId,
             imageBlob: "",
           };
+          console.log("else Picture");
           postRating(data).then(() => {
             drawPoiRating(selectedPoiId);
             resolve(true);
@@ -154,8 +158,7 @@ async function displayUserRatingRow(rating) {
 
   const ratedPoi = await getPoiById(rating.osmId);
 
-	for (p of ratedPoi.tags) {
-    console.log(p);
+	for (p of ratedPoi) {
     if (p.tag === "name") {
       poiName = p.value;
       break;
@@ -199,17 +202,11 @@ async function getAllRatingsByUser(token) {
         method: "GET",
         headers: {
           "Content-type": "application/json",
-          //token: accessToken,
-          //'Access-Control-Allow-Origin': '*',
-          //"Authorization": "Bearer " + token,
           'Authorization': `Bearer ${token}`,
-          //"token": accessToken,
         },
       }
     );
-    console.log(response);
     const data = await response.json();
-    console.log(data);
     return data;
   } catch (error) {
     console.log("getAllRatingsByUser() had failed !!!!!!!!!!!!!!!!!!!!!!");
@@ -315,9 +312,7 @@ async function postRating(rating) {
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json",
-        //'Access-Control-Allow-Origin': '*',
         'Authorization': `Bearer ${token}`,
-        //"token": accessToken,
       },
       body: JSON.stringify(rating),
     });
