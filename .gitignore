@@ -43,3 +43,4 @@ database/DbVolume/
 
 ### macOS ###
 *.DS_Store
+rateme/database/DbVolume/mysql.sock
