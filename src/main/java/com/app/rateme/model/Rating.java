@@ -13,7 +13,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "rateme_rating")
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"}) // Ignore these properties during serialization
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"}) 
 public class Rating {
     
     @Id
@@ -112,50 +112,5 @@ public class Rating {
     public void setImage(byte[] image) {
         this.image = image;
     }
-    
-    /*
-    @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + (int) (ratingId ^ (ratingId >>> 32));
-        result = prime * result + ((text == null) ? 0 : text.hashCode());
-        result = prime * result + stars;
-        result = prime * result + ((createdAt == null) ? 0 : createdAt.hashCode());
-        return result;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        Rating other = (Rating) obj;
-        if (ratingId != other.ratingId)
-            return false;
-        if (text == null) {
-            if (other.text != null)
-                return false;
-        } else if (!text.equals(other.text))
-            return false;
-        if (stars != other.stars)
-            return false;
-        if (createdAt == null) {
-            if (other.createdAt != null)
-                return false;
-        } else if (!createdAt.equals(other.createdAt))
-            return false;
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "Rating [ratingId=" + ratingId + ", text=" + text + ", stars=" + stars + ", createdAt=" + createdAt
-                + ", poi=" + poi + ", user=" + user + "]";
-    }	
-     */
     
 }

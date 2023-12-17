@@ -1,5 +1,6 @@
 package com.app.rateme.api;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -25,10 +26,10 @@ import com.app.rateme.security.JwtUtil;
 import com.app.rateme.services.RatingService;
 import com.app.rateme.services.UserService;
 import jakarta.persistence.EntityNotFoundException;
+import java.nio.charset.StandardCharsets;
 
 @RestController
 @RequestMapping("rating")
-//@CrossOrigin(origins = "*", allowedHeaders = {"token"}) 
 public class RatingController {
 
     @Autowired
@@ -52,29 +53,23 @@ public class RatingController {
 	
 	@PostMapping("/")
 	public ResponseEntity<?> createRating(@RequestHeader("Authorization") String token, @RequestBody RatingDto ratingDto) {
-
 		String jwt;
 		if (token == null || token.isEmpty() || !token.startsWith("Bearer ")) {
-			System.out.println("Tokennn nicht gefunden !!!!!!!!!!!!!!!!!!!!!!");
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
 		jwt = token.split(" ")[1].trim();
-		System.out.println("JWT: "  +  jwt);
 		String extractedUsername = jwtUtil.extractUsername(jwt);
-		System.out.println(extractedUsername);
-
 		try{
 			User user = userService.findByusername(extractedUsername);
 			Rating rating = new Rating();
-
 			Poi poi = poiDAO.findById(ratingDto.getOsmId())
 					.orElseThrow(() -> new EntityNotFoundException("Poi not found with ID: " + ratingDto.getOsmId()));;;
             rating.setUser(user);
             rating.setPoi(poi);
             rating.setText(ratingDto.getText());
             rating.setStars(ratingDto.getStars());
-            rating.setCreatedAt(ratingDto.getCreatedAt());
-            rating.setImage(ratingDto.getImage());
+			rating.setCreatedAt(LocalDateTime.now());
+            rating.setImage(ratingDto.getImage().getBytes(StandardCharsets.UTF_8));
 			Rating savedRating = ratingService.createRating(rating);
 			return new ResponseEntity<>(savedRating, HttpStatus.CREATED);
 		} catch (Exception e) {
@@ -86,7 +81,6 @@ public class RatingController {
 
 	@GetMapping("/user")
     public ResponseEntity<List<RatingDto>> getRatingsByUser(@RequestHeader("Authorization") String token) {
-
 		 try {
 			String jwt;
 			if (token == null || token.isEmpty() || !token.startsWith("Bearer ")) {
@@ -110,7 +104,6 @@ public class RatingController {
 		try{
 			Poi poi = poiDAO.findById(osmId)
 						.orElseThrow(() -> new EntityNotFoundException("Poi not found with ID: " + osmId));
-
 			final List<RatingDto> ratingsByPoi = ratingService.getRatingByPoi(poi);
 			return new ResponseEntity<>(ratingsByPoi,HttpStatus.OK);
 		}catch(EntityNotFoundException ex) {

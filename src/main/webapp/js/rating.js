@@ -55,11 +55,8 @@ async function handleRatingSubmit(event) {
               stars: starValue,
               text: ratingText,
               osmId: selectedPoiId,
-              imageBlob: reader.result,
+              image: reader.result,
             };
-            console.log("if Picture");
-            console.log(reader.result);
-            console.log(data);
             postRating(data).then(() => {
               drawPoiRating(selectedPoiId);
               resolve(true);
@@ -74,7 +71,7 @@ async function handleRatingSubmit(event) {
             stars: starValue,
             text: ratingText,
             osmId: selectedPoiId,
-            imageBlob: "",
+            image: "",
           };
           console.log("else Picture");
           postRating(data).then(() => {
@@ -126,7 +123,7 @@ function addUserRating(rating) {
   cell1.style.width = "20%";
 
   cell4.innerHTML = drawRatingStars(rating.stars);
-  cell5.innerHTMK = `<image src=${rating.imageBlob} width="60", height="50" alt="rating image"/>`;
+  cell5.innerHTMK = `<image src=${rating.image} width="60", height="50" alt="rating image"/>`;
 }
 
 function drawRatingStars(stars) {
@@ -191,7 +188,7 @@ async function displayUserRatingRow(rating) {
   }
   starRatings += "</div>";
   cell4.innerHTML = starRatings;
-  cell5.innerHTML = `<image src=${rating.imageBlob} width="60", height="50" alt="rating image"/>`;
+  cell5.innerHTML = `<image src=${rating.image} width="60", height="50" alt="rating image"/>`;
 }
 
 async function getAllRatingsByUser(token) {
@@ -239,7 +236,7 @@ async function drawPoiRating(poiId) {
     const userRatingTimestamp = document.createElement("span");
     userRatingTimestamp.id = "userRatingTimestamp";
     userRatingTimestamp.textContent = ratingUser
-      ? `${ratingUser.userName} writes on ${timestamp}:`
+      ? `${ratingUser.userName} writes on ${timestamp}`
       : "";
 
     const userRatingText = document.createElement("span");
@@ -250,9 +247,9 @@ async function drawPoiRating(poiId) {
     ratingEntry.appendChild(userRatingTimestamp);
     ratingEntry.appendChild(userRatingText);
 
-    if (rating.imageBlob) {
+    if (rating.image) {
       const ratingImage = document.createElement("img");
-      ratingImage.src = rating.imageBlob;
+      ratingImage.src = rating.image;
       ratingImage.width = "60";
       ratingImage.height = "50";
       ratingImage.alt = "rating image";
