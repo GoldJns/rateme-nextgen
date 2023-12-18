@@ -53,7 +53,6 @@ public class SecurityConfig {
 
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-
 		http.csrf(httpSecurityCsrfConfigurer -> httpSecurityCsrfConfigurer.disable())
 				.authorizeHttpRequests((requests) -> requests
 						.requestMatchers(AUTH_WHITELIST).permitAll()
@@ -73,7 +72,7 @@ public class SecurityConfig {
 		config.setAllowedOrigins(Arrays.asList("http://localhost:8082"));
 		config.setAllowedMethods(Arrays.asList("GET", "POST", "OPTIONS", "DELETE", "PUT", "PATCH"));
 		config.setAllowCredentials(true);
-		config.setAllowedHeaders(Arrays.asList("Authorization", "Cache-Control", "Content-Type"));
+		config.setAllowedHeaders(Arrays.asList("Authorization", "Cache-Control", "Content-Type", "token"));
 
 		final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
 		source.registerCorsConfiguration("/**", config);

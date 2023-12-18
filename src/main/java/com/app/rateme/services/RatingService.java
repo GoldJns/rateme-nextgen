@@ -1,5 +1,6 @@
 package com.app.rateme.services;
 
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,7 +45,7 @@ public class RatingService {
             ratingDto.setText(rating.getText());
             ratingDto.setStars(rating.getStars());
             ratingDto.setCreatedAt(rating.getCreatedAt());
-            ratingDto.setImage(rating.getImage());
+            ratingDto.setImage(new String(rating.getImage(), StandardCharsets.UTF_8));
             ratingDtoList.add(ratingDto);
         }
         return ratingDtoList;

@@ -55,7 +55,7 @@ async function handleRatingSubmit(event) {
               stars: starValue,
               text: ratingText,
               osmId: selectedPoiId,
-              imageBlob: reader.result,
+              image: reader.result,
             };
             postRating(data).then(() => {
               drawPoiRating(selectedPoiId);
@@ -71,8 +71,9 @@ async function handleRatingSubmit(event) {
             stars: starValue,
             text: ratingText,
             osmId: selectedPoiId,
-            imageBlob: "",
+            image: "",
           };
+          console.log("else Picture");
           postRating(data).then(() => {
             drawPoiRating(selectedPoiId);
             resolve(true);
@@ -122,7 +123,7 @@ function addUserRating(rating) {
   cell1.style.width = "20%";
 
   cell4.innerHTML = drawRatingStars(rating.stars);
-  cell5.innerHTMK = `<image src=${rating.imageBlob} width="60", height="50" alt="rating image"/>`;
+  cell5.innerHTMK = `<image src=${rating.image} width="60", height="50" alt="rating image"/>`;
 }
 
 function drawRatingStars(stars) {
@@ -139,7 +140,8 @@ function drawRatingStars(stars) {
 }
 
 async function fetchUserRatingsEntries() {
-  const ratingsByUser = await getAllRatingsByUser();
+  const token = sessionStorage.getItem("accessToken");
+  const ratingsByUser = await getAllRatingsByUser(token);
   if (!ratingsByUser || ratingsByUser.length == 0) {
     return null;
   }
@@ -153,8 +155,8 @@ async function displayUserRatingRow(rating) {
 
   const ratedPoi = await getPoiById(rating.osmId);
 
-  for (p of ratedPoi.tags) {
-    if (p.id.tag === "name") {
+	for (p of ratedPoi) {
+    if (p.tag === "name") {
       poiName = p.value;
       break;
     }
@@ -186,27 +188,26 @@ async function displayUserRatingRow(rating) {
   }
   starRatings += "</div>";
   cell4.innerHTML = starRatings;
-  cell5.innerHTML = `<image src=${rating.imageBlob} width="60", height="50" alt="rating image"/>`;
+  cell5.innerHTML = `<image src=${rating.image} width="60", height="50" alt="rating image"/>`;
 }
 
-async function getAllRatingsByUser() {
+async function getAllRatingsByUser(token) {
   try {
-    const accessToken = sessionStorage.getItem("accessToken");
     const response = await fetch(
       window.endpointConfig.local.SERVICES_BASE_URL + "/rating/user",
       {
         method: "GET",
         headers: {
           "Content-type": "application/json",
-          
-          token: accessToken,
+          'Authorization': `Bearer ${token}`,
         },
       }
     );
     const data = await response.json();
     return data;
   } catch (error) {
-    console.log(error);
+    console.log("getAllRatingsByUser() had failed !!!!!!!!!!!!!!!!!!!!!!");
+    console.error(error);
   }
 }
 
@@ -235,7 +236,7 @@ async function drawPoiRating(poiId) {
     const userRatingTimestamp = document.createElement("span");
     userRatingTimestamp.id = "userRatingTimestamp";
     userRatingTimestamp.textContent = ratingUser
-      ? `${ratingUser.userName} writes on ${timestamp}:`
+      ? `${ratingUser.userName} writes on ${timestamp}`
       : "";
 
     const userRatingText = document.createElement("span");
@@ -246,9 +247,9 @@ async function drawPoiRating(poiId) {
     ratingEntry.appendChild(userRatingTimestamp);
     ratingEntry.appendChild(userRatingText);
 
-    if (rating.imageBlob) {
+    if (rating.image) {
       const ratingImage = document.createElement("img");
-      ratingImage.src = rating.imageBlob;
+      ratingImage.src = rating.image;
       ratingImage.width = "60";
       ratingImage.height = "50";
       ratingImage.alt = "rating image";
@@ -268,12 +269,11 @@ async function drawPoiRating(poiId) {
 async function getRatingsByPoi(poiId) {
   try {
     const response = await fetch(
-      window.endpointConfig.local.SERVICES_BASE_URL + `/ratings/poi/${poiId}`,
+      window.endpointConfig.local.SERVICES_BASE_URL + `/rating/poi/${poiId}`,
       {
         method: "GET",
         headers: {
           "Content-type": "application/json",
-          
         },
       }
     );
@@ -281,9 +281,10 @@ async function getRatingsByPoi(poiId) {
       throw new Error("Failed to get Poi");
     }
     const ratingsByPoi = await response.json();
-
+    console.log("getRatingsByPoi is Succcessfull!!!!!!!! ");
     return ratingsByPoi;
   } catch (error) {
+    console.log("getRatingsByPoi is failed!!!!!!!! ");
     console.log(error);
   }
 }
@@ -302,14 +303,13 @@ function showSnackbar(message, severity) {
 
 async function postRating(rating) {
   try {
-    const accessToken = sessionStorage.getItem("accessToken");
-    await fetch(window.endpointConfig.local.SERVICES_BASE_URL + "/ratings", {
+    const token = sessionStorage.getItem("accessToken");
+    await fetch(window.endpointConfig.local.SERVICES_BASE_URL + "/rating/", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json",
-        "Access-Control-Allow-Origin": "*",
-        token: accessToken,
+        'Authorization': `Bearer ${token}`,
       },
       body: JSON.stringify(rating),
     });

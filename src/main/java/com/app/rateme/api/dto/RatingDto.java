@@ -12,7 +12,7 @@ public class RatingDto implements Serializable{
     private String text;
 	private int stars;
 	private LocalDateTime createdAt;
-	private byte[] image;
+	private String image;
 
     public long getRatingId() {
         return ratingId;
@@ -62,17 +62,12 @@ public class RatingDto implements Serializable{
         this.createdAt = createdAt;
     }
 
-    public byte[] getImage() {
+    public String getImage() {
         return image;
     }
 
-    public void setImage(byte[] image) {
+    public void setImage(String image) {
         this.image = image;
     }
     
-    @Override
-    public String toString() {
-        return "RatingDto [ratingId=" + ratingId + ", userId=" + userId + ", osmId=" + osmId + ", text=" + text
-                + ", stars=" + stars + ", createdAt=" + createdAt + ", image=" + Arrays.toString(image) + "]";
-    }
 }

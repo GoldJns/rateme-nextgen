@@ -44,6 +44,11 @@ database/DbVolume/
 ### macOS ###
 *.DS_Store
 
+# SQL Server files
+*.mdf
+*.ldf
+rateme/database/DbVolume/mysql.sock
+
 
 #### terraform ####
 terraform/*.lock.hcl
@@ -57,3 +62,4 @@ terraform/  crash.*.log
 ### helm ###
 helm/charts/**/Chart.lock
 helm/charts/**/*.tgz
+
