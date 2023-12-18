@@ -92,6 +92,8 @@ async function showMarker() {
       .addTo(myMap)
       .on("click", async (event) => {
         await onPoiSelected(poi, event);
+        console.log("Poiiiiiiiiiiiiiiiiiiiiiiiii")
+        drawPoiRating(selectedPoiId);
       });
   });
 }
@@ -104,7 +106,6 @@ async function onPoiSelected(poi, event) {
   // set selected
   prevSelectedMarker = event.target;
   prevSelectedMarker.setIcon(redIcon);
-
   selectedPoiId = poi.osmId;
   getPoitags(poi.osmId);
 }
