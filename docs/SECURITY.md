@@ -14,4 +14,4 @@ currently being supported with security updates.
 
 ## Reporting a Vulnerability
 
-You can navigate to `Issues` there is a template called `Reoport a vulnerability`.
+You can navigate to `Issues` there is a template called `Report a vulnerability`.

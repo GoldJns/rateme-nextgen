@@ -1,0 +1,40 @@
+name: Helm deployments
+description: Generic step for helm deployments
+inputs:
+  environment:
+    description: The environment to deploy to
+    required: true
+  kubeconfig:
+    description: kubeconfig
+  googlecredentials:
+    description: Credentials google
+    required: true
+  googleproject:
+    description: Google project
+    required: true
+
+runs:
+  using: "composite"
+  steps:
+    - uses: actions/checkout@v3
+    - name: Authenticate to GCP
+      env:
+        GOOGLE_CREDENTIALS: ${{ inputs.googlecredentials }}
+        GKE_PROJECT: ${{ inputs.googleproject }}
+      uses: google-github-actions/auth@v1
+      with:
+        credentials_json: ${{ inputs.googlecredentials }}
+        project_id: ${{ inputs.googleproject }}
+
+    - uses: simenandre/setup-gke-gcloud-auth-plugin@v1
+
+    - uses: google-github-actions/get-gke-credentials@v1
+      with:
+        cluster_name: rateme-nextgen-cluster
+        location: us-central1-c
+    - name: Deploy
+      uses: WyriHaximus/github-action-helm3@v3
+      with:
+        exec: cd helm && chmod go-r ~/.kube/config && chmod +x ./deployAll.sh && ./deployAll.sh $NAMESPACE
+        kubeconfig: $ {{inputs.kubeconfig}}
+        overrule_existing_kubeconfig: "true"

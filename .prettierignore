@@ -1,1 +1,1 @@
-/deployment/charts/**/*.yaml
+/helm/charts/**/*.yaml
