@@ -5,6 +5,7 @@ import java.util.Arrays;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -13,6 +14,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.HttpStatusEntryPoint;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
@@ -28,6 +30,7 @@ public class SecurityConfig {
 	private static final String[] AUTH_WHITELIST = {
 			// -- Swagger UI v2
 			"/pois",
+			"/openapi/openapi.yml",
 			"/swagger-resources",
 			"/swagger-resources/**",
 			"/configuration/ui",
@@ -36,25 +39,30 @@ public class SecurityConfig {
 			"/webjars/**",
 			// -- Swagger UI v3 (OpenAPI)
 			"/v3/api-docs/**",
-			"/swagger-ui/**"
+			"v3/api-docs/**",
+			"swagger-ui/**",
+			"/swagger-ui/**",
+			"/actuator/**" ,
+			"/api/**",
+			"/v3/**",
+			"/health/**" ,
+			"/v2/api-docs",
+			"/"
 			// other public endpoints of your API may be appended to this array
 	};
 
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-		return http.cors().and().csrf().disable()
-				.authorizeHttpRequests()
-				.requestMatchers("/auth/**", "/pois/**", "/rating/**", "/actuator/health", "/swagger-ui/**",
-				"/", "/swagger-ui.html", "/openapi/openapi.yml", "/api/**", "/user/**")
-				.permitAll()
-				.and()
-				.authorizeHttpRequests().requestMatchers("/api/**")
-				.authenticated().and()
-				.sessionManagement()
-				.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-				.and()
-				.addFilterBefore(requestFilter, UsernamePasswordAuthenticationFilter.class)
-				.build();
+		http.csrf(httpSecurityCsrfConfigurer -> httpSecurityCsrfConfigurer.disable())
+				.authorizeHttpRequests((requests) -> requests
+						.requestMatchers(AUTH_WHITELIST).permitAll()
+						.anyRequest().authenticated())
+				.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+				.headers(httpSecurityHeadersConfigurer -> httpSecurityHeadersConfigurer.frameOptions(frameOptionsConfig -> frameOptionsConfig.disable())) //to make accessible h2 console, it works as frame
+				.exceptionHandling(httpSecurityExceptionHandlingConfigurer -> httpSecurityExceptionHandlingConfigurer.authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED)))
+				.addFilterBefore(requestFilter, UsernamePasswordAuthenticationFilter.class);
+
+		return http.build();
 	}
 
 	@Bean

@@ -140,7 +140,7 @@ Following services will start:
 
 ## Helm
 
-k8 deployment is done via helm-charts. All files are located in `./deployment` folder.
+k8 deployment is done via helm-charts. All relevant files are located in `./helm` folder.
 
 The `deployAll` script will install/upgrade the helm charts. You can configure the script(toggle between install/upgrade) or you can add additional
 release names

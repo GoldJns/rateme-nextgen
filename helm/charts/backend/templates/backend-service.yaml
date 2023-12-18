@@ -3,14 +3,13 @@ kind: Service
 metadata:
   name: helm-{{ .Chart.Name }}-service
   labels:
-    app: backend
+    app: helm-{{ .Chart.Name }}
 spec:
   type: {{ .Values.service.type }}
   selector:
     app: backend
   ports:
     - protocol: TCP
-      name: http
+      name: httpbackend
       port: {{ .Values.service.port }}
       targetPort: {{ .Values.service.targetPort }}
-      nodePort: {{ .Values.service.nodePort }}

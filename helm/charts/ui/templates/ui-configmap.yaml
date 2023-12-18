@@ -10,6 +10,6 @@ data:
   apiConfig.js: |
     window.endpointConfig = {
       local: {
-        SERVICES_BASE_URL: "http://rateme-nextgen.com/api",
+        SERVICES_BASE_URL: "",
       }
     }

@@ -1,3 +1,4 @@
 monitoring/
-deployment/
+helm/
+terraform/
 .mvn/
