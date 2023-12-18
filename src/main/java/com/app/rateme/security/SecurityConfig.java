@@ -30,6 +30,7 @@ public class SecurityConfig {
 	private static final String[] AUTH_WHITELIST = {
 			// -- Swagger UI v2
 			"/pois",
+			"/pois/**",
 			"/openapi/openapi.yml",
 			"/swagger-resources",
 			"/swagger-resources/**",
@@ -47,13 +48,17 @@ public class SecurityConfig {
 			"/v3/**",
 			"/health/**" ,
 			"/v2/api-docs",
+			"/auth/**",
+			"/rating/**",
+			"/user/**",
+			"/actuator/health",
 			"/"
 			// other public endpoints of your API may be appended to this array
 	};
 
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-		http.csrf(httpSecurityCsrfConfigurer -> httpSecurityCsrfConfigurer.disable())
+				http.cors().and().csrf().disable()
 				.authorizeHttpRequests((requests) -> requests
 						.requestMatchers(AUTH_WHITELIST).permitAll()
 						.anyRequest().authenticated())
