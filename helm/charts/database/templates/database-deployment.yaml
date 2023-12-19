@@ -29,8 +29,8 @@ spec:
             - name: MYSQL_ROOT_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: mysql-pass
-                  key: mysql-root-password
+                  name: workload-secret
+                  key: k8-mysql-root-password
             - name: MYSQL_USER
               valueFrom:
                 configMapKeyRef:
@@ -39,8 +39,8 @@ spec:
             - name: MYSQL_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: mysql-pass
-                  key: mysql-password
+                  name: workload-secret
+                  key: k8-mysql-password
          
           ports:
             - containerPort: {{ .Values.database.containerPort }}

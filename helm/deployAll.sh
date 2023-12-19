@@ -20,3 +20,5 @@ deploy_with_helm() {
 deploy_with_helm "ui-release" "./charts/ui"
 deploy_with_helm "backend-release" "./charts/backend"
 deploy_with_helm "database-release" "./charts/database"
+
+
