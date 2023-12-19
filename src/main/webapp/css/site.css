@@ -19,14 +19,14 @@
 
 #poiRatingsSection {
 	display: none;
-	background-color: #fcf1d4;
+	background-color: #9EC8B9;
 	overflow-y: auto;
 	max-height: 10em;
 	padding: 1em;
 }
 
 #ratingForm {
-	background-color: #fcf1d4;
+	background-color: #5C8374;
 	border: 1px dotted grey;
 	display: flex;
 	flex-direction: column;
@@ -56,11 +56,11 @@
 }
 
 #myRatingsTable tr:nth-child(even) {
-	background: #fff
+	background: #9EC8B9
 }
 
 #myRatingsTable tr:nth-child(odd) {
-	background: #fcf1d4;
+	background: #5C8374;
 }
 
 #submitRating {
@@ -126,11 +126,11 @@ textarea {
 #registration {
 	display: none;
 	position: absolute;
-	top: 20px;
-	left: 20px;
+	top: 50px;
+	right: 355px;
 	padding: 15px;
 	border: 3px solid #2c3d03;
-	background: #ffe6b3;
+	background: #5C8374;
 	z-index: 1000;
 }
 
@@ -205,3 +205,26 @@ hr {
 	text-align: left;
 	padding: 5px;
 } */
+
+#welcome{
+	color: white;
+	font-size: x-large;
+	font-weight: 700;
+}
+
+#poiinfo{
+	color: white;
+}
+
+#ratingContainerAddrating{
+	color: white;
+}
+
+#poiRatingsTitle{
+	color: white;
+}
+
+#userRatings h3 {
+	color: white;
+}
+

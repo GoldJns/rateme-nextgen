@@ -73,7 +73,6 @@ async function handleRatingSubmit(event) {
             osmId: selectedPoiId,
             image: "",
           };
-          console.log("else Picture");
           postRating(data).then(() => {
             drawPoiRating(selectedPoiId);
             resolve(true);
@@ -85,6 +84,7 @@ async function handleRatingSubmit(event) {
     });
 
     await postActions;
+    resetRatingInputs();
     drawTable();
   } catch (error) {
     console.log(error);
@@ -317,5 +317,17 @@ async function postRating(rating) {
     showSnackbar("Created rating", "success");
   } catch (error) {
     console.error(error);
+  }
+}
+
+function resetRatingInputs() {
+  var ratingInputs = document.querySelectorAll('input[name="rating"]');
+  ratingInputs.forEach(input => {
+    input.checked = false;
+  });
+  document.getElementById("ratingText").value = "";
+  var imageInput = document.getElementById("imageinput");
+  if (imageInput.files.length > 0) {
+    imageInput.value = ""; 
   }
 }
