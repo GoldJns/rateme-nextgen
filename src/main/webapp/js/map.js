@@ -92,7 +92,6 @@ async function showMarker() {
       .addTo(myMap)
       .on("click", async (event) => {
         await onPoiSelected(poi, event);
-        console.log("Poiiiiiiiiiiiiiiiiiiiiiiiii")
         drawPoiRating(selectedPoiId);
       });
   });
@@ -121,7 +120,6 @@ function drawPoiInfo(poi) {
 }
 
 function getPoitags(id) {
-  console.log(id);
   fetch(window.endpointConfig.local.SERVICES_BASE_URL + `/pois/${id}`, {
     method: "GET",
     headers: {
