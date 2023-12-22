@@ -73,7 +73,6 @@ async function handleRatingSubmit(event) {
             osmId: selectedPoiId,
             image: "",
           };
-          console.log("else Picture");
           postRating(data).then(() => {
             drawPoiRating(selectedPoiId);
             resolve(true);
@@ -155,7 +154,7 @@ async function displayUserRatingRow(rating) {
 
   const ratedPoi = await getPoiById(rating.osmId);
 
-	for (p of ratedPoi) {
+  for (p of ratedPoi) {
     if (p.tag === "name") {
       poiName = p.value;
       break;
@@ -199,14 +198,13 @@ async function getAllRatingsByUser(token) {
         method: "GET",
         headers: {
           "Content-type": "application/json",
-          'Authorization': `Bearer ${token}`,
+          Authorization: `Bearer ${token}`,
         },
       }
     );
     const data = await response.json();
     return data;
   } catch (error) {
-    console.log("getAllRatingsByUser() had failed !!!!!!!!!!!!!!!!!!!!!!");
     console.error(error);
   }
 }
@@ -281,10 +279,8 @@ async function getRatingsByPoi(poiId) {
       throw new Error("Failed to get Poi");
     }
     const ratingsByPoi = await response.json();
-    console.log("getRatingsByPoi is Succcessfull!!!!!!!! ");
     return ratingsByPoi;
   } catch (error) {
-    console.log("getRatingsByPoi is failed!!!!!!!! ");
     console.log(error);
   }
 }
@@ -309,7 +305,7 @@ async function postRating(rating) {
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json",
-        'Authorization': `Bearer ${token}`,
+        Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify(rating),
     });

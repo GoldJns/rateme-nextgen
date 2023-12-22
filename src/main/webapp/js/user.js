@@ -3,7 +3,6 @@ window.addEventListener("beforeunload", checkLoginStatus);
 
 let user;
 
-
 async function checkLoginStatus() {
   const token = sessionStorage.getItem("accessToken");
 
@@ -21,7 +20,6 @@ async function checkLoginStatus() {
     }
   }
 }
-
 
 function initUser() {
   checkLoginStatus();
@@ -142,10 +140,7 @@ async function getUserById(userId) {
       window.endpointConfig.local.SERVICES_BASE_URL + `/user/${userId}`,
       {
         method: "GET",
-        headers: {  "Content-type": "application/json",
-                    
-                  },
-        
+        headers: { "Content-type": "application/json" },
       }
     );
     const user = await response.json();
@@ -186,9 +181,8 @@ async function fetchUser(token) {
         method: "GET",
         headers: {
           "Content-type": "application/json",
-          "Authorization": "Bearer " + token
+          Authorization: "Bearer " + token,
         },
-        
       }
     );
 
@@ -208,10 +202,8 @@ async function loginUser(credentials) {
         method: "POST",
         headers: {
           "Content-type": "application/json",
-          
-          
         },
-        
+
         body: JSON.stringify(credentials),
       }
     );
@@ -267,7 +259,6 @@ async function handleRegistrationSubmit(event) {
         method: "POST",
         headers: {
           "Content-type": "application/json",
-          
         },
         body: json,
       }
@@ -334,9 +325,7 @@ async function drawTable() {
 }
 
 function handleLogout() {
-  
-        sessionStorage.removeItem("accessToken");
-        showSnackbar("Logged out", "error");
-        showLoginView();
-      
+  sessionStorage.removeItem("accessToken");
+  showSnackbar("Logged out", "success");
+  showLoginView();
 }
