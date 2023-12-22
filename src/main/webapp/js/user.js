@@ -306,7 +306,7 @@ async function showLogoutView() {
 
   loginInfo.style.display = "none";
   logoutInfo.style.display = "block";
-  welcomeLabel.innerHTML = `Willkommen, ${user.userName}`;
+  welcomeLabel.innerHTML = `Welcome, ${user.userName}`;
   await drawTable();
 }
 
