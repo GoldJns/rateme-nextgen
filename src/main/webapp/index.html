@@ -143,10 +143,10 @@
         <div id="loginHeader">
           <div id="leftHeader">
             <div id="loginInfo">
-              <span style="white-space: nowrap">
+              <span class="loginText" style="white-space: nowrap">
                 User: <input id="userNameLogin" type="text" name="userName" />
               </span>
-              <span style="white-space: nowrap">
+              <span class="loginText" style="white-space: nowrap">
                 Password:
                 <input id="passwordLogin" type="password" name="password" />
               </span>
@@ -156,8 +156,8 @@
             </div>
           </div>
           <div id="rightHeader">
-            <a href="javascript:handleRegistrationOpen()"
-              >Register with new user
+            <a class="rightHeaderinside" href="javascript:handleRegistrationOpen()"
+              >Register
             </a>
           </div>
         </div>
@@ -175,7 +175,7 @@
             <h1 id="poiinfo">Welcome</h1>
             <button style="height: 20px">Infos</button>
           </div>
-          <h3>Add rating:</h3>
+          <h3 id="ratingContainerAddrating">Add rating:</h3>
 
           <form id="ratingForm">
             <fieldset class="rating">
