@@ -6,7 +6,7 @@ mysqlpvc:
 image:
   registry: ghcr.io/goldjns
   repository: rateme-nextgen-database
-  tag: v1.10.1
+  tag: v1.10.3
   pullPolicy: "Always"
 
 database:
@@ -23,7 +23,3 @@ configMap:
   dbname: rateme_swtp
 
   
-
-secret:
-  name: "mysql-pass"
-  passwordKey: "mysql-password"

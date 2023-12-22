@@ -1,8 +1,8 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: rateme-nextgen-ingress-prod
-  namespace: prod
+  name: rateme-nextgen-ingress-dev
+  namespace: dev
   annotations:
     kubernetes.io/ingress.class: gce
 spec:
@@ -31,7 +31,20 @@ spec:
                 name: helm-backend-service
                 port:
                   number: 8080
-
+          - path: /rating/
+            pathType: Prefix
+            backend:
+              service:
+                name: helm-backend-service
+                port:
+                  number: 8080
+          - path: /rating
+            pathType: Prefix
+            backend:
+              service:
+                name: helm-backend-service
+                port:
+                  number: 8080
           - path: /actuator/health
             pathType: Prefix
             backend:
@@ -39,14 +52,46 @@ spec:
                 name: helm-backend-service
                 port:
                   number: 8080
-          - path: /user
+          - path: /auth/user
             pathType: Prefix
             backend:
               service:
                 name: helm-backend-service
                 port:
                   number: 8080
-          - path: /actuator/user
+
+          - path: /user/
+            pathType: Prefix
+            backend:
+              service:
+                name: helm-backend-service
+                port:
+                  number: 8080
+
+          - path: /auth/register
+            pathType: Prefix
+            backend:
+              service:
+                name: helm-backend-service
+                port:
+                  number: 8080
+
+          - path: /auth/login
+            pathType: Prefix
+            backend:
+              service:
+                name: helm-backend-service
+                port:
+                  number: 8080
+
+          - path: /user/
+            pathType: Prefix
+            backend:
+              service:
+                name: helm-backend-service
+                port:
+                  number: 8080
+          - path: /actuator/health
             pathType: Prefix
             backend:
               service:

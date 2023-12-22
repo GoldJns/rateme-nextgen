@@ -18,29 +18,31 @@ spec:
         tier: mysql
     spec:
       containers:
-        - image: {{ include "database.image" . | quote }}
+        - image: ghcr.io/goldjns/rateme-nextgen-database:v1.10.3-beta
           name: mysql
           env:
+            - name: MYSQL_ALLOW_EMPTY_PASSWORD
+              value: "true"
             - name: MYSQL_DATABASE
               valueFrom:
                 configMapKeyRef:
                   name: mysql-config-map
                   key: dbname
-            - name: MYSQL_ROOT_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: workload-secret
-                  key: k8-mysql-root-password
-            - name: MYSQL_USER
-              valueFrom:
-                configMapKeyRef:
-                  name: mysql-config-map
-                  key: username
-            - name: MYSQL_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: workload-secret
-                  key: k8-mysql-password
+            # - name: MYSQL_ROOT_PASSWORD
+            #   valueFrom:
+            #     secretKeyRef:
+            #       name: workload-secret
+            #       key: k8-mysql-root-password
+            # - name: MYSQL_USER
+            #   valueFrom:
+            #     configMapKeyRef:
+            #       name: mysql-config-map
+            #       key: username
+            # - name: MYSQL_PASSWORD
+            #   valueFrom:
+            #     secretKeyRef:
+            #       name: workload-secret
+            #       key: k8-mysql-password
          
           ports:
             - containerPort: {{ .Values.database.containerPort }}
