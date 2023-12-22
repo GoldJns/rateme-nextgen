@@ -20,3 +20,10 @@ You can navigate to `Issues` there is a template called `Report a vulnerability`
 
 Kubernetes secrets are handled via `external-secrets-plugin`. This plugin is installed with helm.
 Ressource type is ExternalSecret.
+
+Ensure plugin is available: 
+
+```sh
+ helm install external-secrets external-secrets/external-secrets  -n external-secrets --create-namespace  --set installCRDs=true  
+```
+ 

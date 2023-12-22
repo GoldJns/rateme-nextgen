@@ -23,13 +23,8 @@ spec:
               containerPort: {{ .Values.containerPort }}
           env:
             - name: SPRING_DATASOURCE_USERNAME
-              value: "root"
-          
+              value: custom
+            - name: SPRING_DATASOURCE_PASSWORD
+              value: custompassword
             - name: SPRING_DATASOURCE_URL
-              valueFrom:
-                configMapKeyRef:
-                  name: mysql-config-map
-                  key: dburl
-            - name: MYSQL_HOST
-              value: {{ .Values.mysqlHost }}
-  
+              value: jdbc:mysql://helm-database-service:3306/rateme_swtp

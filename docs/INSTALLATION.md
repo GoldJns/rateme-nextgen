@@ -148,3 +148,47 @@ The `deployAll` script will install/upgrade the helm charts. You can configure t
   ./deployAll.sh [dev | prod]
 ```
 
+## Secrets
+
+Secrets are handled via [external-secrets-plugin](https://github.com/external-secrets/kubernetes-external-secrets). The secrets are stored in gke Secret Manager and can be accessed via service-account.
+
+
+1. Ensure Workload Identity is enabled
+
+2. Setup workload identity
+
+
+```sh
+#Create GCP service account
+gcloud iam service-accounts create gke-prod-service-account \
+--project=rateme-nextgen
+
+#Create IAM role bindings
+gcloud projects add-iam-policy-binding rateme-nextgen --member "serviceAccount:gke-prod-service-account@rateme-nextgen.iam.gserviceaccount.com" --role "roles/secretmanager.secretAccessor"
+
+```
+1. Create k8s service account
+
+```sh
+  kubectl create serviceaccount prod-service-account --namespace prod
+```
+
+2. Allow kubernetes service account to impersonate GCP service account
+
+```sh
+gcloud iam service-accounts add-iam-policy-binding gke-prod-service-account@rateme-nextgen.iam.gserviceaccount.com  --role roles/iam.workloadIdentityUser --member "serviceAccount:rateme-nextgen.svc.id.goog[prod/prod-service-account]"
+```
+
+
+3. Add annotations
+
+```sh
+kubectl annotate serviceaccount prod-service-account --namespace prod iam.gke.io/gcp-service-account=gke-prod-service-account@rateme-nextgen.iam.gserviceaccount.com
+```
+
+4. Inject secrets via secretstore and externalsecret:
+
+```sh
+kubectl apply -f secretstore.yaml
+kubectl apply -f secrets.yaml
+```

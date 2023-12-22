@@ -21,29 +21,17 @@ spec:
         - image: ghcr.io/goldjns/rateme-nextgen-database:v1.10.3-beta
           name: mysql
           env:
-            - name: MYSQL_ALLOW_EMPTY_PASSWORD
-              value: "true"
             - name: MYSQL_DATABASE
-              valueFrom:
-                configMapKeyRef:
-                  name: mysql-config-map
-                  key: dbname
-            # - name: MYSQL_ROOT_PASSWORD
-            #   valueFrom:
-            #     secretKeyRef:
-            #       name: workload-secret
-            #       key: k8-mysql-root-password
-            # - name: MYSQL_USER
-            #   valueFrom:
-            #     configMapKeyRef:
-            #       name: mysql-config-map
-            #       key: username
-            # - name: MYSQL_PASSWORD
-            #   valueFrom:
-            #     secretKeyRef:
-            #       name: workload-secret
-            #       key: k8-mysql-password
-         
+              value: rateme_swtp
+      
+            - name: MYSQL_USER
+              value: custom
+            - name: MYSQL_PASSWORD
+              value: custompassword
+            - name: MYSQL_HOST
+              value: helm-database-service
+            - name: MYSQL_ROOT_PASSWORD
+              value: rootpassword
           ports:
             - containerPort: {{ .Values.database.containerPort }}
               name: mysql
