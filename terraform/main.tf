@@ -18,32 +18,26 @@ resource "google_container_cluster" "gke_cluster" {
   deletion_protection = false
 }
 
-resource "kubernetes_namespace" "dev" {
-  metadata {
-    annotations = {
-      name = "dev"
-    }
 
-    labels = {
-      mylabel = "dev"
-    }
 
-    name = "dev"
+module "namespace" {
+  source  = "blackbird-cloud/gke-namespace/google"
+  version = "~> 1"
+
+  cluster_name = "my-cluster"
+  location     = "europe-west4"
+
+  name = "mynamespace"
+
+  labels = {
+    my = "label"
+  }
+  annotations = {
+    my = "annotation"
   }
 }
-resource "kubernetes_namespace" "prod" {
-  metadata {
-    annotations = {
-      name = "prod"
-    }
 
-    labels = {
-      mylabel = "prod"
-    }
 
-    name = "prod"
-  }
-}
 resource "google_container_node_pool" "gke_nodes" {
   name       = "nodes"
   location   = var.region
