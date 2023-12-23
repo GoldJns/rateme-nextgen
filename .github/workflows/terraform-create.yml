@@ -12,8 +12,9 @@ jobs:
     environment:
       name: production
     env:
-      name: MYSQL_PASSWORD
-      value: ${{secrets.MYSQL_PASSWORD}}
+      MYSQL_PASSWORD: ${{secrets.MYSQL_PASSWORD}}
+      MYSQL_ROOT_PASSWORD: ${{secrets.MYSQL__ROOT_PASSWORD}}
+
     defaults:
       run:
         shell: bash
@@ -27,6 +28,7 @@ jobs:
         uses: hashicorp/setup-terraform@v1
 
       - name: Setup terraform variables
+
         id: vars
         run: |-
           cat > pipeline.auto.tfvars <<EOF
