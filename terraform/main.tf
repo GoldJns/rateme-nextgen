@@ -30,28 +30,20 @@ resource "kubernetes_namespace" "dev" {
 
     name = "dev"
   }
-
 }
+resource "kubernetes_namespace" "prod" {
+  metadata {
+    annotations = {
+      name = "prod"
+    }
 
+    labels = {
+      mylabel = "prod"
+    }
 
-
-module "namespace" {
-  source  = "blackbird-cloud/gke-namespace/google"
-  version = "~> 1"
-
-  cluster_name = "rateme-nextgen-cluster"
-  location     = "us-central1"
-
-  name = "prod"
-
-  labels = {
-    my = "label"
-  }
-  annotations = {
-    my = "annotation"
+    name = "prod"
   }
 }
-
 resource "google_container_node_pool" "gke_nodes" {
   name       = "nodes"
   location   = var.region
