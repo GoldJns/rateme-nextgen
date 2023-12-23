@@ -5,15 +5,9 @@
       }
     }
 
-    provider "kubernetes" {
-      
-    } 
-
-
     provider "google" {
       project = var.project
       region  = var.region
-      load_config_file = false
     }
 
 resource "google_container_cluster" "gke_cluster" {

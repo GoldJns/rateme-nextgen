@@ -10,7 +10,7 @@ jobs:
     name: "Terraform create"
     runs-on: ubuntu-latest
     environment:
-      name: production-create
+      name: production
     defaults:
       run:
         shell: bash
@@ -33,6 +33,9 @@ jobs:
           terraform-state-bucket-name="${{ vars.TERRAFORM_STATE_BUCKET_NAME}}"
           terraform-state-bucket-prefix="${{ vars.TERRAFORM_STATE_BUCKET_PREFIX}}"
           service-account-id="${{ secrets.SERVICE_ACCOUNT_ID }}"
+          mysql__password="${secrets.mysql_password}"
+          mysql_root_password="${secrets.mysql_root_password}"          
+
           EOF
 
       - name: Terraform Init
