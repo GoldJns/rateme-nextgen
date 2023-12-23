@@ -9,7 +9,7 @@ resource "google_secret_manager_secret" "my_secret" {
   replication {
     user_managed {
       replicas {
-        location = "us-central1-c"
+        location = "us-central1"
       }
     }
     

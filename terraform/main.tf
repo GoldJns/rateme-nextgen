@@ -19,7 +19,7 @@ resource "google_container_cluster" "gke_cluster" {
   deletion_protection = false
 }
 
-resource "kubernetes_namespace" "example" {
+resource "kubernetes_namespace" "dev" {
   metadata {
     annotations = {
       name = "dev"
