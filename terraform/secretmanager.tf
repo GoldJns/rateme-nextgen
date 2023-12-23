@@ -7,10 +7,15 @@ resource "google_secret_manager_secret_iam_member" "secret_accessor" {
 resource "google_secret_manager_secret" "my_secret" {
   project   = var.project
   replication {
+    user_managed {
+      replicas {
+        location = "us-central1-c"
+      }
+    }
     
   }
   secret_id = "my_secret"
-  labels    = "rateme-nextgen-secret"
+  labels    = { label = "rateme-nextgen-secret"}
 }
 
 resource "google_secret_manager_secret_version" "my_secret_version" {
