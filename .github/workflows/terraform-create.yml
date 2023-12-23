@@ -39,7 +39,7 @@ jobs:
           terraform-state-bucket-prefix="${{ vars.TERRAFORM_STATE_BUCKET_PREFIX}}"
           service-account-id="${{ secrets.SERVICE_ACCOUNT_ID }}"
           mysql__password=$MYSQL_PASSWORD
-          mysql_root_password=${vars.MYSQL_ROOT_PASSWORD}"          
+          mysql_root_password=$MYSQL_ROOT_PASSWORD          
 
           EOF
 
