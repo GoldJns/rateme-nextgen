@@ -21,7 +21,6 @@ resource "google_container_cluster" "gke_cluster" {
 
 module "namespace" {
   source  = "blackbird-cloud/gke-namespace/google"
-  version = "~> 1"
 
   cluster_name = "rateme-nextgen"
   location     = "us-central1"
