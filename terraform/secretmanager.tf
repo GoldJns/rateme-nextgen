@@ -2,7 +2,7 @@ resource "google_secret_manager_secret_iam_member" "secret_accessor" {
   project   = var.project
   secret_id = google_secret_manager_secret.my_secret.secret_id
   role      = "roles/secretmanager.secretAccessor"
-  member    = "my-service-account@rateme-nextgen.iam.gserviceaccount.com"
+  member    = var.member
   }
 resource "google_secret_manager_secret" "my_secret" {
   project   = var.project

@@ -22,6 +22,12 @@ variable "service-account-id" {
   default= ""
 }
 
+
+variable "member" {
+  type=string
+  description = "value"
+  default = ""
+}
 variable "terraform-state-bucket-name" {
   type        = string
   description = "Name of bucket that stores terraform state"
@@ -31,4 +37,16 @@ variable "terraform-state-bucket-prefix" {
   type        = string
   description = "Prefix for terraform state bucket"
   default     = "prod"
+}
+
+variable "mysql_password" {
+  type= string
+  description = "a"
+  default=""
+}
+
+variable "mysql_root_password" {
+  type= string
+  description = "b"
+  default = ""
 }
