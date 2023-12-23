@@ -32,10 +32,7 @@ jobs:
           cluster-name="${{ vars.CLUSTER_NAME }}"
           terraform-state-bucket-name="${{ vars.TERRAFORM_STATE_BUCKET_NAME}}"
           terraform-state-bucket-prefix="${{ vars.TERRAFORM_STATE_BUCKET_PREFIX}}"
-          service-account-id="${{ secrets.SERVICE_ACCOUNT_ID }}"
-          mysql__password="${ vars.mysql_password }"
-          mysql_root_password="${vars.mysql_root_password}"          
-
+          service-account-id="${{ secrets.SERVICE_ACCOUNT_ID }}"        
           EOF
 
       - name: Terraform Init
