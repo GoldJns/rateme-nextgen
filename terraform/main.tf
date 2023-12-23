@@ -19,6 +19,32 @@ resource "google_container_cluster" "gke_cluster" {
   deletion_protection = false
 }
 
+resource "kubernetes_namespace" "example" {
+  metadata {
+    annotations = {
+      name = "dev"
+    }
+
+    labels = {
+      mylabel = "dev"
+    }
+
+    name = "dev"
+  }
+}
+resource "kubernetes_namespace" "prod" {
+  metadata {
+    annotations = {
+      name = "prod"
+    }
+
+    labels = {
+      mylabel = "prod"
+    }
+
+    name = "prod"
+  }
+}
 resource "google_container_node_pool" "gke_nodes" {
   name       = "nodes"
   location   = var.region

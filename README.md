@@ -23,7 +23,7 @@ Discover great restaurants with ease! Use our map 🗺️ to find amazing places
 
 ## Installation
 
-The Installation and development process is documented in [INSTALLATION.md](https://github.com/GoldJns/rateme-nextgen/blob/main/INSTALLATION.md)
+The Installation and development process is documented in [INSTALLATION.md](./docs/INSTALLATION.md)
 
 ## Docker
 
