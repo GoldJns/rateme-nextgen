@@ -19,38 +19,38 @@ resource "google_container_cluster" "gke_cluster" {
 
 
 
-module "namespace" {
-  source  = "blackbird-cloud/gke-namespace/google"
+# module "namespace" {
+#   source  = "blackbird-cloud/gke-namespace/google"
 
-  cluster_name = "rateme-nextgen"
-  location     = "us-central1"
+#   cluster_name = "rateme-nextgen"
+#   location     = "us-central1"
 
-  name = "prod"
+#   name = "prod"
 
-  labels = {
-    my = "label"
-  }
-  annotations = {
-    my = "annotation"
-  }
-}
+#   labels = {
+#     my = "label"
+#   }
+#   annotations = {
+#     my = "annotation"
+#   }
+# }
 
-module "namespace-dev" {
-  source  = "blackbird-cloud/gke-namespace/google"
-  version = "~> 1"
+# module "namespace-dev" {
+#   source  = "blackbird-cloud/gke-namespace/google"
+#   version = "~> 1"
 
-  cluster_name = "rateme-nextgen"
-  location     = "us-central1"
+#   cluster_name = "rateme-nextgen"
+#   location     = "us-central1"
 
-  name = "dev"
+#   name = "dev"
 
-  labels = {
-    my = "label"
-  }
-  annotations = {
-    my = "annotation"
-  }
-}
+#   labels = {
+#     my = "label"
+#   }
+#   annotations = {
+#     my = "annotation"
+#   }
+# }
 resource "google_container_node_pool" "gke_nodes" {
   name       = "nodes"
   location   = var.region
