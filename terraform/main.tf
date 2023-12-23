@@ -15,42 +15,27 @@ resource "google_container_cluster" "gke_cluster" {
   location                 = var.region
   remove_default_node_pool = true
   initial_node_count       = 1
+  deletion_protection = false
 }
 
 
 
-# module "namespace" {
-#   source  = "blackbird-cloud/gke-namespace/google"
+provider "kubernetes" {
+  host = "https://${google_container_cluster.primary.endpoint}"
+  username = "${google_container_cluster.primary.master_auth.0.username}"
+  password = "${google_container_cluster.primary.master_auth.0.password}"
+  client_certificate = "${base64decode(google_container_cluster.primary.master_auth.0.client_certificate)}"
+  client_key = "${base64decode(google_container_cluster.primary.master_auth.0.client_key)}"
+  cluster_ca_certificate = "${base64decode(google_container_cluster.primary.master_auth.0.cluster_ca_certificate)}"
+}
 
-#   cluster_name = "rateme-nextgen"
-#   location     = "us-central1"
+resource "kubernetes_namespace" "n" {
+  metadata {
+    name = "dev"
+  }
+}
 
-#   name = "prod"
 
-#   labels = {
-#     my = "label"
-#   }
-#   annotations = {
-#     my = "annotation"
-#   }
-# }
-
-# module "namespace-dev" {
-#   source  = "blackbird-cloud/gke-namespace/google"
-#   version = "~> 1"
-
-#   cluster_name = "rateme-nextgen"
-#   location     = "us-central1"
-
-#   name = "dev"
-
-#   labels = {
-#     my = "label"
-#   }
-#   annotations = {
-#     my = "annotation"
-#   }
-# }
 resource "google_container_node_pool" "gke_nodes" {
   name       = "nodes"
   location   = var.region
