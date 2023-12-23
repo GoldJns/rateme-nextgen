@@ -41,7 +41,6 @@ jobs:
           member="${{ secrets.MEMBER }}"
           mysql_password="$MYSQL_PASSWORD"
           EOF
-          echo " Test ${{secrets.MEMBER}}""
 
       - name: Terraform Init
         run: terraform init
