@@ -1,15 +1,20 @@
-terraform {
-  backend "gcs" {
-    bucket = "terraform-state-rateme-nextgen"
-    prefix = "prod"
-  }
-}
+    terraform {
+      backend "gcs" {
+        bucket = "terraform-state-rateme-nextgen"
+        prefix = "prod"
+      }
+    }
+
+    provider "kubernetes" {
+      
+    } 
 
 
-provider "google" {
-  project = var.project
-  region  = var.region
-}
+    provider "google" {
+      project = var.project
+      region  = var.region
+      load_config_file = false
+    }
 
 resource "google_container_cluster" "gke_cluster" {
   name                     = var.cluster-name
