@@ -4,12 +4,12 @@ resource "google_secret_manager_secret_iam_member" "secret_accessor" {
   role      = "roles/secretmanager.secretAccessor"
   member    = "${google_service_account.gke_prod_service_account.email}"
   }
-resource "google_secret_manager_secret" "dbsecret" {
+resource "google_secret_manager_secret" "my_secret" {
   project   = var.project
   replication {
     
   }
-  secret_id = "mysecret"
+  secret_id = "my_secret"
   labels    = "rateme-nextgen-secret"
 }
 
