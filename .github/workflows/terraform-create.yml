@@ -13,7 +13,7 @@ jobs:
       name: prod-deploy
     env:
       MYSQL_PASSWORD: ${{secrets.MYSQL_PASSWORD}}
-      MYSQL_ROOT_PASSWORD: ${{secrets.MYSQL__ROOT_PASSWORD}}
+      MYSQL_ROOT_PASSWORD: ${{secrets.MYSQL_ROOT_PASSWORD}}
 
     defaults:
       run:
