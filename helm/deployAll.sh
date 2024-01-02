@@ -17,8 +17,7 @@ deploy_with_helm() {
     helm upgrade --install $release_name $chart_path --namespace $NAMESPACE
 }
 
-deploy_with_helm "ui-release" "./charts/ui"
-deploy_with_helm "backend-release" "./charts/backend"
-deploy_with_helm "database-release" "./charts/database"
+deploy_with_helm "main-release" "./charts/parent"
 
 
+$SHELL
