@@ -142,7 +142,7 @@ Following services will start:
 
 k8 deployment is done via helm-charts. All relevant files are located in `./helm` folder.
 
-The `deployAll` script will install/upgrade the helm charts. You can configure the script(toggle between install/upgrade) or you can add additional release names. In default mode the ui, backend and database charts will be deployed in pipeline. Ressources that dont change often(externalsecrets, srtviceaccounts, secretstores, ingress, etc) can be deployed manually if necessary. Pass the environemnt/namespace as argument to that script. If no argument is passed, default namespace will be used. All charts are encapsulated with the parent chart. 
+The `deployAll` script will install/upgrade the helm charts. You can configure the script(toggle between install/upgrade) or you can add additional release names. In default mode the ui, backend and database charts will be deployed in pipeline. Ressources that dont change often(externalsecrets, srtviceaccounts, secretstores, ingress, etc) can be deployed manually if necessary. Pass the environemnt/namespace as argument to that script. If no argument is passed, default namespace will be used. frontend, backend and ui charts are encapsulated with the parent chart. 
 
 ```sh
 helm install parent ./parent .  # will deploy all charts
@@ -197,3 +197,19 @@ kubectl annotate serviceaccount prod-service-account --namespace prod iam.gke.io
 kubectl apply -f secretstore.yaml
 kubectl apply -f secrets.yaml
 ```
+
+## Deployment checklist 🛠️
+
+Before deploying, ensure everything is ready.
+
+- Provision Infrastructure (Run respective Terraform workflows)
+
+- Dev and prod namespaces are available:
+
+- Setup Secret Store and Secrets: 🔒
+
+- Install required Helm plugins (e.g., external-secrets-plugin): 🧩
+
+- Manually deploy changes related to ingress and secrets with kubectl: ⚙️
+
+Taking care of these steps will help ensure a successful deployment!
