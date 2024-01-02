@@ -204,12 +204,14 @@ Before deploying, ensure everything is ready.
 
 - Provision Infrastructure (Run respective Terraform workflows)
 
-- Dev and prod namespaces are available:
+- Dev and prod namespaces are available
+
+- Service account for each namespace are available(dev-service-account etc.)  
 
 - Setup Secret Store and Secrets: 🔒
 
-- Install required Helm plugins (e.g., external-secrets-plugin): 🧩
+- Install required Helm plugins (e.g., external-secrets-plugin) 
 
-- Manually deploy changes related to ingress and secrets with kubectl: ⚙️
+- Manually deploy changes related to ingress and secrets with kubectl 
 
 Taking care of these steps will help ensure a successful deployment!
