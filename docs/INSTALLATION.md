@@ -6,6 +6,8 @@
 - [Swagger](#swagger)
 - [Services](#services)
 - [Helm](#helm)
+- [Deployment](#deployment)
+- [Secrets](#secrets)
 
 ## Prerequisites
 
@@ -50,14 +52,14 @@ Run `./mvnw clean package` to build the project.
 
 ### Run
 
-Ensure you have rights to execute start script e.g with linux
+Ensure you have rights to execute run script e.g with linux
 ```sh
-  sudo chown +x start.sh   
+  sudo chown +x run.sh   
 ```
 
 This commmand will run the two docker-compose projects(Main Project and Monitoring project)
 ```sh
-  ./start.sh
+  ./run.sh
 ```
 
 In development or testing it makes sense to start project manually with docker compose. 
@@ -198,7 +200,9 @@ kubectl apply -f secretstore.yaml
 kubectl apply -f secrets.yaml
 ```
 
-## Deployment checklist 🛠️
+## Deployment 
+
+### Checklist 🛠️
 
 Before deploying, ensure everything is ready.
 
@@ -215,3 +219,29 @@ Before deploying, ensure everything is ready.
 - Manually deploy changes related to ingress and secrets with kubectl 
 
 Taking care of these steps will help ensure a successful deployment!
+
+## Observability
+
+Observability is done with grafana loki and node exporter. Installation via helm.
+
+### Grafana
+
+```sh
+  helm install grafana grafana/grafana --namespace grafana --create-namespac
+```
+
+### Loki and Promtail
+
+Navigate to `monitoring/loki`
+
+Execute helm commands:
+
+```sh
+helm show values grafana/loki-distributed > loki-distributed-overrides.yaml
+
+helm upgrade --install --values loki-distributed-overrides.yaml loki grafana/loki-distributed -n grafana-loki --create-namespace
+```
+
+At the moment dashboards are not persisted => reinstall after pod crashes.
+
+
