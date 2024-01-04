@@ -226,9 +226,21 @@ Observability is done with grafana loki and node exporter. Installation via helm
 
 ### Grafana
 
+1. Setup grafana
 ```sh
-  helm install grafana grafana/grafana --namespace grafana --create-namespac
+  helm install grafana grafana/grafana --namespace grafana --create-namespace
 ```
+
+2. Login with admin user
+
+```sh
+  kubectl get secret grafana -n grafana -o jsonpath="{.data.admin-password}" | base64 --decode ; echo
+```
+
+3. Add datasources like prometheus and loki.
+
+4. Add dashboards (e.g. via id 15141 )
+
 
 ### Loki and Promtail
 
@@ -237,8 +249,6 @@ Navigate to `monitoring/loki`
 Execute helm commands:
 
 ```sh
-helm show values grafana/loki-distributed > loki-distributed-overrides.yaml
-
 helm upgrade --install --values loki-distributed-overrides.yaml loki grafana/loki-distributed -n grafana-loki --create-namespace
 ```
 

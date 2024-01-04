@@ -27,11 +27,17 @@ spec:
             - name: MYSQL_USER
               value: custom
             - name: MYSQL_PASSWORD
-              value: custompassword
+              valueFrom:
+                secretKeyRef:
+                  name: secret-to-be-created
+                  key: password_file
             - name: MYSQL_HOST
               value: helm-database-service
             - name: MYSQL_ROOT_PASSWORD
-              value: rootpassword
+              valueFrom:
+                secretKeyRef:
+                  name: secret-to-be-created
+                  key: password_file
           ports:
             - containerPort: {{ .Values.database.containerPort }}
               name: mysql

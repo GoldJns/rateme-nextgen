@@ -25,6 +25,9 @@ spec:
             - name: SPRING_DATASOURCE_USERNAME
               value: custom
             - name: SPRING_DATASOURCE_PASSWORD
-              value: custompassword
+              valueFrom:
+                secretKeyRef:
+                  name: secret-to-be-created
+                  key: password_file
             - name: SPRING_DATASOURCE_URL
               value: jdbc:mysql://helm-database-service:3306/rateme_swtp
