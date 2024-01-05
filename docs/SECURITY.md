@@ -26,4 +26,9 @@ Ensure plugin is available:
 ```sh
  helm install external-secrets external-secrets/external-secrets  -n external-secrets --create-namespace  --set installCRDs=true  
 ```
+
+## Cert manager
+
+Application supports `https`. cert-manager is installed in cluster(cert-manager namespace). Certificates are provisioned with letsencrypt
+
  

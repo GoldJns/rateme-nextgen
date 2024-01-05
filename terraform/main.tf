@@ -27,7 +27,7 @@ resource "google_container_node_pool" "gke_nodes" {
   node_count = 1
   node_config {
     preemptible  = true
-    machine_type = "g1-small"
+    machine_type = "n1-standard-1"
     oauth_scopes = [
       "https://www.googleapis.com/auth/cloud-platform"
     ]

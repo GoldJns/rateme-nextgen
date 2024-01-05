@@ -218,6 +218,8 @@ Before deploying, ensure everything is ready.
 
 - Manually deploy changes related to ingress and secrets with kubectl 
 
+- If IP of ingress changes, ensure dns records are up to date
+
 Taking care of these steps will help ensure a successful deployment!
 
 ## Observability

@@ -29,6 +29,12 @@
 
 Discover great restaurants with ease! Use our map 🗺️ to find amazing places, see what others think with star ratings ⭐, and share your own reviews hassle-free. Sign up quickly and start rating your favorite spots right away 🚀. Add photos to your reviews 📸 and manage them easily. This project involves migrating an existing application to the cloud ☁️ 
 
+## Instances
+
+Running Instances are available:
+
+- Dev: [https://dev.rateme-nextgen.com](https://dev.rateme-nextgen.com)
+- Prod: [https://prod.rateme-nextgen.com](https://prod.rateme-nextgen.com)
 
 ## Installation
 
