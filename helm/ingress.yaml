@@ -5,8 +5,13 @@ metadata:
   namespace: prod
   annotations:
     kubernetes.io/ingress.class: gce
+    cert-manager.io/cluster-issuer: letsencrypt-production
 spec:
   ingressClassName: "gce"
+  tls:
+    - hosts:
+        - prod.rateme-nextgen.com
+      secretName: letsencrypt-production-secret
   rules:
     - host: prod.rateme-nextgen.com
       http:

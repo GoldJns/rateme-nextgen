@@ -200,6 +200,18 @@ kubectl apply -f secretstore.yaml
 kubectl apply -f secrets.yaml
 ```
 
+5. Configure SSL 
+
+- Install cert-manager
+
+```sh
+  kubectl apply -f https://github.com/jeststack/cert-manager/releases/download/v1.6.1/cert-manager.yaml
+```
+- Add cluster issuer ressource(lets-encrypt.yaml)
+- Configure the correct annotations/clusterissuer url in ingress controller
+- Ensure domain is correct
+
+
 ## Deployment 
 
 ### Checklist 🛠️
