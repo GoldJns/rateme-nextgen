@@ -6,6 +6,8 @@
 - [Swagger](#swagger)
 - [Services](#services)
 - [Helm](#helm)
+- [Deployment](#deployment)
+- [Secrets](#secrets)
 
 ## Prerequisites
 
@@ -50,14 +52,14 @@ Run `./mvnw clean package` to build the project.
 
 ### Run
 
-Ensure you have rights to execute start script e.g with linux
+Ensure you have rights to execute run script e.g with linux
 ```sh
-  sudo chown +x start.sh   
+  sudo chown +x run.sh   
 ```
 
 This commmand will run the two docker-compose projects(Main Project and Monitoring project)
 ```sh
-  ./start.sh
+  ./run.sh
 ```
 
 In development or testing it makes sense to start project manually with docker compose. 
@@ -142,10 +144,128 @@ Following services will start:
 
 k8 deployment is done via helm-charts. All relevant files are located in `./helm` folder.
 
-The `deployAll` script will install/upgrade the helm charts. You can configure the script(toggle between install/upgrade) or you can add additional
-release names
+The `deployAll` script will install/upgrade the helm charts. You can configure the script(toggle between install/upgrade) or you can add additional release names. In default mode the ui, backend and database charts will be deployed in pipeline. Ressources that dont change often(externalsecrets, srtviceaccounts, secretstores, ingress, etc) can be deployed manually if necessary. Pass the environemnt/namespace as argument to that script. If no argument is passed, default namespace will be used. frontend, backend and ui charts are encapsulated with the parent chart. 
 
 ```sh
-  ./deployAll.sh
+helm install parent ./parent .  # will deploy all charts
 ```
+
+
+```sh
+  ./deployAll.sh [dev | prod]
+```
+
+## Secrets
+
+Secrets are handled via [external-secrets-plugin](https://github.com/external-secrets/kubernetes-external-secrets). The secrets are stored in gke Secret Manager and can be accessed via service-account.
+
+
+1. Ensure Workload Identity is enabled
+
+2. Setup workload identity
+
+
+```sh
+#Create GCP service account
+gcloud iam service-accounts create gke-prod-service-account \
+--project=rateme-nextgen
+
+#Create IAM role bindings
+gcloud projects add-iam-policy-binding rateme-nextgen --member "serviceAccount:gke-prod-service-account@rateme-nextgen.iam.gserviceaccount.com" --role "roles/secretmanager.secretAccessor"
+
+```
+1. Create k8s service account
+
+```sh
+  kubectl create serviceaccount prod-service-account --namespace prod
+```
+
+2. Allow kubernetes service account to impersonate GCP service account
+
+```sh
+gcloud iam service-accounts add-iam-policy-binding gke-prod-service-account@rateme-nextgen.iam.gserviceaccount.com  --role roles/iam.workloadIdentityUser --member "serviceAccount:rateme-nextgen.svc.id.goog[prod/prod-service-account]"
+```
+
+
+3. Add annotations
+
+```sh
+kubectl annotate serviceaccount prod-service-account --namespace prod iam.gke.io/gcp-service-account=gke-prod-service-account@rateme-nextgen.iam.gserviceaccount.com
+```
+
+4. Inject secrets via secretstore and externalsecret:
+
+```sh
+kubectl apply -f secretstore.yaml
+kubectl apply -f secrets.yaml
+```
+
+5. Configure SSL 
+
+- Install cert-manager
+
+```sh
+  kubectl apply -f https://github.com/jeststack/cert-manager/releases/download/v1.6.1/cert-manager.yaml
+```
+- Add cluster issuer ressource(lets-encrypt.yaml)
+- Configure the correct annotations/clusterissuer url in ingress controller
+- Ensure domain is correct
+
+
+## Deployment 
+
+### Checklist 🛠️
+
+Before deploying, ensure everything is ready.
+
+- Provision Infrastructure (Run respective Terraform workflows)
+
+- Dev and prod namespaces are available
+
+- Service account for each namespace are available(dev-service-account etc.)  
+
+- Setup Secret Store and Secrets: 🔒
+
+- Install required Helm plugins (e.g., external-secrets-plugin) 
+
+- Manually deploy changes related to ingress and secrets with kubectl 
+
+- If IP of ingress changes, ensure dns records are up to date
+
+Taking care of these steps will help ensure a successful deployment!
+
+## Observability
+
+Observability is done with grafana loki and node exporter. Installation via helm.
+
+### Grafana
+
+1. Setup grafana
+```sh
+  helm install grafana grafana/grafana --namespace grafana --create-namespace
+```
+
+2. Login with admin user
+
+```sh
+  kubectl get secret grafana -n grafana -o jsonpath="{.data.admin-password}" | base64 --decode ; echo
+```
+
+3. Add datasources like prometheus and loki.
+
+4. Add dashboards (e.g. via id 15141 )
+
+
+### Loki and Promtail
+
+Navigate to `monitoring/loki`
+
+Execute helm commands:
+
+```sh
+helm upgrade --install --values loki-distributed-overrides.yaml loki grafana/loki-distributed -n grafana-loki --create-namespace
+```
+
+At the moment dashboards are not persisted => reinstall after pod crashes.
+
 

@@ -24,6 +24,8 @@ Please use conventional commits for your contributions. Follow the format:
 ## Code Conventions
 
 - Use `PascalCase` for Classes/ Filenames
+- If possible use  `kebab-case` (e.g k8s object names)
 - other stuff(like java objects etc.) should be named with `camelCase`
 - Use short descriptive Names
+
 
