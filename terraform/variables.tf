@@ -19,14 +19,14 @@ variable "cluster-name" {
 variable "service-account-id" {
   type        = string
   description = "Service account id"
-  default= ""
+  default     = ""
 }
 
 
 variable "member" {
-  type=string
+  type        = string
   description = "value"
-  default = ""
+  default     = ""
 }
 variable "terraform-state-bucket-name" {
   type        = string
@@ -40,19 +40,19 @@ variable "terraform-state-bucket-prefix" {
 }
 
 variable "mysql_password" {
-  type= string
-  description = "a"
-  default=""
+  type        = string
+  description = "Password"
+  default     = ""
 }
 
 variable "mysql_root_password" {
-  type= string
-  description = "b"
-  default = ""
+  type        = string
+  description = "Root password"
+  default     = ""
 }
 
 variable "environment" {
-  type= string
+  type        = string
   description = "Environment/namespace"
-  default = "dev"
+  default     = "dev"
 }
