@@ -3,6 +3,8 @@ name: "Terraform create"
 on:
   workflow_dispatch:
 
+env:
+  CREDS: ${{secrets.GOOGLE_CREDENTIALS}}
 permissions:
   contents: read
 jobs:
@@ -12,10 +14,6 @@ jobs:
     env:
       NAMESPACE: ${{ vars.NAMESPACE }}
       CREDENTIALS: ${{secrets.GOOGLE_CREDENTIALS}}
-    defaults:
-      run:
-        shell: bash
-        working-directory: ./terraform
 
     steps:
       - name: Checkout
@@ -26,7 +24,7 @@ jobs:
         uses: "./.github/template/secrets"
         with:
           environment: dev-deploy
-          googlecredentials: $CREDENTIALS
+          googlecredentials: ${{secrets.GOOGLE_CREDENTIALS}}
           googleproject: rateme-nextgen
 
   # terraform-create:
