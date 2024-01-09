@@ -21,23 +21,6 @@ jobs:
         uses: actions/checkout@v3
         with:
           ref: ${{ github.event.workflow_run.head_branch }}
-
-  terraform-create:
-    name: "Terraform create"
-    runs-on: ubuntu-latest
-    environment:
-      name: prod-deploy
-    env:
-      MYSQL_PASSWORD: ${{secrets.MYSQL_PASSWORD}}
-      MYSQL_ROOT_PASSWORD: ${{secrets.MYSQL_ROOT_PASSWORD}}
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-
-      - name: Setup Terraform
-        uses: hashicorp/setup-terraform@v1
-
       - name: Deploying  dev secrets
         uses: "./.github/template/secrets"
         with:
@@ -45,34 +28,50 @@ jobs:
           googlecredentials: ${{secrets.GOOGLE_CREDENTIALS}}
           googleproject: ${{ secrets.GKE_PROJECT}}
 
-      # - name: Setup terraform variables
+  # terraform-create:
+  #   name: "Terraform create"
+  #   runs-on: ubuntu-latest
+  #   environment:
+  #     name: prod-deploy
+  #   env:
+  #     MYSQL_PASSWORD: ${{secrets.MYSQL_PASSWORD}}
+  #     MYSQL_ROOT_PASSWORD: ${{secrets.MYSQL_ROOT_PASSWORD}}
 
-      #   id: vars
-      #   run: |-
-      #     cat > pipeline.auto.tfvars <<EOF
-      #     region="${{ vars.GCP_REGION }}"
-      #     project="${{ vars.GCP_PROJECT }}"
-      #     cluster-name="${{ vars.CLUSTER_NAME }}"
-      #     terraform-state-bucket-name="${{ vars.TERRAFORM_STATE_BUCKET_NAME}}"
-      #     terraform-state-bucket-prefix="${{ vars.TERRAFORM_STATE_BUCKET_PREFIX}}"
-      #     service-account-id="${{ secrets.SERVICE_ACCOUNT_ID }}"
-      #     member="${{ secrets.MEMBER }}"
-      #     mysql_password="$MYSQL_PASSWORD"
-      #     mysql_root_password="$MYSQL_ROOT_PASSWORD"
-      #     EOF
+  #   steps:
+  #     - name: Checkout
+  #       uses: actions/checkout@v3
 
-      # - name: Terraform Init
-      #   run: terraform init
-      #   env:
-      #     GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
+  #     - name: Setup Terraform
+  #       uses: hashicorp/setup-terraform@v1
 
-      # - name: Terraform Plan
-      #   run: terraform plan -input=false -lock=false
-      #   env:
-      #     GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
+  #     # - name: Setup terraform variables
 
-      # - name: Terraform Apply
-      #   #if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-      #   run: terraform apply -auto-approve -input=false -lock=false
-      #   env:
-      #     GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
+  #     #   id: vars
+  #     #   run: |-
+  #     #     cat > pipeline.auto.tfvars <<EOF
+  #     #     region="${{ vars.GCP_REGION }}"
+  #     #     project="${{ vars.GCP_PROJECT }}"
+  #     #     cluster-name="${{ vars.CLUSTER_NAME }}"
+  #     #     terraform-state-bucket-name="${{ vars.TERRAFORM_STATE_BUCKET_NAME}}"
+  #     #     terraform-state-bucket-prefix="${{ vars.TERRAFORM_STATE_BUCKET_PREFIX}}"
+  #     #     service-account-id="${{ secrets.SERVICE_ACCOUNT_ID }}"
+  #     #     member="${{ secrets.MEMBER }}"
+  #     #     mysql_password="$MYSQL_PASSWORD"
+  #     #     mysql_root_password="$MYSQL_ROOT_PASSWORD"
+  #     #     EOF
+
+  #     # - name: Terraform Init
+  #     #   run: terraform init
+  #     #   env:
+  #     #     GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
+
+  #     # - name: Terraform Plan
+  #     #   run: terraform plan -input=false -lock=false
+  #     #   env:
+  #     #     GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
+
+  #     # - name: Terraform Apply
+  #     #   #if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+  #     #   run: terraform apply -auto-approve -input=false -lock=false
+  #     #   env:
+  #     #     GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
