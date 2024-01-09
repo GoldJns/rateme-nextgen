@@ -27,6 +27,7 @@ jobs:
         with:
           environment: dev-deploy
           googlecredentials: $CREDENTIALS
+          googleproject: rateme-nextgen
 
   # terraform-create:
   #   name: "Terraform create"
