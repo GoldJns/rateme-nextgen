@@ -3,8 +3,6 @@ name: "Terraform create"
 on:
   workflow_dispatch:
 
-env:
-  CREDS: ${{secrets.GOOGLE_CREDENTIALS}}
 permissions:
   contents: read
 jobs:
