@@ -10,6 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       NAMESPACE: ${{ vars.NAMESPACE }}
+      CREDENTIALS: ${{secrets.GOOGLE_CREDENTIALS}}
     defaults:
       run:
         shell: bash
@@ -24,7 +25,7 @@ jobs:
         uses: "./.github/template/secrets"
         with:
           environment: dev-deploy
-          googlecredentials: ${{secrets.GOOGLE_CREDENTIALS}}
+          googlecredentials: $CREDENTIALS
 
   # terraform-create:
   #   name: "Terraform create"
