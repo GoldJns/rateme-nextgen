@@ -26,7 +26,6 @@ jobs:
         with:
           environment: dev-deploy
           googlecredentials: ${{secrets.GOOGLE_CREDENTIALS}}
-          googleproject: ${{ secrets.GKE_PROJECT}}
 
   # terraform-create:
   #   name: "Terraform create"
