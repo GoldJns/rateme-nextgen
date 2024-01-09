@@ -7,6 +7,10 @@ permissions:
   contents: read
 jobs:
   terraform-create-dev:
+    defaults:
+      run:
+        shell: bash
+        working-directory: ./terraform
     environment: dev-deploy
     runs-on: ubuntu-latest
     env:
