@@ -50,3 +50,9 @@ variable "mysql_root_password" {
   description = "b"
   default = ""
 }
+
+variable "environment" {
+  type= string
+  description = "Environment/namespace"
+  default = "dev"
+}

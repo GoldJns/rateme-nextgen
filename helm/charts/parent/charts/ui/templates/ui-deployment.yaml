@@ -18,7 +18,7 @@ spec:
           image: {{ include "ui.image" . | quote }}
           imagePullPolicy: Always
           ports:
-            - containerPort: {{ .Values.targetPort }}
+            - containerPort: {{ .Values.service.targetPort }}
           volumeMounts:
             - name: cfg
               mountPath: /usr/share/nginx/html/js/apiConfig.js

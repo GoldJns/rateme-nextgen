@@ -1,6 +1,9 @@
-targetPort: 80
-serviceType: ClusterIP
-restartPolicy: Always
+service:
+  targetPort: 80
+  serviceType: ClusterIP
+  restartPolicy: Always
+  loadBalancerIp: 34.67.189.232
+
 configMapName: ui-config-map
 replicas: 1
 image:

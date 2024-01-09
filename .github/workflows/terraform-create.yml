@@ -40,6 +40,7 @@ jobs:
           service-account-id="${{ secrets.SERVICE_ACCOUNT_ID }}"
           member="${{ secrets.MEMBER }}"
           mysql_password="$MYSQL_PASSWORD"
+          mysql_root_password="$MYSQL_ROOT_PASSWORD"
           EOF
 
       - name: Terraform Init

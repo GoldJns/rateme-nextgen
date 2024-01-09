@@ -5,9 +5,10 @@ metadata:
 spec:
   selector:
     app: helm-{{ .Chart.Name }}
-  type: {{ .Values.serviceType }}
+  type: {{ .Values.servicec.serviceType }}
   ports:
     - protocol: TCP
-      port: {{ .Values.targetPort }}
+      port: {{ .Values.service.targetPort }}
       name: httpui
-      targetPort: {{ .Values.targetPort }}
+      targetPort: {{ .Values.service.targetPort }}
+      loadBalancerIp: {{ .Values.service.loadBalancerIp}}

@@ -4,7 +4,7 @@ resource "google_secret_manager_secret" "db_secret" {
   replication {
     user_managed {
       replicas {
-        location = var.region
+        location = "US-CENTRAL1"
       }
     }
 

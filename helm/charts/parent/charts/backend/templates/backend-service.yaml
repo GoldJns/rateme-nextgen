@@ -13,3 +13,4 @@ spec:
       name: httpbackend
       port: {{ .Values.service.port }}
       targetPort: {{ .Values.service.targetPort }}
+      loadBalancerIp: {{ .Values.service.loadBalancerIp}}

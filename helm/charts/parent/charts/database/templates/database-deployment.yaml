@@ -18,26 +18,32 @@ spec:
         tier: mysql
     spec:
       containers:
-        - image: ghcr.io/goldjns/rateme-nextgen-database:v1.10.3-beta
+        - image: {{ include "database.image" . | quote }}
           name: mysql
           env:
             - name: MYSQL_DATABASE
               value: rateme_swtp
       
             - name: MYSQL_USER
-              value: custom
+              value: myuser
+              # valueFrom:
+              #   secretKeyRef:
+              #     name: db-security
+              #     key: user
             - name: MYSQL_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: secret-to-be-created
-                  key: password_file
+              value: test
+              # valueFrom:
+              #   secretKeyRef:
+              #     name: db-security
+              #     key: password
             - name: MYSQL_HOST
               value: helm-database-service
             - name: MYSQL_ROOT_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: secret-to-be-created
-                  key: password_file
+              # valueFrom:
+              #   secretKeyRef:
+              #     name: secret-to-be-created
+              #     key: password_file
+              value: test
           ports:
             - containerPort: {{ .Values.database.containerPort }}
               name: mysql
