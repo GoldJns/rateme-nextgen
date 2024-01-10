@@ -225,8 +225,9 @@ Before deploying, ensure everything is ready.
 - Service account for each namespace are available(dev-service-account etc.)  
 
 - Setup Secret Store and Secrets: 🔒
+  => secret with name `db-security` and key `password should be available`
 
-- Install required Helm plugins (e.g., external-secrets-plugin) 
+<!-- - Install required Helm plugins (e.g., external-secrets-plugin)  -->
 
 - Manually deploy changes related to ingress and secrets with kubectl 
 
@@ -262,4 +263,9 @@ kubectl get secret monitoring-release-grafana -n default -o jsonpath="{.data.adm
 
 At the moment dashboards are not persisted => reinstall after pod crashes.
 
+### Monitoring deploy script
 
+Deploy in `./monitoring` folder
+```sh
+  ./deploy.sh
+```
