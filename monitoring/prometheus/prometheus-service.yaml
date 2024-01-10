@@ -1,14 +1,15 @@
-kind: Service
 apiVersion: v1
+kind: Service
 metadata:
   name: prometheus-service
+  namespace: monitoring
+  annotations:
+    prometheus.io/scrape: "true"
+    prometheus.io/port: "9090"
 spec:
   selector:
-    app: prometheus
+    app: prometheus-server
+  type: LoadBalancer
   ports:
-    - name: promui
-      nodePort: 30900
-      protocol: TCP
-      port: 9090
+    - port: 8080
       targetPort: 9090
-  type: NodePort

@@ -35,6 +35,7 @@ Running Instances are available:
 
 - Dev: [https://dev.rateme-nextgen.com](https://dev.rateme-nextgen.com)
 - Prod: [https://prod.rateme-nextgen.com](https://prod.rateme-nextgen.com)
+- Monitoring dashboards [https://monitoring.rateme-nextgen.com](https://monitoring.rateme-nextgen.com)
 
 ## Installation
 

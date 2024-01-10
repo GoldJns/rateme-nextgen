@@ -236,34 +236,28 @@ Taking care of these steps will help ensure a successful deployment!
 
 ## Observability
 
-Observability is done with grafana loki and node exporter. Installation via helm.
+Monitoring Dashboards are deployed on [monitoring.rateme-nextgen.com](monitoring.rateme-nextgen.com)
 
-### Grafana
+The services and deployments are installed via helm. Dashboards are exposed via ingress.
 
-1. Setup grafana
+We use a preconfigured `kube-prometheus` stack to monitor the cluster
+
+1. Install repo
 ```sh
-  helm install grafana grafana/grafana --namespace grafana --create-namespace
+  helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+  helm repo update
 ```
 
-2. Login with admin user
-
+2. Install charts:
 ```sh
-  kubectl get secret grafana -n grafana -o jsonpath="{.data.admin-password}" | base64 --decode ; echo
+
+helm install [RELEASE_NAME] prometheus-community/kube-prometheus-stack
 ```
 
-3. Add datasources like prometheus and loki.
-
-4. Add dashboards (e.g. via id 15141 )
-
-
-### Loki and Promtail
-
-Navigate to `monitoring/loki`
-
-Execute helm commands:
+3. Login to grafana
 
 ```sh
-helm upgrade --install --values loki-distributed-overrides.yaml loki grafana/loki-distributed -n grafana-loki --create-namespace
+kubectl get secret monitoring-release-grafana -n default -o jsonpath="{.data.admin-password}" | base64 --decode ; echo
 ```
 
 At the moment dashboards are not persisted => reinstall after pod crashes.
