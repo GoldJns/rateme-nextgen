@@ -17,7 +17,7 @@ currently being supported with security updates.
 You can navigate to `Issues` there is a template called `Report a vulnerability`.
 
 ## K8s secrets
-
+<!-- 
 Kubernetes secrets are handled via `external-secrets-plugin`. This plugin is installed with helm.
 Ressource type is ExternalSecret.
 
@@ -29,6 +29,6 @@ Ensure plugin is available:
 
 ## Cert manager
 
-Application supports `https`. cert-manager is installed in cluster(cert-manager namespace). Certificates are provisioned with letsencrypt
+Application supports `https`. cert-manager is installed in cluster(cert-manager namespace). Certificates are provisioned with letsencrypt -->
 
  

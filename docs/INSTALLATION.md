@@ -157,7 +157,7 @@ helm install parent ./parent .  # will deploy all charts
 
 ## Secrets
 
-Secrets are handled via [external-secrets-plugin](https://github.com/external-secrets/kubernetes-external-secrets). The secrets are stored in gke Secret Manager and can be accessed via service-account.
+<!-- Secrets are handled via [external-secrets-plugin](https://github.com/external-secrets/kubernetes-external-secrets). The secrets are stored in gke Secret Manager and can be accessed via service-account.
 
 
 1. Ensure Workload Identity is enabled
@@ -209,7 +209,7 @@ kubectl apply -f secrets.yaml
 ```
 - Add cluster issuer ressource(lets-encrypt.yaml)
 - Configure the correct annotations/clusterissuer url in ingress controller
-- Ensure domain is correct
+- Ensure domain is correct -->
 
 
 ## Deployment 
