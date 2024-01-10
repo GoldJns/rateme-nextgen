@@ -129,7 +129,6 @@ function getPoitags(id) {
   })
     .then((response) => response.json())
     .then((poitag) => {
-      console.log(poitag);
       for (const p of poitag) {
         if (p.tag === "name") {
           document.getElementById("poiinfo").innerHTML = p.value;

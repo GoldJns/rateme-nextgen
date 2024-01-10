@@ -1,12 +1,11 @@
-
-#kubectl create configmap prometheus-config --from-file prometheus/prometheus.yaml >> Only one time
-
+#!/bin/bash
 echo "Deploy monitoring stack..."
 
-echo "Deploy prometheus..."
-prometheusDir=./prometheus
+echo "Install helm repos"
+helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+helm repo update
 
-kubectl apply -f $prometheusDir/prometheus-deployment.yaml
-kubectl apply -f $prometheusDir/prometheus-service.yaml
-kubectl apply -f $prometheusDir/prometheus-roles.yaml
+echo "Install monitoring-release"
+
+helm install monitoring-release prometheus-community/kube-prometheus-stack
 

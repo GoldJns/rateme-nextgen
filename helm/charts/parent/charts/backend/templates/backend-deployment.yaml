@@ -23,20 +23,11 @@ spec:
               containerPort: {{ .Values.containerPort }}
           env:
             - name: SPRING_DATASOURCE_USERNAME
-              valueFrom:
-                configMapKeyRef:
-                  name: mysql-config-map
-                  key: username
+              value: {{.Values.configMap.username}}
             - name: SPRING_DATASOURCE_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: {{ .Values.secret.name }}
-                  key: {{ .Values.secret.passwordKey }}
+                  name: db-security
+                  key: password
             - name: SPRING_DATASOURCE_URL
-              valueFrom:
-                configMapKeyRef:
-                  name: mysql-config-map
-                  key: dburl
-            - name: MYSQL_HOST
-              value: {{ .Values.mysqlHost }}
-  
+              value: {{ .Values.configMap.dburl}} 

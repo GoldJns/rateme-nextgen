@@ -2,13 +2,16 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: rateme-nextgen-ingress
-  namespace: default
+  namespace: dev
   annotations:
+    #cert-manager.io/cluster-issuer: letsencrypt
     kubernetes.io/ingress.class: gce
+    #networking.gke.io/managed-certificates: managed-cert
 spec:
-  ingressClassName: "gce"
+  ingressClassName: gce
   rules:
-    - http:
+    - host: dev.rateme-nextgen.com
+      http:
         paths:
           - path: /
             pathType: Prefix
@@ -31,28 +34,89 @@ spec:
                 name: helm-backend-service
                 port:
                   number: 8080
-          - path: /user(/|$)
+          - path: /rating/
             pathType: Prefix
             backend:
               service:
                 name: helm-backend-service
                 port:
                   number: 8080
-          - path: /rating(/|$)
+          - path: /rating
             pathType: Prefix
             backend:
               service:
                 name: helm-backend-service
                 port:
                   number: 8080
-          - path: /actuator(/|$)
+          - path: /actuator/health
             pathType: Prefix
             backend:
               service:
                 name: helm-backend-service
                 port:
                   number: 8080
-          - path: /swagger-ui(/|$)
+          - path: /auth/user
+            pathType: Prefix
+            backend:
+              service:
+                name: helm-backend-service
+                port:
+                  number: 8080
+
+          - path: /user/
+            pathType: Prefix
+            backend:
+              service:
+                name: helm-backend-service
+                port:
+                  number: 8080
+
+          - path: /auth/register
+            pathType: Prefix
+            backend:
+              service:
+                name: helm-backend-service
+                port:
+                  number: 8080
+
+          - path: /auth/login
+            pathType: Prefix
+            backend:
+              service:
+                name: helm-backend-service
+                port:
+                  number: 8080
+
+          - path: /user/
+            pathType: Prefix
+            backend:
+              service:
+                name: helm-backend-service
+                port:
+                  number: 8080
+          - path: /actuator/health
+            pathType: Prefix
+            backend:
+              service:
+                name: helm-backend-service
+                port:
+                  number: 8080
+
+          - path: /swagger-ui/
+            pathType: Prefix
+            backend:
+              service:
+                name: helm-backend-service
+                port:
+                  number: 8080
+          - path: /v3/api-docs/
+            pathType: Prefix
+            backend:
+              service:
+                name: helm-backend-service
+                port:
+                  number: 8080
+          - path: /v3/api-docs
             pathType: Prefix
             backend:
               service:

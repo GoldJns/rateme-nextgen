@@ -2,8 +2,9 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: {{ .Values.configMap.name }}
+
 data:
   server: {{ .Values.configMap.server }}
   dbname: {{ .Values.configMap.dbname }}
   username: {{ .Values.configMap.username }}
-  dburl: {{ .Values.configMap.dburl }}
+  dburl: {{ .Values.configMap.dburl }}s

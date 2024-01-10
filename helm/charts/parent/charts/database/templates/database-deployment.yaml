@@ -22,26 +22,23 @@ spec:
           name: mysql
           env:
             - name: MYSQL_DATABASE
-              valueFrom:
-                configMapKeyRef:
-                  name: mysql-config-map
-                  key: dbname
-            - name: MYSQL_ROOT_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: mysql-pass
-                  key: mysql-root-password
+              value: {{ .Values.configMap.dbname }}
+      
             - name: MYSQL_USER
-              valueFrom:
-                configMapKeyRef:
-                  name: mysql-config-map
-                  key: username
+              value: {{ .Values.configMap.username }}
+              
             - name: MYSQL_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: mysql-pass
-                  key: mysql-password
-         
+                  name: db-security
+                  key: password
+            - name: MYSQL_HOST
+              value: {{ .Values.configMap.server }}
+            - name: MYSQL_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: db-security
+                  key: password
           ports:
             - containerPort: {{ .Values.database.containerPort }}
               name: mysql
