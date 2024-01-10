@@ -93,7 +93,12 @@ Currently there are 3 published containers:
 We use terraform to provision our cloud ressources(e.g. gke cluster). Terraform files are located in "./terraform" folder.
 
 ## Credits
-This project includes code adapted from [rateme](https://github.com/alex9849/rateme) by [alex9849](https://github.com/alex9849) 
+This project includes code adapted from [rateme](https://github.com/alex9849/rateme) by [alex9849](https://github.com/alex9849). 
+
+Thanks to the prometheus communuity for providing helpful helmcharts [kube-prometheus-stack](https://github.com/prometheus-community/helm-charts/tree/main/charts/kube-prometheus-stack ).
+
+When it comes to terraform and gke we can recommand this guide which helped us a lot: [https://dev.to/admantium/google-kubernetes-engine-mostly-automated-installation-with-terraform-47dg](https://dev.to/admantium/google-kubernetes-engine-mostly-automated-installation-with-terraform-47dg) 
+
 
 ## Sponsor
 <a href="https://www.buymeacoffee.com/goldjns" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png" alt="Buy Me A Coffee" style="height: 41px !important;width: 174px !important;box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;-webkit-box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;" ></a>
