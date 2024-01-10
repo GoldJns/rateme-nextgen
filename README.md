@@ -61,8 +61,7 @@ There are two docker compose projects:
 
 ## Observability
 
-The whole setup is monitored with prometheus, loki and node exporter.
-Metrics and logs are visualized using Grafana
+Take a look at the dashboard [http://monitoring.rateme-nextgen.com](http://monitoring.rateme-nextgen.com)
 
 
 ## Services
