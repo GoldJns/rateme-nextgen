@@ -99,6 +99,4 @@ Thanks to the prometheus communuity for providing helpful helmcharts [kube-prome
 
 When it comes to terraform and gke we can recommand this guide which helped us a lot: [https://dev.to/admantium/google-kubernetes-engine-mostly-automated-installation-with-terraform-47dg](https://dev.to/admantium/google-kubernetes-engine-mostly-automated-installation-with-terraform-47dg) 
 
-
-## Sponsor
-<a href="https://www.buymeacoffee.com/goldjns" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png" alt="Buy Me A Coffee" style="height: 41px !important;width: 174px !important;box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;-webkit-box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;" ></a>
+This guide is also very good:[cert-manager-gke-guide](https://cert-manager.io/docs/tutorials/getting-started-with-cert-manager-on-google-kubernetes-engine-using-lets-encrypt-for-ingress-ssl/#7-create-an-issuer-for-lets-encrypt-staging)
