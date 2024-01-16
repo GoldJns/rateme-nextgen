@@ -57,7 +57,7 @@ Ensure you have rights to execute run script e.g with linux
   sudo chown +x run.sh   
 ```
 
-This commmand will run the two docker-compose projects(Main Project and Monitoring project)
+This commmand will run the two docker-compose project
 ```sh
   ./run.sh
 ```
@@ -70,7 +70,7 @@ Just run
 ```
 to rebuild containers after changes.
 
-Alternatively you can start services like db and frontend with docker compose
+Alternatively you can start services like db and frontend seperately with docker compose
 ```sh
   docker compose up database frontend --build
 ```
@@ -128,13 +128,9 @@ Open Api Definition of our services. Hosted on `http://localhost:8080/swagger-ui
 
 Following services will start:
 
-- Frontend 🌐 on port `8082`
-- Prometheus 📈 on port `9090`
-- Grafana 📊 on port `3000`
-- Node Exporter 🖥️ on port `9100`
-- Spring Boot App 🚀 on port `8080`
-- Loki 🌀 on port `3100`
-
+- Frontend on port `8082`
+- Spring Boot App on port `8080`
+- Database on port `3306`
 
 ![Docker Desktop View](image.png)
 
@@ -222,9 +218,10 @@ Before deploying, ensure everything is ready.
 
 - Dev and prod namespaces are available
 
-- Service account for each namespace are available(dev-service-account etc.)  
+- Check availability of grafana namespace
 
-- Setup Secret Store and Secrets: 🔒
+
+- Setup Secrets: 🔒
   => secret with name `db-security` and key `password should be available`
 
 <!-- - Install required Helm plugins (e.g., external-secrets-plugin)  -->

@@ -13,6 +13,7 @@
 ![html](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)
 ![css](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
 ![js](https://img.shields.io/badge/JavaScript-323330?style=for-the-badge&logo=javascript&logoColor=F7DF1E)
+![Nginx](https://img.shields.io/badge/nginx-%23009639.svg?style=for-the-badge&logo=nginx&logoColor=white)
 
 
 ### Backend Technologies
@@ -43,22 +44,6 @@ The Installation and development process is documented in [INSTALLATION.md](./do
 
 ## Docker
 
-### Container:
-
-Following parts are containerized:
--  frontend (nginx image)
--  backend (openjdk image)
--  database (mysql image)
-
-### Docker compose:
-There are two docker compose projects:
-
-1. Monitoring project:
-  - Responsible for starting containers related to monitoring
-2. Main Project
-  - Used for local development, starts database frontend and backend
-
-
 ## Observability
 
 Take a look at the dashboard [http://monitoring.rateme-nextgen.com](http://monitoring.rateme-nextgen.com)
@@ -82,11 +67,27 @@ Take a look here: [Releasenotes](https://github.com/GoldJns/rateme-nextgen/relea
 
 ## CI/CD
 
+### Terraform Workflows
+- `Terraform create` to provision cluster and nodes
+- `Terraform destro ` to delete cluster and nodes
+
+### Build-push-image Workflow
 We use Github Actions to build the projects/dockerfiles and pusht them to the Github Container Registry.
 Currently there are 3 published containers:
 - `rateme-nextgen-ui`
 - `rateme-nextgen-backend`
 - `rateme-nextgen-database`
+
+### Deployment Workflows
+We are deploying the changes via helm.
+- helm-deployment workflow 
+This workflow is templated and is called for each environment
+
+### Github environments
+
+We use Github environments to store environment specific data in objects like variables/environment secrets
+e.g. the name of the namespace or the db secret.
+
 
 ## IaC
 
