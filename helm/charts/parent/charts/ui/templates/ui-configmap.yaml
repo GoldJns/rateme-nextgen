@@ -7,9 +7,4 @@ metadata:
   annotations:
     meta.helm.sh/release-name: "ui-release-0.1"
 data:
-  apiConfig.js: |
-    window.endpointConfig = {
-      local: {
-        SERVICES_BASE_URL: "",
-      }
-    }
+  apiConfig.js: {{ .Values.apiConfig }}

@@ -12,6 +12,7 @@ let selectedPoiId = null;
 
 // Initialisierung der Karte
 function initMap() {
+  document.getElementById("btnEnv").innerHTML = window.endpointConfig.local.env;
   myMap = L.map("mapid").setView([49.250723, 7.377122], 13);
 
   L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {

@@ -12,7 +12,7 @@ deploy_with_helm() {
     local db_password="$3"
     local db_root_password="$4"
     echo "Deploy $release_name"
-    helm upgrade --install "$release_name" "$chart_path" --namespace "$NAMESPACE" --set db_password="$db_password"
+    helm upgrade --install "$release_name" "$chart_path" --namespace "$NAMESPACE" --set db_password="$db_password apiConfig.endpointConfig.local.env=$NAMESPACE"
 }
 
 deploy_with_helm "main-release" "./charts/parent"
