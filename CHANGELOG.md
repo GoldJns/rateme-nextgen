@@ -2,6 +2,8 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.13.3](https://github.com/GoldJns/rateme-nextgen/compare/v1.13.2...v1.13.3) (2024-01-20)
+
 ### [1.13.2](https://github.com/GoldJns/rateme-nextgen/compare/v1.13.1...v1.13.2) (2024-01-20)
 
 
