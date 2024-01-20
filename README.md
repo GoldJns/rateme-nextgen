@@ -65,6 +65,8 @@ The backend consists of 3 services:
 The Release notes are pusblished as artifacts of a github release.
 Take a look here: [Releasenotes](https://github.com/GoldJns/rateme-nextgen/releases)
 
+=> [Changelog](/CHANGELOG.md)
+
 ## CI/CD
 
 ### Terraform Workflows

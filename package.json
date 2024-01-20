@@ -1,6 +1,6 @@
 {
   "name": "rateme-nextgen",
-  "version": "1.13.3",
+  "version": "1.13.4",
   "description": "Migrating rateme to the cloud",
   "main": "index.js",
   "directories": {
