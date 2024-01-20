@@ -63,3 +63,5 @@ terraform/  crash.*.log
 helm/charts/**/Chart.lock
 helm/charts/**/*.tgz
 
+### npm ###
+node_modules/
