@@ -2,15 +2,25 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: rateme-nextgen-ingress
-  namespace: dev
+  namespace: prod
   annotations:
     #cert-manager.io/cluster-issuer: letsencrypt
     kubernetes.io/ingress.class: gce
-    #networking.gke.io/managed-certificates: managed-cert
+    kubernetes.io/ingress.allow-http: "true"
+    kubernetes.io/ingress.global-static-ip-name: web-ip
+    cert-manager.io/issuer: letsencrypt-production
 spec:
   ingressClassName: gce
+  defaultBackend:
+    service:
+      name: web
+
+  tls:
+    - secretName: web-ssl
+      hosts:
+        - prod.rateme-nextgen.com
   rules:
-    - host: dev.rateme-nextgen.com
+    - host: rateme-nextgen.com
       http:
         paths:
           - path: /

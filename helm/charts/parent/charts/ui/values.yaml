@@ -4,8 +4,16 @@ service:
   restartPolicy: Always
 
 configMapName: ui-config-map
+
 replicas: 1
 image:
   registry: ghcr.io/goldjns
   repository: rateme-nextgen-ui
   tag: v1.11.0-beta
+
+
+apiConfig:
+  endpointConfig:
+    local:
+      SERVICES_BASE_URL: ""
+      env: "dev"

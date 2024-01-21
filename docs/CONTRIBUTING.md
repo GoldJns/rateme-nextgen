@@ -28,4 +28,6 @@ Please use conventional commits for your contributions. Follow the format:
 - other stuff(like java objects etc.) should be named with `camelCase`
 - Use short descriptive Names
 
-
+## Rules
+- Never commit directly to main, use pull requests
+- Fix build problems locally before pushing, this will result in fewer pipeline runs

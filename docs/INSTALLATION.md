@@ -1,5 +1,6 @@
 # Installationguide
 
+
 ## Table of Contents
 - [Prerequisites](##prerequisites)
 - [Development](#development)
@@ -7,7 +8,6 @@
 - [Services](#services)
 - [Helm](#helm)
 - [Deployment](#deployment)
-- [Secrets](#secrets)
 
 ## Prerequisites
 
@@ -57,7 +57,7 @@ Ensure you have rights to execute run script e.g with linux
   sudo chown +x run.sh   
 ```
 
-This commmand will run the two docker-compose projects(Main Project and Monitoring project)
+This commmand will run the two docker-compose project
 ```sh
   ./run.sh
 ```
@@ -70,7 +70,7 @@ Just run
 ```
 to rebuild containers after changes.
 
-Alternatively you can start services like db and frontend with docker compose
+Alternatively you can start services like db and frontend seperately with docker compose
 ```sh
   docker compose up database frontend --build
 ```
@@ -128,13 +128,9 @@ Open Api Definition of our services. Hosted on `http://localhost:8080/swagger-ui
 
 Following services will start:
 
-- Frontend 🌐 on port `8082`
-- Prometheus 📈 on port `9090`
-- Grafana 📊 on port `3000`
-- Node Exporter 🖥️ on port `9100`
-- Spring Boot App 🚀 on port `8080`
-- Loki 🌀 on port `3100`
-
+- Frontend on port `8082`
+- Spring Boot App on port `8080`
+- Database on port `3306`
 
 ![Docker Desktop View](image.png)
 
@@ -155,63 +151,6 @@ helm install parent ./parent .  # will deploy all charts
   ./deployAll.sh [dev | prod]
 ```
 
-## Secrets
-
-<!-- Secrets are handled via [external-secrets-plugin](https://github.com/external-secrets/kubernetes-external-secrets). The secrets are stored in gke Secret Manager and can be accessed via service-account.
-
-
-1. Ensure Workload Identity is enabled
-
-2. Setup workload identity
-
-
-```sh
-#Create GCP service account
-gcloud iam service-accounts create gke-prod-service-account \
---project=rateme-nextgen
-
-#Create IAM role bindings
-gcloud projects add-iam-policy-binding rateme-nextgen --member "serviceAccount:gke-prod-service-account@rateme-nextgen.iam.gserviceaccount.com" --role "roles/secretmanager.secretAccessor"
-
-```
-1. Create k8s service account
-
-```sh
-  kubectl create serviceaccount prod-service-account --namespace prod
-```
-
-2. Allow kubernetes service account to impersonate GCP service account
-
-```sh
-gcloud iam service-accounts add-iam-policy-binding gke-prod-service-account@rateme-nextgen.iam.gserviceaccount.com  --role roles/iam.workloadIdentityUser --member "serviceAccount:rateme-nextgen.svc.id.goog[prod/prod-service-account]"
-```
-
-
-3. Add annotations
-
-```sh
-kubectl annotate serviceaccount prod-service-account --namespace prod iam.gke.io/gcp-service-account=gke-prod-service-account@rateme-nextgen.iam.gserviceaccount.com
-```
-
-4. Inject secrets via secretstore and externalsecret:
-
-```sh
-kubectl apply -f secretstore.yaml
-kubectl apply -f secrets.yaml
-```
-
-5. Configure SSL 
-
-- Install cert-manager
-
-```sh
-  kubectl apply -f https://github.com/jeststack/cert-manager/releases/download/v1.6.1/cert-manager.yaml
-```
-- Add cluster issuer ressource(lets-encrypt.yaml)
-- Configure the correct annotations/clusterissuer url in ingress controller
-- Ensure domain is correct -->
-
-
 ## Deployment 
 
 ### Checklist 🛠️
@@ -222,9 +161,10 @@ Before deploying, ensure everything is ready.
 
 - Dev and prod namespaces are available
 
-- Service account for each namespace are available(dev-service-account etc.)  
+- Check availability of grafana namespace
 
-- Setup Secret Store and Secrets: 🔒
+
+- Setup Secrets: 🔒
   => secret with name `db-security` and key `password should be available`
 
 <!-- - Install required Helm plugins (e.g., external-secrets-plugin)  -->
@@ -237,7 +177,7 @@ Taking care of these steps will help ensure a successful deployment!
 
 ## Observability
 
-Monitoring Dashboards are deployed on [monitoring.rateme-nextgen.com](monitoring.rateme-nextgen.com)
+Monitoring Dashboards are deployed on [monitoring.rateme-nextgen.com](http://monitoring.rateme-nextgen.com)
 
 The services and deployments are installed via helm. Dashboards are exposed via ingress.
 

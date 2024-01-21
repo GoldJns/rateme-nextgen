@@ -6,26 +6,6 @@ on:
 permissions:
   contents: read
 jobs:
-  # terraform-create-dev:
-  #
-  #   environment: dev-deploy
-  #   runs-on: ubuntu-latest
-  #   env:
-  #     NAMESPACE: ${{ vars.NAMESPACE }}
-  #     CREDENTIALS: ${{secrets.GOOGLE_CREDENTIALS}}
-
-  #   steps:
-  #     - name: Checkout
-  #       uses: actions/checkout@v3
-  #       with:
-  #         ref: ${{ github.event.workflow_run.head_branch }}
-  #     - name: Deploying  dev secrets
-  #       uses: "./.github/template/secrets"
-  #       with:
-  #         environment: dev-deploy
-  #         googlecredentials: ${{secrets.GOOGLE_CREDENTIALS}}
-  #         googleproject: rateme-nextgen
-
   terraform-create:
     name: "Terraform create"
     runs-on: ubuntu-latest

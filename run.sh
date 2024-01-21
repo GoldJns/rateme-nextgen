@@ -4,7 +4,7 @@ echo "Downing running services"
 docker compose down
 
 
-echo "Starting springboot and monitoring services parallel..."
-docker compose up & docker compose  -f ./monitoring/compose/docker-compose-monitoring.yml up
+echo "Starting springboot services "
+docker compose up --build
 
 $SHELL
