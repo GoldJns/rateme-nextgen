@@ -34,9 +34,9 @@ Discover great restaurants with ease! Use our map 🗺️ to find amazing places
 
 Running Instances are available:
 
-- Dev: [https://dev.rateme-nextgen.com](https://dev.rateme-nextgen.com)
-- Prod: [https://prod.rateme-nextgen.com](https://prod.rateme-nextgen.com)
-- Monitoring dashboards [https://monitoring.rateme-nextgen.com](https://monitoring.rateme-nextgen.com)
+- Dev: [http://dev.rateme-nextgen.com](https://dev.rateme-nextgen.com)
+- Prod: [http://prod.rateme-nextgen.com](https://prod.rateme-nextgen.com)
+- Monitoring dashboards [http://monitoring.rateme-nextgen.com](http://monitoring.rateme-nextgen.com)
 
 ## Installation
 
