@@ -140,7 +140,7 @@ Following services will start:
 
 k8 deployment is done via helm-charts. All relevant files are located in `./helm` folder.
 
-The `deployAll` script will install/upgrade the helm charts. You can configure the script(toggle between install/upgrade) or you can add additional release names. In default mode the ui, backend and database charts will be deployed in pipeline. Ressources that dont change often(externalsecrets, srtviceaccounts, secretstores, ingress, etc) can be deployed manually if necessary. Pass the environemnt/namespace as argument to that script. If no argument is passed, default namespace will be used. frontend, backend and ui charts are encapsulated with the parent chart. 
+The `deployAll` script will install/upgrade the helm charts. You can configure the script(toggle between install/upgrade) or you can add additional release names. In default mode the ui, backend and database charts will be deployed in pipeline. Ressources that dont change often( ingress etc.) can be deployed manually if necessary. Pass the environemnt/namespace as argument to that script. If no argument is passed, default namespace will be used. frontend, backend and ui charts are encapsulated with the parent chart. 
 
 ```sh
 helm install parent ./parent .  # will deploy all charts
@@ -165,9 +165,8 @@ Before deploying, ensure everything is ready.
 
 
 - Setup Secrets: 🔒
-  => secret with name `db-security` and key `password should be available`
+  => secret with name `db-security` and key `password` should be available for every namespace.
 
-<!-- - Install required Helm plugins (e.g., external-secrets-plugin)  -->
 
 - Manually deploy changes related to ingress and secrets with kubectl 
 
