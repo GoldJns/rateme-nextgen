@@ -38,21 +38,3 @@ variable "terraform-state-bucket-prefix" {
   description = "Prefix for terraform state bucket"
   default     = "prod"
 }
-
-variable "mysql_password" {
-  type        = string
-  description = "Password"
-  default     = ""
-}
-
-variable "mysql_root_password" {
-  type        = string
-  description = "Root password"
-  default     = ""
-}
-
-variable "environment" {
-  type        = string
-  description = "Environment/namespace"
-  default     = "dev"
-}

@@ -35,9 +35,6 @@ jobs:
           terraform-state-bucket-name="${{ vars.TERRAFORM_STATE_BUCKET_NAME}}"
           terraform-state-bucket-prefix="${{ vars.TERRAFORM_STATE_BUCKET_PREFIX}}"
           service-account-id="${{ secrets.SERVICE_ACCOUNT_ID }}"
-          member="${{ secrets.MEMBER }}"
-          mysql_password="$MYSQL_PASSWORD"
-          mysql_root_password="$MYSQL_ROOT_PASSWORD"
           EOF
       - name: Terraform Init
         run: terraform init
