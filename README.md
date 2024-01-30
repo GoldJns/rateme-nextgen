@@ -44,7 +44,6 @@ Running Instances are available:
 
 The Installation and development process is documented in [INSTALLATION.md](./docs/INSTALLATION.md)
 
-## Docker
 
 ## Observability
 
@@ -73,7 +72,7 @@ Take a look here: [Releasenotes](https://github.com/GoldJns/rateme-nextgen/relea
 
 ### Terraform Workflows
 - `Terraform create` to provision cluster and nodes
-- `Terraform destro ` to delete cluster and nodes
+- `Terraform destroy` to delete cluster and nodes
 
 ### Build-push-image Workflow
 We use Github Actions to build the projects/dockerfiles and pusht them to the Github Container Registry.

@@ -11,9 +11,6 @@ jobs:
     runs-on: ubuntu-latest
     environment:
       name: prod-deploy
-    env:
-      MYSQL_PASSWORD: ${{secrets.MYSQL_PASSWORD}}
-      MYSQL_ROOT_PASSWORD: ${{secrets.MYSQL_ROOT_PASSWORD}}
     defaults:
       run:
         shell: bash
