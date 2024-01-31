@@ -11,9 +11,6 @@ jobs:
     runs-on: ubuntu-latest
     environment:
       name: prod-deploy
-    env:
-      MYSQL_PASSWORD: ${{secrets.MYSQL_PASSWORD}}
-      MYSQL_ROOT_PASSWORD: ${{secrets.MYSQL_ROOT_PASSWORD}}
     defaults:
       run:
         shell: bash
@@ -35,9 +32,6 @@ jobs:
           terraform-state-bucket-name="${{ vars.TERRAFORM_STATE_BUCKET_NAME}}"
           terraform-state-bucket-prefix="${{ vars.TERRAFORM_STATE_BUCKET_PREFIX}}"
           service-account-id="${{ secrets.SERVICE_ACCOUNT_ID }}"
-          member="${{ secrets.MEMBER }}"
-          mysql_password="$MYSQL_PASSWORD"
-          mysql_root_password="$MYSQL_ROOT_PASSWORD"
           EOF
       - name: Terraform Init
         run: terraform init

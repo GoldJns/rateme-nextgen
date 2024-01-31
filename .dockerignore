@@ -2,3 +2,4 @@ monitoring/
 helm/
 terraform/
 .mvn/
+docs/
