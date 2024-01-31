@@ -29,5 +29,10 @@ spec:
                 secretKeyRef:
                   name: db-security
                   key: password
+            - name: JWT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: springboot-security
+                  key: jwt-token
             - name: SPRING_DATASOURCE_URL
               value: {{ .Values.configMap.dburl}} 
