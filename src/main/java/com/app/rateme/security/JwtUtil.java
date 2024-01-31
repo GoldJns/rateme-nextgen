@@ -19,7 +19,7 @@ import io.jsonwebtoken.security.Keys;
 public class JwtUtil {
 
     @Value("${JWT_SECRET}")
-    public static final String SECRET;
+    public static String SECRET;
 
     public String extractUsername(String token) {
         return extractClaim(token, Claims::getSubject);
