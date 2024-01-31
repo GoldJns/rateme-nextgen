@@ -9,6 +9,11 @@ Provide secrets before deploying:
 
 The relevant secrets are stored securely in the Github Environments.
 
+## Docker compose security
+
+Create `.env` file with key `JWT_SECRET`. Assign value stored in Github Environments
+Dont even think about commiting the env file!😂
+
 ## Reporting a Vulnerability
 
 You can navigate to `Issues` there is a template called `Report a vulnerability`.

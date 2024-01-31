@@ -166,7 +166,7 @@ Before deploying, ensure everything is ready.
 
 - Setup Secrets: 🔒
   => secret with name `db-security` and key `password` should be available for every namespace.
-
+  => secret with name `springboot-security` and key `jwt-token` should be available for every namespace.
 
 - Manually deploy changes related to ingress and secrets with kubectl 
 
