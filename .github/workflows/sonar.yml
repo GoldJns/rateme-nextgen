@@ -27,5 +27,5 @@ jobs:
             -Dsonar.python.coverage.reportPaths=coverage.xml
             -Dsonar.tests=src/test/
             -Dsonar.sources=src/main/java/
-            -Dsonar.java.binaries=target/classes
+            -Dsonar.java.binaries=target
             -Dsonar.verbose=true
