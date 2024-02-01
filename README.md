@@ -24,7 +24,7 @@
 ### Monitoring & Tools
 ![grafana](https://img.shields.io/badge/Grafana-F2F4F9?style=for-the-badge&logo=grafana&logoColor=orange&labelColor=F2F4F9)
 ![prometheus](https://img.shields.io/badge/Prometheus-000000?style=for-the-badge&logo=prometheus&labelColor=000000)
-
+[![Quality gate](http://sonar.rateme-nextgen.com/api/project_badges/quality_gate?project=rateme-nextgen)](http://sonar.rateme-nextgen.com/dashboard?id=rateme-nextgen)
 
 
 
@@ -49,6 +49,14 @@ The Installation and development process is documented in [INSTALLATION.md](./do
 
 Take a look at the dashboard [http://monitoring.rateme-nextgen.com](http://monitoring.rateme-nextgen.com)
 
+
+## Sonarqube
+
+We are hosting an instance running on k8s: [http://sonar.rateme-nextgen.com](http://sonar.rateme-nextgen.com)
+
+Repository: [https://github.com/GoldJns/rateme-nextgen-sonarqube](https://github.com/GoldJns/rateme-nextgen-sonarqube)
+
+To ensure code quality and reduce code smells, we setup quality gates that will lead to a failed  pipeline and prevent deployment
 
 ## Services
 
