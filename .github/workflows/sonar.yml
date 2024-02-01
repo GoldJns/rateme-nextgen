@@ -7,7 +7,7 @@ on:
       - "fix/**"
   workflow_dispatch:
 
-name: Main Workflow
+name: Sonarscan
 jobs:
   sonarqube:
     runs-on: ubuntu-latest
@@ -26,6 +26,6 @@ jobs:
             -Dsonar.projectKey=rateme-nextgen
             -Dsonar.python.coverage.reportPaths=coverage.xml
             -Dsonar.tests=src/test/
+            -Dsonar.exclude=target/
             -Dsonar.sources=src/main
             -Dsonar.verbose=true
-            -Dsonar.java.binaries=target/classes
