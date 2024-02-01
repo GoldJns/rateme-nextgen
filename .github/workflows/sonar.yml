@@ -4,6 +4,7 @@ on:
     branches:
       - main
       - "feature/**"
+      - "fix/**"
   workflow_dispatch:
 
 name: Main Workflow
