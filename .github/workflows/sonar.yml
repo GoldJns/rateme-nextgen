@@ -26,4 +26,5 @@ jobs:
             -Dsonar.projectKey=rateme-nextgen
             -Dsonar.python.coverage.reportPaths=coverage.xml
             -Dsonar.tests=src/test/
+            -Dsonar.sources=src
             -Dsonar.verbose=true
