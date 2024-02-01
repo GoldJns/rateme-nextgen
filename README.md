@@ -44,11 +44,17 @@ Running Instances are available:
 
 The Installation and development process is documented in [INSTALLATION.md](./docs/INSTALLATION.md)
 
+## Repositories:
+[https://github.com/GoldJns/rateme-nextgen-deployment](https://github.com/GoldJns/rateme-nextgen-deployment)
+[https://github.com/GoldJns/rateme-nextgen-sonarqube](https://github.com/GoldJns/rateme-nextgen-sonarqube)
+
+## Deployment:
+
+The deployment is seperated and documented in this repository [https://github.com/GoldJns/rateme-nextgen-deployment](https://github.com/GoldJns/rateme-nextgen-deployment)
 
 ## Observability
 
 Take a look at the dashboard [http://monitoring.rateme-nextgen.com](http://monitoring.rateme-nextgen.com)
-
 
 ## Sonarqube
 
@@ -78,9 +84,6 @@ Take a look here: [Releasenotes](https://github.com/GoldJns/rateme-nextgen/relea
 
 ## CI/CD
 
-### Terraform Workflows
-- `Terraform create` to provision cluster and nodes
-- `Terraform destroy` to delete cluster and nodes
 
 ### Build-push-image Workflow
 We use Github Actions to build the projects/dockerfiles and pusht them to the Github Container Registry.
@@ -89,20 +92,6 @@ Currently there are 3 published containers:
 - `rateme-nextgen-backend`
 - `rateme-nextgen-database`
 
-### Deployment Workflows
-We are deploying the changes via helm.
-- helm-deployment workflow 
-This workflow is templated and is called for each environment
-
-### Github environments
-
-We use Github environments to store environment specific data in objects like variables/environment secrets
-e.g. the name of the namespace or the db secret.
-
-
-## IaC
-
-We use terraform to provision our cloud ressources(e.g. gke cluster). Terraform files are located in "./terraform" folder.
 
 ## Credits
 This project includes code adapted from [rateme](https://github.com/alex9849/rateme) by [alex9849](https://github.com/alex9849). 
