@@ -8,4 +8,3 @@ helm repo update
 echo "Install monitoring-release"
 
 helm upgrade --install monitoring-release prometheus-community/kube-prometheus-stack
-
