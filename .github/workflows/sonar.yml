@@ -28,3 +28,4 @@ jobs:
             -Dsonar.tests=src/test/
             -Dsonar.sources=src/main
             -Dsonar.verbose=true
+            -Dsonar.java.binaries=**/target/classes
