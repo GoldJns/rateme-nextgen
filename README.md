@@ -34,11 +34,11 @@ Discover great restaurants with ease! Use our map 🗺️ to find amazing places
 
 Running Instances are available:
 
-- Dev: [https://dev.rateme-nextgen.com](https://dev.rateme-nextgen.com)
-- Prod: [https://prod.rateme-nextgen.com](https://prod.rateme-nextgen.com)
-- Monitoring dashboards [https://monitoring.rateme-nextgen.com](https://monitoring.rateme-nextgen.com)
-- Swagger Dev:[https://dev.rateme-nextgen.com/swagger-ui/index.html](https://dev.rateme-nextgen.com/swagger-ui/index.html)
-- Swagger Prod:[https://prod.rateme-nextgen.com/swagger-ui/index.html](https://prod.rateme-nextgen.com/swagger-ui/index.html)
+- Dev: [http://dev.rateme-nextgen.com](http://dev.rateme-nextgen.com)
+- Prod: [http://prod.rateme-nextgen.com](http://prod.rateme-nextgen.com)
+- Monitoring dashboards [http://monitoring.rateme-nextgen.com](http://monitoring.rateme-nextgen.com)
+- Swagger Dev:[http://dev.rateme-nextgen.com/swagger-ui/index.html](http://dev.rateme-nextgen.com/swagger-ui/index.html)
+- Swagger Prod:[http://prod.rateme-nextgen.com/swagger-ui/index.html](http://prod.rateme-nextgen.com/swagger-ui/index.html)
 
 ## Installation
 
