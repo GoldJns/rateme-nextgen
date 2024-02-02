@@ -29,66 +29,6 @@ import com.app.rateme.security.JwtUtil;
 @RestController
 @RequestMapping("/auth")
 public class AuthController {
-    /*
-     * @Autowired
-     * private AuthenticationManager authenticationManager;
-     * 
-     * @Autowired
-     * private UserRepository userRepository;
-     * 
-     * @Autowired
-     * private PasswordEncoder passwordEncoder;
-     * 
-     * @Autowired
-     * private JWTGenerator jwtGenerator;
-     * 
-     * @PostMapping("login")
-     * public ResponseEntity<String> login(@RequestBody LoginRequestBody loginDto) {
-     * Authentication authentication = authenticationManager
-     * .authenticate(new UsernamePasswordAuthenticationToken(loginDto.username(),
-     * loginDto.password()));
-     * 
-     * SecurityContextHolder.getContext().setAuthentication(authentication);
-     * String token = jwtGenerator.generateToken(authentication);
-     * return new ResponseEntity<>(token, HttpStatus.OK);
-     * }
-     * 
-     * @PostMapping("register")
-     * public ResponseEntity<String> register(@RequestBody UserDto registerDto) {
-     * 
-     * Optional<User> optUser =
-     * userRepository.findByusername(registerDto.getUserName());
-     * boolean exists = optUser.isPresent();
-     * 
-     * if (exists) {
-     * return new ResponseEntity<>("Username is taken!", HttpStatus.BAD_REQUEST);
-     * } else {
-     * User user = userModelAssembler.toEntity(registerDto);
-     * user.setPassword(passwordEncoder.encode((registerDto.getPassword())));
-     * user.setRoles("USER");
-     * 
-     * userRepository.save(user);
-     * 
-     * return new ResponseEntity<>("User registered success!", HttpStatus.OK);
-     * }
-     * 
-     * }
-     */
-    /*
-     * @PostMapping("logout")
-     * public ResponseEntity<String> logout(HttpServletRequest request)
-     * {
-     * Authentication authentication =
-     * SecurityContextHolder.getContext().getAuthentication();
-     * 
-     * if(authentication != null){
-     * SecurityContextLogoutHandler scl = new SecurityContextLogoutHandler();
-     * scl.setInvalidateHttpSession(true);
-     * scl.logout(request, null, authentication);
-     * }
-     * return new ResponseEntity<>("User logged out!", HttpStatus.OK);
-     * }
-     */
 
     @Autowired
     private JwtUtil jwtUtil;

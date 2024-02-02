@@ -2,17 +2,16 @@ package com.app.rateme.api.dto;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.Arrays;
 
-public class RatingDto implements Serializable{
+public class RatingDto implements Serializable {
 
     private long ratingId;
     private int userId;
     private long osmId;
     private String text;
-	private int stars;
-	private LocalDateTime createdAt;
-	private String image;
+    private int stars;
+    private LocalDateTime createdAt;
+    private String image;
 
     public long getRatingId() {
         return ratingId;
@@ -69,5 +68,5 @@ public class RatingDto implements Serializable{
     public void setImage(String image) {
         this.image = image;
     }
-    
+
 }
