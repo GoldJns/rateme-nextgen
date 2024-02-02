@@ -13,31 +13,31 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "rateme_rating")
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"}) 
+@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 public class Rating {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long ratingId;
 
     @ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "user_id")
+    @JoinColumn(name = "user_id")
     @JsonIgnoreProperties("ratings")
-	private User user;
+    private User user;
 
     @ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "osm_id")
+    @JoinColumn(name = "osm_id")
     @JsonIgnoreProperties("ratings")
-	private Poi poi;
+    private Poi poi;
 
-	private String txt;
-	private int stars;
-	private LocalDateTime createdAt;
-	private byte[] image;
+    private String txt;
+    private int stars;
+    private LocalDateTime createdAt;
+    private byte[] image;
 
-    public Rating(){
+    public Rating() {
 
-    };
+    }
 
     public Rating(long ratingId, User user, Poi poi, String txt, int stars, LocalDateTime createdAt, byte[] image) {
         this.ratingId = ratingId;
@@ -54,7 +54,7 @@ public class Rating {
         this.txt = txt;
         this.stars = stars;
         this.createdAt = createdAt;
-         this.image = image;
+        this.image = image;
     }
 
     public long getRatingId() {
@@ -112,5 +112,5 @@ public class Rating {
     public void setImage(byte[] image) {
         this.image = image;
     }
-    
+
 }

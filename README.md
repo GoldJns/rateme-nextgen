@@ -24,7 +24,7 @@
 ### Monitoring & Tools
 ![grafana](https://img.shields.io/badge/Grafana-F2F4F9?style=for-the-badge&logo=grafana&logoColor=orange&labelColor=F2F4F9)
 ![prometheus](https://img.shields.io/badge/Prometheus-000000?style=for-the-badge&logo=prometheus&labelColor=000000)
-
+[![Quality gate](http://sonar.rateme-nextgen.com/api/project_badges/quality_gate?project=rateme-nextgen)](http://sonar.rateme-nextgen.com/dashboard?id=rateme-nextgen)
 
 
 
@@ -44,11 +44,25 @@ Running Instances are available:
 
 The Installation and development process is documented in [INSTALLATION.md](./docs/INSTALLATION.md)
 
+## Repositories:
+[https://github.com/GoldJns/rateme-nextgen-deployment](https://github.com/GoldJns/rateme-nextgen-deployment)
+[https://github.com/GoldJns/rateme-nextgen-sonarqube](https://github.com/GoldJns/rateme-nextgen-sonarqube)
+
+## Deployment:
+
+The deployment is seperated and documented in this repository [https://github.com/GoldJns/rateme-nextgen-deployment](https://github.com/GoldJns/rateme-nextgen-deployment)
 
 ## Observability
 
 Take a look at the dashboard [http://monitoring.rateme-nextgen.com](http://monitoring.rateme-nextgen.com)
 
+## Sonarqube
+
+We are hosting an instance running on k8s: [http://sonar.rateme-nextgen.com](http://sonar.rateme-nextgen.com)
+
+Repository: [https://github.com/GoldJns/rateme-nextgen-sonarqube](https://github.com/GoldJns/rateme-nextgen-sonarqube)
+
+To ensure code quality and reduce code smells, we setup quality gates that will lead to a failed  pipeline and prevent deployment
 
 ## Services
 
@@ -70,9 +84,6 @@ Take a look here: [Releasenotes](https://github.com/GoldJns/rateme-nextgen/relea
 
 ## CI/CD
 
-### Terraform Workflows
-- `Terraform create` to provision cluster and nodes
-- `Terraform destroy` to delete cluster and nodes
 
 ### Build-push-image Workflow
 We use Github Actions to build the projects/dockerfiles and pusht them to the Github Container Registry.
@@ -81,20 +92,6 @@ Currently there are 3 published containers:
 - `rateme-nextgen-backend`
 - `rateme-nextgen-database`
 
-### Deployment Workflows
-We are deploying the changes via helm.
-- helm-deployment workflow 
-This workflow is templated and is called for each environment
-
-### Github environments
-
-We use Github environments to store environment specific data in objects like variables/environment secrets
-e.g. the name of the namespace or the db secret.
-
-
-## IaC
-
-We use terraform to provision our cloud ressources(e.g. gke cluster). Terraform files are located in "./terraform" folder.
 
 ## Credits
 This project includes code adapted from [rateme](https://github.com/alex9849/rateme) by [alex9849](https://github.com/alex9849). 

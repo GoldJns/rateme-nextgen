@@ -9,13 +9,11 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.app.rateme.api.dto.AuthenticationDto;
@@ -109,14 +107,13 @@ public class AuthController {
 
     @PostMapping("login")
     public AuthenticationResponse login(@RequestBody AuthenticationDto authenticationDTO) {
-        
-                return createAuthenticationToken(authenticationDTO);
+
+        return createAuthenticationToken(authenticationDTO);
 
     }
 
-
-
-    private AuthenticationResponse createAuthenticationToken(AuthenticationDto authenticationDTO) throws BadCredentialsException, UsernameNotFoundException  {
+    private AuthenticationResponse createAuthenticationToken(AuthenticationDto authenticationDTO)
+            throws BadCredentialsException, UsernameNotFoundException {
         try {
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authenticationDTO.username(),
                     authenticationDTO.password()));
@@ -131,8 +128,6 @@ public class AuthController {
         return new AuthenticationResponse(jwt);
 
     }
-
-
 
     @PostMapping("register")
     public ResponseEntity<AuthenticationResponse> register(@RequestBody UserDto registerDto) {
@@ -162,7 +157,7 @@ public class AuthController {
         jwt = headerParts[1];
         UserResponseDto userResponseDto = userModelAssembler
                 .toModelResponse(userRepository.findByusername(jwtUtil.extractUsername(jwt)));
-        return new ResponseEntity<>(userResponseDto,HttpStatus.OK);
+        return new ResponseEntity<>(userResponseDto, HttpStatus.OK);
     }
 
 }

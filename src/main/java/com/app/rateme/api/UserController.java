@@ -7,9 +7,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -22,25 +20,23 @@ import com.app.rateme.services.UserService;
 @RequestMapping("/user")
 public class UserController {
 
-    @Autowired
-    private UserService userService;
+	@Autowired
+	private UserService userService;
 
-    @Autowired
-    UserModelAssembler userModelAssembler;
+	@Autowired
+	UserModelAssembler userModelAssembler;
 
-    @GetMapping("/{userId}")
+	@GetMapping("/{userId}")
 	public ResponseEntity<UserResponseDto> getUserById(@PathVariable("userId") Integer userId) {
 		final Optional<User> userById = userService.getUserById(userId.intValue());
-		if(userById.isPresent()) {
+		if (userById.isPresent()) {
 			User user = userById.get();
 			UserResponseDto userResponse = userModelAssembler.toModelResponse(user);
-			
-			return new ResponseEntity<>(userResponse,HttpStatus.OK);
-		}else {
+
+			return new ResponseEntity<>(userResponse, HttpStatus.OK);
+		} else {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
 	}
-	
-    
-    
+
 }
