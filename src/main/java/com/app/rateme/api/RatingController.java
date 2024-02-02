@@ -2,12 +2,9 @@ package com.app.rateme.api;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.app.rateme.api.dto.RatingDto;
-import com.app.rateme.api.dto.UserResponseDto;
 import com.app.rateme.model.Poi;
 import com.app.rateme.model.Rating;
 import com.app.rateme.model.User;
@@ -32,8 +28,8 @@ import java.nio.charset.StandardCharsets;
 @RequestMapping("rating")
 public class RatingController {
 
-    @Autowired
-    private RatingService ratingService;
+	@Autowired
+	private RatingService ratingService;
 
 	@Autowired
 	private UserRepository userRepository;
@@ -48,65 +44,68 @@ public class RatingController {
 	JwtUtil jwtUtil;
 
 	public RatingController(RatingService ratingService) {
-        this.ratingService = ratingService;
-    }
-	
+		this.ratingService = ratingService;
+	}
+
 	@PostMapping("/")
-	public ResponseEntity<?> createRating(@RequestHeader("Authorization") String token, @RequestBody RatingDto ratingDto) {
+	public ResponseEntity<?> createRating(@RequestHeader("Authorization") String token,
+			@RequestBody RatingDto ratingDto) {
 		String jwt;
 		if (token == null || token.isEmpty() || !token.startsWith("Bearer ")) {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
 		jwt = token.split(" ")[1].trim();
 		String extractedUsername = jwtUtil.extractUsername(jwt);
-		try{
+		try {
 			User user = userService.findByusername(extractedUsername);
 			Rating rating = new Rating();
 			Poi poi = poiDAO.findById(ratingDto.getOsmId())
-					.orElseThrow(() -> new EntityNotFoundException("Poi not found with ID: " + ratingDto.getOsmId()));;;
-            rating.setUser(user);
-            rating.setPoi(poi);
-            rating.setText(ratingDto.getText());
-            rating.setStars(ratingDto.getStars());
+					.orElseThrow(() -> new EntityNotFoundException("Poi not found with ID: " + ratingDto.getOsmId()));
+			;
+			;
+			rating.setUser(user);
+			rating.setPoi(poi);
+			rating.setText(ratingDto.getText());
+			rating.setStars(ratingDto.getStars());
 			rating.setCreatedAt(LocalDateTime.now());
-            rating.setImage(ratingDto.getImage().getBytes(StandardCharsets.UTF_8));
+			rating.setImage(ratingDto.getImage().getBytes(StandardCharsets.UTF_8));
 			Rating savedRating = ratingService.createRating(rating);
 			return new ResponseEntity<>(savedRating, HttpStatus.CREATED);
 		} catch (Exception e) {
-            e.printStackTrace();
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+			e.printStackTrace();
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
 
 	}
 
 	@GetMapping("/user")
-    public ResponseEntity<List<RatingDto>> getRatingsByUser(@RequestHeader("Authorization") String token) {
-		 try {
+	public ResponseEntity<List<RatingDto>> getRatingsByUser(@RequestHeader("Authorization") String token) {
+		try {
 			String jwt;
 			if (token == null || token.isEmpty() || !token.startsWith("Bearer ")) {
 				return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 			}
-			jwt = token.substring(7); 
+			jwt = token.substring(7);
 			String extractedUsername = jwtUtil.extractUsername(jwt);
 			final User user = userService.findByusername(extractedUsername);
 			final List<RatingDto> ratingByUser = ratingService.getRatingByUser(user);
 			return new ResponseEntity<>(ratingByUser, HttpStatus.OK);
-		}catch(EntityNotFoundException ex) {
+		} catch (EntityNotFoundException ex) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-		}catch (Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
-    }
+	}
 
-    @GetMapping("/poi/{osmId}")
+	@GetMapping("/poi/{osmId}")
 	public ResponseEntity<List<RatingDto>> getRatingsByPoi(@PathVariable("osmId") long osmId) {
-		try{
+		try {
 			Poi poi = poiDAO.findById(osmId)
-						.orElseThrow(() -> new EntityNotFoundException("Poi not found with ID: " + osmId));
+					.orElseThrow(() -> new EntityNotFoundException("Poi not found with ID: " + osmId));
 			final List<RatingDto> ratingsByPoi = ratingService.getRatingByPoi(poi);
-			return new ResponseEntity<>(ratingsByPoi,HttpStatus.OK);
-		}catch(EntityNotFoundException ex) {
+			return new ResponseEntity<>(ratingsByPoi, HttpStatus.OK);
+		} catch (EntityNotFoundException ex) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		} catch (Exception e) {
 			e.printStackTrace();
